@@ -62,6 +62,12 @@ THEN I am presented with a mission statement for the app, a list of contributors
 THEN I am logged out of the app.
 ```  
 
+## Wire Frame Mock Up
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+
 ## Contributors 
 
 - Sean Harrigan
