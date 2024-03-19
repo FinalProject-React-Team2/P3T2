@@ -21,7 +21,7 @@ function Signup(props) {
       },
     });
     console.log("past user");
-    console.log(mutationResponses)
+    console.log(mutationResponse)
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
   };
