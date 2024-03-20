@@ -1,23 +1,17 @@
-const { User, Product, Category, Order } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const { User, Debate } = require("../models");
+const { signToken, AuthenticationError } = require("../utils/auth");
+
 
 const resolvers = {
   Query: {
-  
- 
-   
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id)
-        };
-
-        return user;
+        const user = await User.findById(context.user._id);
       }
-   
+
+      return user;
+    },
   },
-
-
 
   Mutation: {
     addUser: async (parent, args) => {
@@ -27,16 +21,15 @@ const resolvers = {
       return { token, user };
     },
 
-
-      
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
       }
 
       throw AuthenticationError;
     },
-   
 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -54,8 +47,15 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
-  }
+    },
+
+    createDebate: async (parent, args, context) => {
+      if (context.user) {
+        const debate = await Debate.create({ ...args, createdBy: context.user._id });
+        return debate;
+      }
+    },
+  },
 };
 
 module.exports = resolvers;

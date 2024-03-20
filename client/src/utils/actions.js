@@ -9,3 +9,7 @@ export const TOGGLE_CART = "TOGGLE_CART";
 
 export const UPDATE_CATEGORIES = "UPDATE_CATEGORIES";
 export const UPDATE_CURRENT_CATEGORY = "UPDATE_CURRENT_CATEGORY";
+
+
+
+//this is wehre we could search for topics rihgt?  

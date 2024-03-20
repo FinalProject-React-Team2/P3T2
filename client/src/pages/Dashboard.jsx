@@ -1,10 +1,17 @@
-import ProductList from "../components/ProductList";
-import CategoryMenu from "../components/CategoryMenu";
-import Cart from "../components/Cart";
 
-const Home = () => {
+import UserStats from "../components/UserStats";
+import UserOpenChallenges from "../components/UserOpenChallenges";
+import DebateLists from "../components/DashboardComponents/DebateDropdown/index ";
+import DebateDropdown from "../components/DashboardComponents/DebateDropdown/index";
+// import CategoryMenu from "../components/CategoryMenu";
+
+const Dashboard = () => {
   return (
     <div className="container">
+      <UserStats />
+      <UserOpenChallenges />
+      <DebateLists />
+      <DebateDropdown />
       {/* <CategoryMenu />
       <ProductList />
       <Cart /> */}
@@ -12,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

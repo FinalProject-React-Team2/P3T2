@@ -1,0 +1,1 @@
+//about page with debate essentials and description
