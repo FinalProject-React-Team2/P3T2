@@ -48,10 +48,10 @@ const resolvers = {
 
       return { token, user };
     },
-
     createDebate: async (parent, args, context) => {
+      console.log("createDebate called!", args);
       if (context.user) {
-        const debate = await Debate.create({ ...args, createdBy: context.user._id });
+        const debate = await Debate.create({ title: args.title, createdBy: context.user._id }, { new: true});
         return debate;
       }
     },

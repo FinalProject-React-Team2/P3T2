@@ -37,7 +37,6 @@ const typeDefs = `
 
   input DebateInput {
     title: String!
-    createdBy: String!
   } 
 
 
