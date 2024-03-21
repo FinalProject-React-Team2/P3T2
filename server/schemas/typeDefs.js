@@ -58,8 +58,7 @@ const typeDefs = `
 
     createDebate(Debate: DebateInput!): Debate
   }
-
- 
 `;
+
 
 module.exports = typeDefs;
