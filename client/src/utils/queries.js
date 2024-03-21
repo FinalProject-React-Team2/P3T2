@@ -1,81 +1,58 @@
 import { gql } from '@apollo/client';
 
-// export const QUERY_PRODUCTS = gql`
-//   query getProducts($category: ID) {
-//     products(category: $category) {
-//       _id
-//       name
-//       description
-//       price
-//       quantity
-//       image
-//       category {
-//         _id
-//       }
-//     }
-//   }
-// `;
-
-// export const QUERY_CHECKOUT = gql`
-//   query getCheckout($products: [ProductInput]) {
-//     checkout(products: $products) {
-//       session
-//     }
-//   }
-// `;
-
-// export const QUERY_ALL_PRODUCTS = gql`
-//   {
-//     products {
-//       _id
-//       name
-//       description
-//       price
-//       quantity
-//       category {
-//         name
-//       }
-//     }
-//   }
-// `;
-
-// export const QUERY_TOPICS= gql`
-//   {
-//     categories {
-//       _id
-//       name
-//     }
-//   }
-// `;
-
-// export const QUERY_USER = gql`
-//   {
-//     user {
-//       firstName
-//       lastName
-//       orders {
-//         _id
-//         purchaseDate
-//         products {
-//           _id
-//           name
-//           description
-//           price
-//           quantity
-//           image
-//         }
-//       }
-//     }
-//   }
-// `;
-
-export const QUERY_DEBATETOPICS = gql`
-    { 
-        debateTopics {
+export const QUERY_USER = gql`
+query { 
+    user {
+        _id
+        username
+        email
+        debates {
             _id
-            topic
-
-            }
+            title
+            category
+            createdAt
+            challenger
+            status
         }
     }
+}  
+`;
+
+export const GET_DEBATES = gql`
+query {
+    getDebates {
+        _id
+        title
+        category
+        createdAt
+        challenger
+        status
+    }
+}
+`;
+
+
+export const GET_DEBATE = gql`
+query GetDebate($_id: ID!) {
+    getDebate(_id: $_id) {
+        _id
+        title
+        category
+        createdAt
+        challenger
+        status
+        arguments {
+            _id
+            title
+            body
+            comments {
+                _id
+                comment
+                user
+            }
+            votes
+        }
+    }
+}
+`;
 

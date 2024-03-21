@@ -5,12 +5,26 @@ const resolvers = {
   Query: {
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id); // Finding user by ID
+      //   const user = await User.findById(context.user._id); // Finding user by ID
+      // }
+return await User.findById(context.user._id).populate('debates'); // Finding user by ID and populating the debates field
       }
-
-      return user; // Returning the user
+      return null; // Returning the user
     },
+    getDebate: async (parent, args, context) => {
+      if (context.user) {
+        throw new AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
+        return await Debate.findById(args._id); // Finding a debate by ID
+      }
+    }, 
+    getDebates: async (parent, args, context) => {
+      if (context.user) {
+        throw new AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
+        return await Debate.find({ createdBy: context.user._id }); // Finding all debates created by the user
+      }
+    }
   },
+
 
   Mutation: {
     addUser: async (parent, args) => {
@@ -27,7 +41,7 @@ const resolvers = {
         });
       }
 
-      throw AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
+      throw new AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
     },
 
     login: async (parent, { email, password }) => {
@@ -53,7 +67,9 @@ const resolvers = {
         const debate = await Debate.create({ title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
         return debate; // Returning the debate
       }
+
     },
+
   },
 };
 

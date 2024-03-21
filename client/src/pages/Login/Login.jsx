@@ -1,28 +1,40 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
-// import { LOGIN } from '../utils/mutations';
-import AuthS from "../../utils/auth";
+import Auth from "../../utils/auth";
 import { LOGIN } from "../../utils/mutations";
 
 function Login() {
-    // (props)
+  // State to store form input values
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error }] = useMutation(LOGIN);
 
+  // Mutation hook to handle login mutation
+  const [login, { error, loading }] = useMutation(LOGIN);
+
+  // Function to handle form submission
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    if(!formState.email || !formState.password) {
+      console.error("Email and password are required");
+      return;
+    }
     try {
+      // Call the login mutation with form input values
       const mutationResponse = await login({
         variables: { email: formState.email, password: formState.password },
       });
+
+      // Extract the token from the mutation response
       const token = mutationResponse.data.login.token;
+
+      // Store the token in local storage using AuthS.login() method
       Auth.login(token);
     } catch (e) {
       console.log(e);
     }
   };
 
+  // Function to handle input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -69,7 +81,5 @@ function Login() {
     </div>
   );
 }
-
-
 
 export default Login;
