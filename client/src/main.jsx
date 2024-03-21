@@ -10,6 +10,8 @@ import Signup from "./pages/Signup/Signup.jsx";
 import Dashboard from "./pages/Dashboard";
 import ActiveDebatePage from "./pages/ActiveDebatePage";
 import About from "./pages/About/Aboutus.jsx";
+import CreateDebate from "./pages/CreateDebate.jsx";
+
 
 
 const router = createBrowserRouter([
@@ -34,12 +36,14 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard />,
       },
+      { 
+        path: "open-challenge",
+        element: <CreateDebate  />,
+      },
       {
         path: "ActiveDebatePage",
         element: <ActiveDebatePage />,
-
       },
-
       { path: "Aboutus",
         element: <About />,
       }

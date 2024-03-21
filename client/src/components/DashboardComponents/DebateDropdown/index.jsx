@@ -1,15 +1,12 @@
 // DebateDropdown.js
 import { useState } from "react";
-// import OpenDebates from "./AllLists/OpenDebates";
 import ActiveDebates from "./AllLists/ActiveDebates.jsx"
-// import ClosedDebates from "./AllLists/ClosedDebateList";
+import OpenDebates from "./AllLists/OpenDebates.jsx"
+import DebateTopics from "./AllLists/DebateTopics.jsx"
 import { Link } from "react-router-dom";
-import CreateDebate from "../../CreateDebate/createDebate.jsx";
 
 
-
-
-
+ 
 function DebateDropdown() {
   const [selectedDebate, setSelectedDebate] = useState("");
 
@@ -20,17 +17,31 @@ function DebateDropdown() {
   return (
     <div>
       <h3>Debates:</h3>
-      <OpenDebates onSelect={handleDebateSelect} />
-      <ActiveDebates onSelect={handleDebateSelect} />
-      <ClosedDebates onSelect={handleDebateSelect} />
+      <div className="debates-container">
+        <ActiveDebates onSelect={handleDebateSelect} />
+      </div>
       {selectedDebate && (
         <Link to={`/debates/${selectedDebate}`}>
           <button>View Details</button>
         </Link>
       )}
-      <CreateDebate /> {CreateDebate}
-    </div>
+      <DebateTopics onSelect={handleDebateSelect} />
+     </div>
   );
+       <div>
+        <OpenDebates onSelect={handleDebateSelect} />
+       </div>
+  ; 
 }
+<div>
+        <Link to="/CreateDebate">
+          <button>Open Challenge</button>
+        </Link>
+      </div>
+  ;
+
+
+
+
 
 export default DebateDropdown;
