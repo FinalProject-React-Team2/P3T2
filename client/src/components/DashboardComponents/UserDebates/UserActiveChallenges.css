@@ -1,0 +1,37 @@
+.active-challenges-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: linear-gradient(145deg, #ece9e6, #ffffff);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.challenges-list .debate-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.challenges-list .debate-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.challenges-list .debate-item a {
+    color: #333;
+    text-decoration: none; /* Adjust as needed */
+}
+
+.challenges-list .debate-item h3 {
+    margin: 0;
+    font-size: 1.2rem; /* Adjust as needed */
+    color: #333; /* Adjust for better readability */
+}
+
+.loading {
+    text-align: center;
+    font-size: 1.5rem;
+}

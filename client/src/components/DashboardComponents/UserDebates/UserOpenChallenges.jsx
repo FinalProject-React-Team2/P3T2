@@ -20,7 +20,7 @@ const UserOpenChallenges = () => {
     <div>
       <h2>Your Open Challenges</h2>
       <div>
-        {user.debates.map((debate) => (
+        {user.debates?.map((debate) => (
           <div key={debate._id}>
             <Link to={`/debate/${debate._id}`}>
               <h3>{debate.title}</h3>

@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Dashboard />,
       },
       {
         path: "/login",
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       { 
-        path: "open-challenge",
+        path: "CreateDebate",
         element: <CreateDebate  />,
       },
       {

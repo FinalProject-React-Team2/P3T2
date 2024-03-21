@@ -9,7 +9,15 @@ const typeDefs = `
   }
 
   type Debate {
+    _id: ID
+    debateTitle: String
+    status: String
+    createdBy: User
+    opponent: User
+    numOfRounds: Int
     arguments: [Argument]
+    comments: [Comment]
+    winner: User
   }
 
   type Argument {
@@ -20,7 +28,8 @@ const typeDefs = `
   }
 
   type Comment {
-    user: String
+    user: {
+      type: String
     comment: String
   }
 
