@@ -9,14 +9,14 @@ import Login from "./pages/Login/Login.jsx";
 import Signup from "./pages/Signup/Signup.jsx";
 import Dashboard from "./pages/Dashboard";
 import ActiveDebatePage from "./pages/ActiveDebatePage";
-import About from "./pages/About";
+import About from "./pages/About/Aboutus.jsx";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    error: <NoMatch />,
+    // errorElement: <NoMatch />,
     children: [
       {
         index: true,
@@ -38,8 +38,9 @@ const router = createBrowserRouter([
         path: "ActiveDebatePage",
         element: <ActiveDebatePage />,
 
-      }
-      { path: "About",
+      },
+
+      { path: "Aboutus",
         element: <About />,
       }
     ],

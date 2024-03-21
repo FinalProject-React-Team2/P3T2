@@ -1,10 +1,13 @@
 // DebateDropdown.js
 import { useState } from "react";
-import OpenDebates from "./AllLists/OpenDebateList";
-import ActiveDebates from "./AllLists/DebateList";
-import ClosedDebates from "./AllLists/ClosedDebateList";
+// import OpenDebates from "./AllLists/OpenDebates";
+import ActiveDebates from "./AllLists/ActiveDebates.jsx"
+// import ClosedDebates from "./AllLists/ClosedDebateList";
 import { Link } from "react-router-dom";
-import CreateDebate from "../../../CreateDebate/createDebate.jsx";
+import CreateDebate from "../../CreateDebate/createDebate.jsx";
+
+
+
 
 
 function DebateDropdown() {

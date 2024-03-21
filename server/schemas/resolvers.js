@@ -1,61 +1,60 @@
-const { User, Debate } = require("../models");
-const { signToken, AuthenticationError } = require("../utils/auth");
-
+const { User, Debate } = require("../models"); // Importing User and Debate models
+const { signToken, AuthenticationError } = require("../utils/auth"); // Importing signToken function and AuthenticationError class
 
 const resolvers = {
   Query: {
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id);
+        const user = await User.findById(context.user._id); // Finding user by ID
       }
 
-      return user;
+      return user; // Returning the user
     },
   },
 
   Mutation: {
     addUser: async (parent, args) => {
-      const user = await User.create(args);
-      const token = signToken(user);
+      const user = await User.create(args); // Creating a new user
+      const token = signToken(user); // Generating a token for the user
 
-      return { token, user };
+      return { token, user }; // Returning the token and user
     },
 
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
-          new: true,
+          new: true, // Updating the user with new data
         });
       }
 
-      throw AuthenticationError;
+      throw AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
     },
 
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }); // Finding user by email
 
       if (!user) {
-        throw AuthenticationError;
+        throw AuthenticationError; // Throwing an AuthenticationError if user is not found
       }
 
-      const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(password); // Checking if the password is correct
 
       if (!correctPw) {
-        throw AuthenticationError;
+        throw AuthenticationError; // Throwing an AuthenticationError if password is incorrect
       }
 
-      const token = signToken(user);
+      const token = signToken(user); // Generating a token for the user
 
-      return { token, user };
+      return { token, user }; // Returning the token and user
     },
     createDebate: async (parent, args, context) => {
-      console.log("createDebate called!", args);
+      console.log("createDebate called!", args); // Logging a message to the console
       if (context.user) {
-        const debate = await Debate.create({ title: args.title, createdBy: context.user._id }, { new: true});
-        return debate;
+        const debate = await Debate.create({ title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
+        return debate; // Returning the debate
       }
     },
   },
 };
 
-module.exports = resolvers;
+module.exports = resolvers; // Exporting the resolvers object

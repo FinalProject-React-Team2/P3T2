@@ -49,3 +49,68 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const CREATE_DEBATE = gql`
+  mutation createDebate($title: String!) {
+    createDebate(title: $title) {
+      title
+    }
+  }
+`;
+
+export const ADD_ARGUMENT = gql`
+  mutation addArgument($debateId: ID!, $title: String!, $body: String!) {
+    addArgument(debateId: $debateId, title: $title, body: $body) {
+      title
+      body
+    }
+  }
+`;
+
+export const ADD_COMMENT = gql`
+  mutation addComment($argumentId: ID!, $comment: String!) {
+    addComment(argumentId: $argumentId, comment: $comment) {
+      comment
+    }
+  }
+`;
+
+export const VOTE = gql`
+  mutation vote($argumentId: ID!) {
+    vote(argumentId: $argumentId) {
+      votes
+    }
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation updateUser(
+    $firstName: String
+    $lastName: String
+    $email: String
+    $password: String
+  ) {
+    updateUser(
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      password: $password
+    ) {
+      _id
+      firstName
+      lastName
+      email
+    }
+  }
+`;
+
+export default {
+  LOGIN,
+  ADD_USER,
+  CREATE_DEBATE,
+  ADD_ARGUMENT,
+  ADD_COMMENT,
+  VOTE,
+  UPDATE_USER,
+};
+
