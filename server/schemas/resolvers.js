@@ -12,18 +12,19 @@ return await User.findById(context.user._id).populate('debates'); // Finding use
       return null; // Returning the user
     },
     getDebate: async (parent, args, context) => {
-      if (context.user) {
-        throw new AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
+      if (!context.user) {
+        throw new AuthenticationError;
+       } // Throwing an AuthenticationError if user is not authenticated
         return await Debate.findById(args._id); // Finding a debate by ID
-      }
-    }, 
+      },
+
     getDebates: async (parent, args, context) => {
-      if (context.user) {
-        throw new AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
+      if (!context.user) {
+        throw new AuthenticationError; 
+      }// Throwing an AuthenticationError if user is not authenticated
         return await Debate.find({ createdBy: context.user._id }); // Finding all debates created by the user
       }
-    }
-  },
+    },
 
 
   Mutation: {
@@ -35,26 +36,19 @@ return await User.findById(context.user._id).populate('debates'); // Finding use
     },
 
     updateUser: async (parent, args, context) => {
-      if (context.user) {
+      if (!context.user) {
+        throw new AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
+      }
         return await User.findByIdAndUpdate(context.user._id, args, {
           new: true, // Updating the user with new data
         });
-      }
-
-      throw new AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
     },
 
-    login: async (parent, { email, password }) => {
+    login: async (_, { email, password }) => {
       const user = await User.findOne({ email }); // Finding user by email
 
-      if (!user) {
-        throw AuthenticationError; // Throwing an AuthenticationError if user is not found
-      }
-
-      const correctPw = await user.isCorrectPassword(password); // Checking if the password is correct
-
-      if (!correctPw) {
-        throw AuthenticationError; // Throwing an AuthenticationError if password is incorrect
+      if (!user || !(await user.isCorrectPassword(password))) {
+        throw new AuthenticationError('incorrect credentials'); // Throwing an AuthenticationError if user is not found
       }
 
       const token = signToken(user); // Generating a token for the user
@@ -64,12 +58,12 @@ return await User.findById(context.user._id).populate('debates'); // Finding use
     createDebate: async (parent, args, context) => {
       console.log("createDebate called!", args); // Logging a message to the console
       if (context.user) {
-        const debate = await Debate.create({ title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
+        const debate = await Debate.create({...args, createdBy: context.user._id }); // Creating a new debate
+        //  title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
         return debate; // Returning the debate
       }
-
-    },
-
+      throw new AuthenticationError('You need to be logged in!'); // Throwing an AuthenticationError if user is not authenticated
+    }
   },
 };
 

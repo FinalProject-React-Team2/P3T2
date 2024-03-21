@@ -4,6 +4,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../../../utils/queries";
 import { Link } from "react-router-dom";
+import './UserActiveChallenges.css';
 
 const UserActiveChallenges = () => {
     const { loading, data } = useQuery(QUERY_USER);
@@ -19,7 +20,7 @@ const UserActiveChallenges = () => {
         <div>
         <h2>Your Active Challenges</h2>
         <div>
-            {user.debates.map((debate) => (
+            {user.debates?.map((debate) => (
             <div key={debate._id}>
                 <Link to={`/debate/${debate._id}`}>
                 <h3>{debate.title}</h3>

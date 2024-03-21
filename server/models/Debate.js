@@ -17,7 +17,7 @@ const argumentSchema = new Schema(
       trim: true,
     },
     // The statement of the argument
-    user: {
+    user: { 
       type: Schema.Types.ObjectId,
       ref: "User",
     },
@@ -36,7 +36,9 @@ const argumentSchema = new Schema(
 const commentSchema = new Schema({
   // Define the schema for a comment
   user: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
   // The user who made the comment
   comment: {
@@ -103,3 +105,7 @@ const Debate = model("Debate", debateSchema);
 module.exports = Debate;
 
 // Export the Debate model
+
+
+//possible votes schema
+//votes: [{ type: Schema.Types.ObjectId, ref: 'User'}]
