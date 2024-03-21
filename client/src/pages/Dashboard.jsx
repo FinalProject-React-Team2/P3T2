@@ -1,17 +1,17 @@
 
-import UserStats from "../components/UserStats";
-import UserOpenChallenges from "../components/UserOpenChallenges";
-import DebateLists from "../components/DashboardComponents/DebateDropdown/index ";
-import DebateDropdown from "../components/DashboardComponents/DebateDropdown/index";
+// import UserStats from "../components/UserStats";
+// import UserOpenChallenges from "../components/OpenChallenges/UserOpenChallenges";
+
+import DebateDropdowns from "../components/DashboardComponents/DebateDropdown/index.jsx";
 // import CategoryMenu from "../components/CategoryMenu";
 
 const Dashboard = () => {
   return (
     <div className="container">
-      <UserStats />
+      {/* <UserStats /> */}
       <UserOpenChallenges />
       <DebateLists />
-      <DebateDropdown />
+      <DebateDropdowns />
       {/* <CategoryMenu />
       <ProductList />
       <Cart /> */}

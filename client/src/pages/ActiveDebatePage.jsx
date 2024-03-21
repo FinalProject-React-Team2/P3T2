@@ -1,6 +1,8 @@
 // Remove unused imports
-import ActiveDebate from "../components/DashboardComponents/ActiveDebate.jsx";
-import { Container, Row, Col } from "react-bootstrap";
+// import ActiveDebate from "../components/DebateComponents/ActiveDebates/ActiveDebate.jsx";
+import React from "react";
+// import { Container, Row, Col } from "react-bootstrap";
+import DebateComponent from "../components/DebateComponents/ActiveDebates/ActiveDebateComponent.jsx";
 
 
 // Remove unused variable declaration
@@ -12,12 +14,12 @@ function ActiveDebatePage() {
         <Container>
         <Row>
             <Col>
-            <ActiveDebate />
+            <DebateComponent />
             </Col>
         </Row>
         </Container>
     );
-    }
-    export default ActiveDebatePage;
+}
+export default ActiveDebatePage;
 
 

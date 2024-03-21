@@ -1,6 +1,6 @@
 // DebateComponent.js
 import React, { useState } from 'react';
-import DebateService from '../services/DebateService';
+// import DebateService from '../services/DebateService';
 
 function DebateComponent({ debate }) {
   const [newComment, setNewComment] = useState('');
