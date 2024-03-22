@@ -56,13 +56,22 @@ return await User.findById(context.user._id).populate('debates'); // Finding use
       return { token, user }; // Returning the token and user
     },
     createDebate: async (parent, args, context) => {
+      try{
       console.log("createDebate called!", args); // Logging a message to the console
+      console.log(context.user)
       if (context.user) {
-        const debate = await Debate.create({...args, createdBy: context.user._id }); // Creating a new debate
-        //  title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
+        
+        const debate = await Debate.create({title: args.title, createdBy: context.user._id}); // Creating a new debate
+
+        console.log("debate created!", debate); // Logging a message to the console
         return debate; // Returning the debate
+      } else if (context.user == null) {
+        throw new AuthenticationError('You need to be logged in!'); // Throwing an AuthenticationError if user is not authenticated
+
       }
-      throw new AuthenticationError('You need to be logged in!'); // Throwing an AuthenticationError if user is not authenticated
+      } catch (err) {
+      console.error(`Error encountered in create debate: ${err}`)
+      }
     }
   },
 };
