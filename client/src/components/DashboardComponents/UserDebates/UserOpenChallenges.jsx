@@ -1,4 +1,4 @@
-// create a file that is a container tthat holds a list populated with the user's open challenges.
+// create a file that is a container that holds a list populated with the user's open challenges.
 // these are the debates the user has created but have not had a challenger accept it. 
 // these will be found in the database by searching for user id and the status of open debates
 import React from "react";
@@ -14,13 +14,14 @@ const UserOpenChallenges = () => {
     return <div>Loading...</div>;
   }
 
-  //filter that only includes open challenges //
-  const openDebates = user.debates?.filter(debate => debate.status === 'open') || [];
+  // Filter that only includes open challenges created by the user
+  const openDebates = user.debates?.filter(debate => debate.status === 'open' && debate.createdBy === user.id) || [];
+
   return (
     <div>
       <h2>Your Open Challenges</h2>
       <div>
-        {user.debates?.map((debate) => (
+        {openDebates.map((debate) => (
           <div key={debate._id}>
             <Link to={`/debate/${debate._id}`}>
               <h3>{debate.title}</h3>
