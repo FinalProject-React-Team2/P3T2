@@ -24,9 +24,27 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minlength: 5
-  }
+  },
+  openDebates: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Debate'
+    }
+  ],
+  activeDebates: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Debate'
+    }
+  ],
+  closedDebates: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Debate'
+    }
+  ]
+ 
 });
-
 
 // set up pre-save middleware to create password
 userSchema.pre('save', async function(next) {
@@ -34,7 +52,6 @@ userSchema.pre('save', async function(next) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-  
 
   next();
 });
@@ -45,5 +62,5 @@ userSchema.methods.isCorrectPassword = async function(password) {
 };
 
 const User = mongoose.model('User', userSchema);
- 
+
 module.exports = User;
