@@ -16,6 +16,15 @@ function Home() {
         <Link to="/signup">
             <button>Signup</button>
         </Link>
+        <Link to="/dashboard">
+            <button>Dashboard</button>
+        </Link>
+        <Link to="/Aboutus">
+            <button>About Us</button>
+        </Link>
+
+
+
         </div>
     );
     }

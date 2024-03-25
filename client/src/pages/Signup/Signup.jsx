@@ -4,8 +4,7 @@ import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations';
 
-function Signup() {
-    // (props)
+function Signup(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   console.log("made it here to handle");
   const [addUser] = useMutation(ADD_USER);
@@ -38,10 +37,10 @@ function Signup() {
   };
 
 
-//   function validateForm() {
+  function validateForm() {
  
 
-//   }
+}
   
   return (
     <> 
@@ -55,7 +54,7 @@ function Signup() {
             <input
               placeholder="First"
               name="firstName"
-              type="firstName"
+              type="text"
               id="firstName"
               onChange={handleChange}
             />
@@ -65,7 +64,7 @@ function Signup() {
             <input
               placeholder="Last"
               name="lastName"
-              type="lastName"
+              type="text"
               id="lastName"
               onChange={handleChange}
             />
@@ -91,6 +90,7 @@ function Signup() {
             />
           </div>
           <div className="flex-row flex-end">
+            
             <button type="submit">Submit</button>
           </div>
         </form>

@@ -10,7 +10,7 @@ const typeDefs = `
 
   type Debate {
     _id: ID
-    debateTitle: String
+    title: String
     status: String
     createdBy: User
     opponent: User
@@ -28,7 +28,7 @@ const typeDefs = `
   }
 
   type Comment {
-    user: {
+    user: String
       type: String
     comment: String
   }
@@ -56,9 +56,8 @@ const typeDefs = `
      
     login(email: String!, password: String!): Auth
 
-    createDebate(Debate: DebateInput!): Debate
+    createDebate(title: String!): Debate
   }
 `;
-
 
 module.exports = typeDefs;

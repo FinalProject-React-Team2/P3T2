@@ -9,6 +9,7 @@ const argumentSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      defult: "This is a test"
     },
     // The title of the argument
     body: {
@@ -53,7 +54,7 @@ const commentSchema = new Schema({
 const debateSchema = new Schema(
   {
     // Define the schema for a debate
-    debateTitle: {
+    title: {
       type: String,
       required: true,
       trim: true,
