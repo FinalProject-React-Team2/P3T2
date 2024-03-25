@@ -9,6 +9,7 @@ const argumentSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      defult: "This is a test"
     },
     // The title of the argument
     body: {

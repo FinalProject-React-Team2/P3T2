@@ -4,13 +4,20 @@ import { Link } from 'react-router-dom';
 import Auth from "../../utils/auth";
 import { LOGIN } from "../../utils/mutations";
 
-function Login() {
+
+
+function Login(props) {
   // State to store form input values
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ firstName: '', lastName: '', email: '', password: '' });
 
   // Mutation hook to handle login mutation
   const [login, { error, loading }] = useMutation(LOGIN);
 
+  const validateForm = () => {
+    const { email, password, firstName, lastName } = formState;
+    return email.length > 0 && password.length > 5 && firstName.length > 0 && lastName.length > 0;
+  };
+  
   // Function to handle form submission
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -29,6 +36,7 @@ function Login() {
 
       // Store the token in local storage using AuthS.login() method
       Auth.login(token);
+      window.location.assign('/dashboard');
     } catch (e) {
       console.log(e);
     }

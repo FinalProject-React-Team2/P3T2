@@ -28,6 +28,10 @@ const typeDefs = `
 
   type Comment {
     user: String
+<<<<<<< HEAD
+=======
+      type: String
+>>>>>>> 1de947d (Keep calm and carry on boys)
     comment: String
   }
 

@@ -1,64 +1,84 @@
-// //create the open challenge page 
-// this should link to the open challenge button the Dashboard//
+import React, { Component } from "react";
+import { useMutation } from "@apollo/client";
+import { CREATE_DEBATE } from "../utils/mutations";
+const { getUserFromToken } = require("../../utils/helpers");
+import { useState } from "react";
 
-// import { Component } from "react";
-import React from "react";
-import { useQuery } from "@apollo/client";
-import { QUERY_USER } from "../utils/queries";
-import { Link } from "react-router-dom";
-// import Dashboard from "./Dashboard"
+function CreateDebate({ loggedInUser }) {
 
+    const [debateTitle, setDebateTitle] = useState("");
+    const [numOfRounds, setNumOfRounds] = useState(3);
 
-class CreateDebate extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            debateTitle: "",
-            debateDescription: ""
-        };
-    }
+    
+    const [ createDebate, {error} ] = useMutation(CREATE_DEBATE); 
 
-    handleInputChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-    };
-
-    handleSubmit = (event) => {
+   const handleSubmit = async (event) => {
         event.preventDefault();
+        
+        try {
+            const {data} = await createDebate({
+                variables: {
+                title: debateTitle,
+                numOfRounds: 3, 
+                status: "open"
+                }
+            })
+         
+            console.log("debate created", data);
+            setDebateTitle('') 
+        } catch (e) {
+             console.error(e);
+        }
         // Handle form submission logic here
         // You can access the form values using this.state.debateTitle and this.state.debateDescription
     };
+ 
 
-    render() {
+    const handleInputChange = async (event) => {
+        const { name, value } = event.target;
+        if (name === 'debateTitle') {
+            setDebateTitle(value);
+        }
+
+        // this.setState({ [name]: value });
+    };
+    
+   
+
+    
         return (
             <div>
                 <button>Open Challenge</button>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <label>
                         Debate Title:
                         <input
                             type="text"
                             name="debateTitle"
-                            value={this.state.debateTitle}
-                            onChange={this.handleInputChange}
+                            value={debateTitle}
+                            onChange={handleInputChange}
                         />
                     </label>
                     <br />
                     <label>
                         Debate Description:
                         <textarea
-                            name="debateDescription"
-                            value={this.state.debateDescription}
-                            onChange={this.handleInputChange}
+                        type="text"
+                            name="numOfRounds"
+                            value={numOfRounds}
+                            onChange={handleInputChange}
                         ></textarea>
                     </label>
-                
                     <br />
+
                     <button type="submit">Create Debate</button>
                 </form>
             </div>
         );
     }
-}
+
+
+
+
 
 export default CreateDebate;
