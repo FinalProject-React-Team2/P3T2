@@ -15,6 +15,16 @@ const resolvers = {
       throw new Error(`User with ID ${userId} not found`);
     },
 
+    myProfile: async (_, __, context) => {
+      // Ensure there is a user in the context
+      if (!context.user) {
+        throw new Error('You must be logged in.');
+      }
+      // Use context.user._id to fetch the user profile
+      const userProfile = await User.findById(context.user._id).populate('debates');
+      return userProfile;
+    },
+
     getUserDebates: async (_, __, context) => {
       try {
         // Assuming context.userId contains the ID of the user making the request
@@ -27,17 +37,10 @@ const resolvers = {
         // Fetch the user and populate the debates
         const user = await User.findById(userId)
           .populate({
-            path: "openDebates",
+            path: "debates",
             select: "title -_id", // Select only the title field, exclude the id
-          })
-          .populate({
-            path: "activeDebates",
-            select: "title -_id",
-          })
-          .populate({
-            path: "closedDebates",
-            select: "title -_id",
           });
+        
 
         if (!user) {
           throw new Error("User not found");

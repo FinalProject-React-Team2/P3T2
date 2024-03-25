@@ -4,9 +4,8 @@ const typeDefs = `
     firstName: String
     lastName: String
     email: String
-    openDebates: [Debate]
-    activeDebates: [Debate]
-    closedDebates: [Debate]
+    debates: [Debate]
+   
   }
   type Debate {
     _id: ID
@@ -41,6 +40,7 @@ const typeDefs = `
   type Query {
     user(userId: ID!): User
     users: [User]
+    myProfile: User
     getUserDebates: [User]
     getDebate(_id: ID!): Debate
     getDebates: [Debate]

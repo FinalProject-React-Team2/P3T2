@@ -25,19 +25,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  openDebates: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Debate'
-    }
-  ],
-  activeDebates: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Debate'
-    }
-  ],
-  closedDebates: [
+  debates: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Debate'
