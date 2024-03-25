@@ -21,7 +21,7 @@ const resolvers = {
         throw new Error('You must be logged in.');
       }
       // Use context.user._id to fetch the user profile
-      const userProfile = await User.findById(context.user._id).populate('debates');
+      const userProfile = await User.findById(context.user._id);
       return userProfile;
     },
 
