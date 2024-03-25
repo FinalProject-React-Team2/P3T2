@@ -111,7 +111,7 @@ const resolvers = {
         }); // Creating a new debate
         //  title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
         console.log(debateInit); // Logging the debate to the console
-        return debate; // Returning the debate
+        return debateInit; // Returning the debate
       }
       throw new AuthenticationError("You need to be logged in!"); // Throwing an AuthenticationError if user is not authenticated
     },
