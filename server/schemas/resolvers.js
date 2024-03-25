@@ -23,8 +23,22 @@ return await User.findById(context.user._id).populate('debates'); // Finding use
         throw new AuthenticationError; 
       }// Throwing an AuthenticationError if user is not authenticated
         return await Debate.find({ createdBy: context.user._id }); // Finding all debates created by the user
-      }
-    },
+      },
+      getDebatesByUser: async (parent, args, context) => {
+        if (!context.user) {
+          throw new AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
+        }
+          return await Debate.find({ createdBy: context.user._id }); // Finding all debates created by the user
+        },
+        getDebatesByUserStatus: async (parent, args, context) => {
+          if (!context.user) {
+            throw new AuthenticationError; // Throwing an AuthenticationError if user is not authenticated
+          }
+            return await Debate.find({ createdBy: context.user._id, status: args.status }); // Finding all debates created by the user with a specific status
+          }
+      },
+  
+
 
 
   Mutation: {
@@ -65,8 +79,8 @@ return await User.findById(context.user._id).populate('debates'); // Finding use
 
         console.log("debate created!", debate); // Logging a message to the console
         return debate; // Returning the debate
-      } else if (context.user == null) {
-        throw new AuthenticationError('You need to be logged in!'); // Throwing an AuthenticationError if user is not authenticated
+      // } else if (context.user == null) {
+      //   throw new AuthenticationError('You need to be logged in!'); // Throwing an AuthenticationError if user is not authenticated
 
       }
       } catch (err) {

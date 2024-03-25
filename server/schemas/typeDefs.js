@@ -41,6 +41,8 @@ const typeDefs = `
   type Query {
     user: User
     getDebate(_id: ID!): Debate
+    getDebatesByUser: [Debate]
+    getDebatesByUserStatus(status: String!): [Debate]
     getDebates: [Debate]
   }
 

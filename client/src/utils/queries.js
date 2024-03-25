@@ -32,6 +32,19 @@ query {
 `;
 
 
+export const GET_DEBATES_BY_USER_STATUS = gql`
+query GetDebatesByUser {
+    getDebatesByUser {
+        _id
+        title
+        category
+        createdAt
+        challenger
+        status
+    }
+}
+`;
+
 export const GET_DEBATE = gql`
 query GetDebate($_id: ID!) {
     getDebate(_id: $_id) {

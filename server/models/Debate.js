@@ -61,7 +61,7 @@ const debateSchema = new Schema(
     },
     // The title of the debate
     status: {
-      type: String,
+      type: ["open", "closed", "active"],
       required: true,
       default: "open",
     },

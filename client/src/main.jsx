@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       { 
         path: "CreateDebate",
-        element: <CreateDebate  />,
+        element: <CreateDebate />,
       },
       {
         path: "ActiveDebatePage",

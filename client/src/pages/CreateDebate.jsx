@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_DEBATE } from "../utils/mutations";
-const { getUserFromToken } = require("../../utils/helpers");
+// import { getUserFromToken } from "../utils/auth";
 import { useState } from "react";
+import Auth from "../utils/auth";
+
+
 
 function CreateDebate({ loggedInUser }) {
 
@@ -20,7 +23,8 @@ function CreateDebate({ loggedInUser }) {
                 variables: {
                 title: debateTitle,
                 numOfRounds: 3, 
-                status: "open"
+                status: "open",
+                createdBy: loggedInUser._id
                 }
             })
          
