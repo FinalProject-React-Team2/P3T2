@@ -6,7 +6,7 @@ const resolvers = {
     users: async () => {
       return User.find();
     },
-
+    
     user: async (parent, { userId }, context) => {
       if (context.user) {
         return await User.findById({ _id: userId }).populate("debates");
