@@ -9,7 +9,7 @@ const resolvers = {
 
     user: async (parent, { userId }, context) => {
       if (context.user) {
-        return await User.findById({ _id: userId });
+        return await User.findById({ _id: userId }).populate("debates");
       }
 
       throw new Error(`User with ID ${userId} not found`);
@@ -21,7 +21,7 @@ const resolvers = {
         throw new Error('You must be logged in.');
       }
       // Use context.user._id to fetch the user profile
-      const userProfile = await User.findById(context.user._id).populate('debates');
+      const userProfile = await User.findById(context.user._id);
       return userProfile;
     },
 
@@ -114,7 +114,14 @@ const resolvers = {
         }); // Creating a new debate
         //  title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
         console.log(debateInit); // Logging the debate to the console
-        return debateInit; // Returning the debate
+        // return debateInit; // Returning the debate
+        const userDebate = await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { debates: debateInit._id } },
+          { new: true }
+        ); // Updating the user's debates
+
+        return userDebate
       }
       throw new AuthenticationError("You need to be logged in!"); // Throwing an AuthenticationError if user is not authenticated
     },

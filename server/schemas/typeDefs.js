@@ -48,7 +48,6 @@ const typeDefs = `
 
   input DebateInput {
     title: String!
-    createdBy: ID!
   } 
 
   type Mutation {
