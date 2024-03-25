@@ -82,7 +82,7 @@ const debateSchema = new Schema(
       default: 3,
     },
     // The number of rounds in the debate
-    argument: [argumentSchema],
+    arguments: [argumentSchema],
     // An array of arguments in the debate
     comments: [commentSchema],
     // An array of comments in the debate
