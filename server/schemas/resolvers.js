@@ -6,7 +6,7 @@ const resolvers = {
     users: async () => {
       return User.find();
     },
-    
+
     user: async (parent, { userId }, context) => {
       if (context.user) {
         return await User.findById({ _id: userId }).populate("debates");
@@ -18,10 +18,15 @@ const resolvers = {
     myProfile: async (_, __, context) => {
       // Ensure there is a user in the context
       if (!context.user) {
-        throw new Error('You must be logged in.');
+        throw new Error("You must be logged in.");
       }
       // Use context.user._id to fetch the user profile
-      const userProfile = await User.findById(context.user._id);
+      const userProfile = await User.findById(context.user._id)
+        .populate("debates")
+        .populate({
+          path: "debates",
+          populate: "createdBy opponent winner",
+        });
       return userProfile;
     },
 
@@ -35,12 +40,10 @@ const resolvers = {
         }
 
         // Fetch the user and populate the debates
-        const user = await User.findById(userId)
-          .populate({
-            path: "debates",
-            select: "title -_id", // Select only the title field, exclude the id
-          });
-        
+        const user = await User.findById(userId).populate({
+          path: "debates",
+          select: "title -_id", // Select only the title field, exclude the id
+        });
 
         if (!user) {
           throw new Error("User not found");
@@ -58,14 +61,16 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError();
       } // Throwing an AuthenticationError if user is not authenticated
-      return await Debate.findById(args._id).populate('createby opponent winner'); // Finding a debate by ID
+      return await Debate.findById(args._id).populate(
+        "createdBy opponent winner"
+      ); // Finding a debate by ID
     },
 
     getDebates: async (parent, args, context) => {
-      if (!context.user) {
-        throw new AuthenticationError();
-      } // Throwing an AuthenticationError if user is not authenticated
-      return await Debate.find({ createdBy: context.user._id }).populate('createdBy opponent winner'); // Finding all debates created by the user
+      // if (!context.user) {
+      //   throw new AuthenticationError();
+      // } // Throwing an AuthenticationError if user is not authenticated
+      return await Debate.find({}).populate("createdBy opponent winner"); // Finding all debates created by the user
     },
   },
 
@@ -121,9 +126,26 @@ const resolvers = {
           { new: true }
         ); // Updating the user's debates
 
-        return debateInit
+        return debateInit;
       }
       throw new AuthenticationError("You need to be logged in!"); // Throwing an AuthenticationError if user is not authenticated
+    },
+    addOpponent: async (parent, { _id }, context) => {
+      if (context.user) {
+        const updatedDebate =  await Debate.findByIdAndUpdate(
+          _id,
+          { opponent: context.user._id, status: "active" },
+          { new: true }
+        ).populate("createdBy opponent winner");
+
+          await User.findByIdAndUpdate(
+            context.user._id,
+            { $push: { debates: _id } },
+            { new: true }
+          );
+          
+        return updatedDebate;
+      }
     },
   },
 };

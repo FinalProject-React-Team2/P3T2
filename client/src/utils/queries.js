@@ -1,58 +1,94 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
-query { 
-    user {
+  query MyProfile {
+    myProfile {
+      debates {
         _id
-        username
-        email
-        debates {
-            _id
-            title
-            category
-            createdAt
-            challenger
-            status
+        createdBy {
+          _id
+          firstName
         }
+        numOfRounds
+        opponent {
+          _id
+          firstName
+        }
+        title
+        status
+        winner {
+          _id
+          firstName
+        }
+      }
     }
-}  
+  }
 `;
 
 export const GET_DEBATES = gql`
-query {
+  query getDebates {
     getDebates {
+      title
+      createdBy {
         _id
-        title
-        category
-        createdAt
-        challenger
-        status
+        firstName
+      }
+      opponent {
+        _id
+        firstName
+      }
+      status
+      numOfRounds
+      winner {
+        _id
+        firstName
+        lastName
+      }
+      _id
     }
-}
+  }
 `;
-
 
 export const GET_DEBATE = gql`
-query GetDebate($_id: ID!) {
-    getDebate(_id: $_id) {
+  query getDebate($id: ID!) {
+    getDebate(_id: $id) {
+      _id
+      title
+      status
+      createdBy {
         _id
-        title
-        category
-        createdAt
-        challenger
-        status
-        arguments {
-            _id
-            title
-            body
-            comments {
-                _id
-                comment
-                user
-            }
-            votes
+        firstName
+        lastName
+        email
+        debates {
+          _id
+          title
+          status
+          numOfRounds
         }
+      }
+      opponent {
+        _id
+        firstName
+        lastName
+        email
+      }
+      numOfRounds
+      arguments {
+        title
+        body
+        votes
+      }
+      comments {
+        user
+        comment
+      }
+      winner {
+        _id
+        firstName
+        lastName
+        email
+      }
     }
-}
+  }
 `;
-

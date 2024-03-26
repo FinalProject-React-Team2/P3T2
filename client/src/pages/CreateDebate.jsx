@@ -13,18 +13,17 @@ function CreateDebate({ loggedInUser }) {
 
    const handleSubmit = async (event) => {
         event.preventDefault();
-        
+        console.log("debateTitle", debateTitle);
         try {
-            const {data} = await createDebate({
-                variables: {
-                title: debateTitle,
-                numOfRounds: 3, 
-                status: "open"
-                }
+            const data = await createDebate({
+                variables: {debate: {
+                title: debateTitle
+                }}
             })
          
             console.log("debate created", data);
             setDebateTitle('') 
+            window.location.replace('/dashboard')
         } catch (e) {
              console.error(e);
         }
