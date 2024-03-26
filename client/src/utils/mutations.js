@@ -51,14 +51,19 @@ export const ADD_USER = gql`
 `;
 
 export const CREATE_DEBATE = gql`
- mutation Mutation($title: String!) {
-  createDebate(title: $title) {
-    _id
-    title
+mutation createDebate($debate: DebateInput!) {
+  createDebate(debate: $debate) {
     createdBy {
       _id
-    
+      firstName
     }
+    numOfRounds
+    opponent {
+      _id
+      firstName
+    }
+    status
+    title
   }
 }
 
