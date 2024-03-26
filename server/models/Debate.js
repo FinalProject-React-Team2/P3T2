@@ -9,6 +9,7 @@ const argumentSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      defult: "This is a test"
     },
     // The title of the argument
     body: {
@@ -53,7 +54,7 @@ const commentSchema = new Schema({
 const debateSchema = new Schema(
   {
     // Define the schema for a debate
-    debateTitle: {
+    title: {
       type: String,
       required: true,
       trim: true,
@@ -81,7 +82,7 @@ const debateSchema = new Schema(
       default: 3,
     },
     // The number of rounds in the debate
-    argument: [argumentSchema],
+    arguments: [argumentSchema],
     // An array of arguments in the debate
     comments: [commentSchema],
     // An array of comments in the debate

@@ -1,16 +1,15 @@
 const typeDefs = `
-
   type User {
     _id: ID
     firstName: String
     lastName: String
     email: String
-    password: String
+    debates: [Debate]
+   
   }
-
   type Debate {
     _id: ID
-    debateTitle: String
+    title: String
     status: String
     createdBy: User
     opponent: User
@@ -28,10 +27,10 @@ const typeDefs = `
   }
 
   type Comment {
-    user: {
-      type: String
+    user: String
     comment: String
   }
+
 
   type Auth {
     token: ID
@@ -39,7 +38,10 @@ const typeDefs = `
   }
 
   type Query {
-    user: User
+    user(userId: ID!): User
+    users: [User]
+    myProfile: User
+    getUserDebates: [User]
     getDebate(_id: ID!): Debate
     getDebates: [Debate]
   }
@@ -48,17 +50,12 @@ const typeDefs = `
     title: String!
   } 
 
-
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-     
     login(email: String!, password: String!): Auth
-
-    createDebate(Debate: DebateInput!): Debate
+    createDebate(debate: DebateInput!): Debate
   }
 `;
-
 
 module.exports = typeDefs;

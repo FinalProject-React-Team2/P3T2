@@ -15,7 +15,8 @@ const Dashboard = () => {
       <DebateDropdowns />
       <UserActiveChallenges />
       <UserOpenChallenges />
-     
+    
+    
     </div>
   );
 };

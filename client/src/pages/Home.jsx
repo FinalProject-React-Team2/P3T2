@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function Home() {
     return (
         <div>
+<<<<<<< HEAD
             <div class="header-content">
                 <div class="header-content-inner">
                     <h1> Welcome to DebateBros</h1>
@@ -40,6 +41,27 @@ function Home() {
                 <div class="col-md-4 promo-item item-3">
                     <h3> Concluded Debates List </h3>
                 </div>
+=======
+        <h1>Welcome to DebateBros</h1>
+        <p>
+            We are a community of individuals who love to debate. We provide a platform for users to engage in friendly debates on a variety of topics.
+        </p>
+        <Link to="/login">
+            <button>Login</button>
+        </Link>
+        <Link to="/signup">
+            <button>Signup</button>
+        </Link>
+        <Link to="/dashboard">
+            <button>Dashboard</button>
+        </Link>
+        <Link to="/Aboutus">
+            <button>About Us</button>
+        </Link>
+
+
+
+>>>>>>> develop
         </div>
         <section class="content content-3">
             <div class="container">
