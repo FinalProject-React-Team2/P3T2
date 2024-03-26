@@ -12,6 +12,7 @@ import ActiveDebatePage from "./pages/ActiveDebatePage";
 import About from "./pages/About/Aboutus.jsx";
 import CreateDebate from "./pages/CreateDebate.jsx";
 // import Donations from "./pages/Donations.jsx";
+import Notfound from "./pages/404";
 
 
 
@@ -47,6 +48,9 @@ const router = createBrowserRouter([
       },
       { path: "Aboutus",
         element: <About />,
+      },
+      { path: "*",
+        element: <Notfound></Notfound>
       }
     ],
   },
