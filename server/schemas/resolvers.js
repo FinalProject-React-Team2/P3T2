@@ -65,7 +65,7 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError();
       } // Throwing an AuthenticationError if user is not authenticated
-      return await Debate.find({ createdBy: context.user._id }); // Finding all debates created by the user
+      return await Debate.find({ createdBy: context.user._id }).populate('createdBy opponent winner'); // Finding all debates created by the user
     },
   },
 

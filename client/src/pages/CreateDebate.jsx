@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_DEBATE } from "../utils/mutations";
-const { getUserFromToken } = require("../../utils/helpers");
+// const { getUserFromToken } = require("../../utils/helpers");
 import { useState } from "react";
 
 function CreateDebate({ loggedInUser }) {
