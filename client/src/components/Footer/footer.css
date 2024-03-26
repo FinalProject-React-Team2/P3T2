@@ -1,0 +1,20 @@
+.footer {
+    background-color: #343a40; /* Dark shade */
+    color: #ffffff; /* White text color */
+    padding: 10px 0; /* Padding inside the footer, top and bottom */
+    font-size: 14px; /* Font size */
+    text-align: center; /* Center the text */
+    position: relative; /* Adjusted to 'relative' if footer should not always be at the bottom */
+    bottom: 0; /* Stick to the bottom */
+    width: 100%; /* Full width */
+  }
+  
+  .container {
+    max-width: 960px; /* Max width of the content inside footer */
+    margin: auto; /* Center the container */
+    padding: 0 15px; /* Padding on the sides */
+  }
+  
+  .text-muted {
+    color: #6c757d; /* Muted text color */
+  }

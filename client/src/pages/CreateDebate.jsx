@@ -42,7 +42,7 @@ function CreateDebate({ loggedInUser }) {
         // this.setState({ [name]: value });
     };
     
-   
+    
 
     
         return (

@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import ActiveDebatePage from "./pages/ActiveDebatePage";
 import About from "./pages/About/Aboutus.jsx";
 import CreateDebate from "./pages/CreateDebate.jsx";
+// import Donations from "./pages/Donations.jsx";
 
 
 
