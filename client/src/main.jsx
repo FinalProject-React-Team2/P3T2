@@ -12,8 +12,6 @@ import ActiveDebatePage from "./pages/ActiveDebatePage";
 import About from "./pages/About/Aboutus.jsx";
 import CreateDebate from "./pages/CreateDebate.jsx";
 
-
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,21 +30,23 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <Signup />,
       },
-      { 
+      {
         path: "dashboard",
         element: <Dashboard />,
       },
-      { 
+      {
         path: "CreateDebate",
-        element: <CreateDebate  />,
+        element: <CreateDebate />,
+      },
+      {
+        path: "debate/:id",
+        element: <ActiveDebatePage />,
       },
       {
         path: "ActiveDebatePage",
         element: <ActiveDebatePage />,
       },
-      { path: "Aboutus",
-        element: <About />,
-      }
+      { path: "Aboutus", element: <About /> },
     ],
   },
 ]);
