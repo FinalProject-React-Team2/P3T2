@@ -28,10 +28,6 @@ const typeDefs = `
 
   type Comment {
     user: String
-<<<<<<< HEAD
-=======
-      type: String
->>>>>>> 1de947d (Keep calm and carry on boys)
     comment: String
   }
 
@@ -58,12 +54,7 @@ const typeDefs = `
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
-<<<<<<< HEAD
     createDebate(debate: DebateInput!): Debate
-=======
-
-    createDebate(title: String!): Debate
->>>>>>> 1de947d (Keep calm and carry on boys)
   }
 `;
 

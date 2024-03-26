@@ -58,7 +58,7 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError();
       } // Throwing an AuthenticationError if user is not authenticated
-      return await Debate.findById(args._id); // Finding a debate by ID
+      return await Debate.findById(args._id).populate('createby opponent winner'); // Finding a debate by ID
     },
 
     getDebates: async (parent, args, context) => {
@@ -121,7 +121,7 @@ const resolvers = {
           { new: true }
         ); // Updating the user's debates
 
-        return userDebate
+        return debateInit
       }
       throw new AuthenticationError("You need to be logged in!"); // Throwing an AuthenticationError if user is not authenticated
     },
