@@ -1,6 +1,6 @@
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
-import nav from "./nav.css";
+import "./nav.css";
 
 function Nav() {
 
@@ -8,11 +8,6 @@ function Nav() {
     if (Auth.loggedIn()) {
       return (
         <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="Aboutus">
-              Order History
-            </Link>
-          </li>
           <li className="mx-1">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
             <a href="/" onClick={() => Auth.logout()}>
@@ -32,6 +27,21 @@ function Nav() {
           <li className="mx-1">
             <Link to="/login">
               Login
+            </Link>
+          </li>
+          <li className="mx-1">
+          <Link to="/aboutus">
+              About Us
+            </Link>
+            </li>
+          <li className="mx-1">
+            <Link to="/Dashboard">
+              Dashboard
+            </Link>
+          </li>
+          <li className="mx-1">
+            <Link to="/Donations">
+              Donations
             </Link>
           </li>
         </ul>

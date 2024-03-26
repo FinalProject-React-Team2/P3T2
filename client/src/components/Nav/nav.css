@@ -42,6 +42,8 @@ header h1 a {
     color: #ffdde1;
 }
 
+
+
 /* Adjust the below media query as per your design's responsiveness needs */
 @media (max-width: 600px) {
     header {
