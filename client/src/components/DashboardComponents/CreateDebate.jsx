@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { useMutation } from "@apollo/client";
-import { CREATE_DEBATE } from "../utils/mutations";
+import { CREATE_DEBATE } from "../../utils/mutations";
 import { useState } from "react";
 
 function CreateDebate({ loggedInUser }) {

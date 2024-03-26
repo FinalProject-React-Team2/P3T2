@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const RoundsComponent = () => {
     const [rounds, setRounds] = useState(0); // Initialize rounds with 0

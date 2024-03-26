@@ -68,6 +68,45 @@ THEN I am logged out of the app.
 ![alt text](image-2.png)
 ![alt text](image-3.png)
 
+## Component Structure (best viewed in raw markdown)
+
+App  
+├── Header  
+│   ├── Navigation  
+│   └── UserMenu  
+├── Routes  
+│   ├── HomePage  
+│   │   ├── DebateFundamentals  
+│   │   ├── SearchTopics  
+│   │   ├── PredefinedTopics  
+│   │   └── FeaturedDebates  
+│   ├── AboutPage  
+│   │   ├── MissionStatement  
+│   │   ├── Contributors  
+│   │   └── DebateFundamentalsLink  
+│   ├── SignUpPage  
+│   │   └── SignUpForm  
+│   ├── LoginPage   
+│   │   └── LoginForm  
+│   ├── DashboardPage  
+│   │   ├── ChallengeLinks  
+│   │   ├── SpectateDebatesLinks  
+│   │   ├── OpenDebateChallenges  
+│   │   ├── ProposeTopicForm  
+│   │   └── AcceptDebateChallenges  
+│   └── DebatePage  
+│       ├── DebateRoom  
+│       │   ├── TurnIndicator  
+│       │   ├── ArgumentList  
+│       │   │   └── ArgumentItem  
+│       │   └── CommentSection  
+│       │       └── CommentItem  
+│       └── SpectatorView  
+│           ├── SpectatorRoom  
+│           │   └── VoteAndComment  
+│           └── SpectateDebateList  
+└── Footer
+
 ## Contributors 
 
 - Sean Harrigan

@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_DEBATE } from "../utils/queries";
-import { ADD_OPPONENT } from "../utils/mutations";
+import { GET_DEBATE } from "../../utils/queries";
+import { ADD_OPPONENT } from "../../utils/mutations";
 
-import AuthService from "../utils/auth";
+import AuthService from "../../utils/auth";
 
 function ActiveDebatePage() {
   const { id } = useParams();
