@@ -14,8 +14,6 @@ import CreateDebate from "./pages/CreateDebate.jsx";
 // import Donations from "./pages/Donations.jsx";
 import Notfound from "./pages/404";
 
-
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,13 +32,17 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <Signup />,
       },
-      { 
+      {
         path: "dashboard",
         element: <Dashboard />,
       },
-      { 
+      {
         path: "CreateDebate",
-        element: <CreateDebate  />,
+        element: <CreateDebate />,
+      },
+      {
+        path: "debate/:id",
+        element: <ActiveDebatePage />,
       },
       {
         path: "ActiveDebatePage",

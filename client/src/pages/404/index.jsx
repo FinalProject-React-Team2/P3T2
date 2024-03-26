@@ -2,7 +2,8 @@
 function NotFound() {
   return (
     <> 
-    <h1>404 goes here</h1>
+    <h1>404 this website is currently down 
+    </h1>
     </>
   );
 }

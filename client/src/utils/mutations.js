@@ -50,23 +50,66 @@ export const ADD_USER = gql`
   }
 `;
 
-export const CREATE_DEBATE = gql`
-mutation createDebate($debate: DebateInput!) {
-  createDebate(debate: $debate) {
-    createdBy {
+export const ADD_OPPONENT = gql`
+  mutation Mutation($id: ID!) {
+    addOpponent(_id: $id) {
       _id
-      firstName
+      title
+      status
+      createdBy {
+        _id
+        firstName
+        lastName
+        email
+        debates {
+          _id
+          title
+          status
+          numOfRounds
+        }
+      }
+      opponent {
+        _id
+        firstName
+        lastName
+        email
+      }
+      numOfRounds
+      arguments {
+        title
+        body
+        votes
+      }
+      comments {
+        user
+        comment
+      }
+      winner {
+        _id
+        firstName
+        lastName
+        email
+      }
     }
-    numOfRounds
-    opponent {
-      _id
-      firstName
-    }
-    status
-    title
   }
-}
+`;
 
+export const CREATE_DEBATE = gql`
+  mutation createDebate($debate: DebateInput!) {
+    createDebate(debate: $debate) {
+      createdBy {
+        _id
+        firstName
+      }
+      numOfRounds
+      opponent {
+        _id
+        firstName
+      }
+      status
+      title
+    }
+  }
 `;
 
 export const ADD_ARGUMENT = gql`
@@ -99,14 +142,14 @@ export const UPDATE_USER = gql`
     $firstName: String
     $lastName: String
     $email: String
-    # $password: String
-  ) {
+  ) # $password: String
+  {
     updateUser(
       firstName: $firstName
       lastName: $lastName
       email: $email
-      # password: $password
-    ) {
+    ) # password: $password
+    {
       _id
       firstName
       lastName
@@ -124,4 +167,3 @@ export default {
   VOTE,
   UPDATE_USER,
 };
-
