@@ -6,37 +6,8 @@ import { Link } from "react-router-dom";
 function Home() {
     return (
         <div>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <h1>Welcome to DebateBros</h1>
-        <p>
-            We are a community of individuals who love to debate. We provide a platform for users to engage in friendly debates on a variety of topics.
-        </p>
-        <Link to="/login">
-            <button>Login</button>
-        </Link>
-        <Link to="/signup">
-            <button>Signup</button>
-        </Link>
-        <Link to="/dashboard">
-            <button>Dashboard</button>
-        </Link>
-        <Link to="/Aboutus">
-            <button>About Us</button>
-        </Link>
-
-
-
-=======
->>>>>>> 4d16241 (resolving merge)
-            <div class="header-content">
-                <div class="header-content-inner">
-=======
             <div className="header-content">
                 <div className="header-content-inner">
->>>>>>> d9fba94 (update css)
                     <h1> Welcome to DebateBros</h1>
                         <p>We are a community of individuals who love to debate. We provide a platform for users to engage in friendly debates on a variety of topics</p>
                 </div>
@@ -69,13 +40,6 @@ function Home() {
                 <div className="col-md-4 promo-item item-3">
                     <h3> Concluded Debates List </h3>
                 </div>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 1d8af36 (update branch)
-=======
->>>>>>> d9fba94 (update css)
->>>>>>> 4d16241 (resolving merge)
         </div>
         <section className="content content-3">
             <div className="container">
