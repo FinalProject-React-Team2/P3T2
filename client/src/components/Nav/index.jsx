@@ -1,6 +1,6 @@
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
-import nav from "./nav.css";
+import "./nav.css";
 
 function Nav() {
 
@@ -10,6 +10,7 @@ function Nav() {
         <ul className="flex-row">
           <li className="mx-1">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <Link to="Aboutus">
               Order History
             </Link>
@@ -17,6 +18,8 @@ function Nav() {
 >>>>>>> 1d8af36 (update branch)
           </li>
           <li className="mx-1">
+=======
+>>>>>>> d9fba94 (update css)
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
             <a href="/" onClick={() => Auth.logout()}>
               Logout
