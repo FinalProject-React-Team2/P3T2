@@ -32,9 +32,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <Outlet />
-      {/* //<header /> */}
-      {/* <footer /> */}
+      <main>
+        <Outlet />
+      </main>
     </ApolloProvider>
   );
 }

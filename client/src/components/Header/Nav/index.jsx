@@ -1,5 +1,6 @@
 import Auth from "../../../utils/auth";
 import { Link } from "react-router-dom";
+import UserMenu from "./UserMenu";
 import "./nav.css";
 
 function Nav() {
@@ -8,10 +9,16 @@ function Nav() {
       return (
         <ul className="flex-row">
           <li className="mx-1">
+            <Link to="/aboutus">About Us</Link>
+          </li>
+          <li className="mx-1">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
             <a href="/" onClick={() => Auth.logout()}>
               Logout
             </a>
+          </li>
+          <li>
+            <UserMenu />
           </li>
         </ul>
       );
@@ -28,9 +35,6 @@ function Nav() {
             <Link to="/aboutus">About Us</Link>
           </li>
           <li className="mx-1">
-            <Link to="/Dashboard">Dashboard</Link>
-          </li>
-          <li className="mx-1">
             <Link to="/Donations">Donations</Link>
           </li>
         </ul>
@@ -39,18 +43,11 @@ function Nav() {
   }
 
   return (
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">
-            🛍️
-          </span>
-          DebateBros
-        </Link>
-      </h1>
+    <div className="flex-row px-1">
+
 
       <nav>{showNavigation()}</nav>
-    </header>
+    </div>
   );
 }
 
