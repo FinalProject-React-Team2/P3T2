@@ -48,6 +48,7 @@ const typeDefs = `
 
   input DebateInput {
     title: String!
+    numOfRounds: Int!
   } 
 
   type Mutation {

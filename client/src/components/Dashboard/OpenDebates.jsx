@@ -1,18 +1,16 @@
-import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_DEBATES } from "../../../../utils/queries";
-import { Link } from "react-router-dom";
-import AuthService from "../../../../utils/auth";
+import { GET_DEBATES } from "../../utils/queries";
+import AuthService from "../../utils/auth";
 
 const OpenDebates = ({ addOpponentHandler }) => {
   const { loading, data } = useQuery(GET_DEBATES);
-  const debates =
+  const openDebates =
     data?.getDebates.filter(
       (debate) =>
         debate.status === "open" &&
-        debate.createdBy._id != AuthService.getProfile().data._id
+        debate.createdBy?._id != AuthService.getProfile().data._id
     ) || [];
-  console.log("OPEN DEBATES", debates, AuthService.getProfile().data._id);
+  console.log("OPEN DEBATES", openDebates, AuthService.getProfile().data._id);
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -21,7 +19,7 @@ const OpenDebates = ({ addOpponentHandler }) => {
     <div>
       <h2>Open Debates</h2>
       <div>
-        {debates.map((debate) => (
+        {openDebates.map((debate) => (
           <div key={debate._id}>
             <a onClick={() => addOpponentHandler(debate._id)}>
               <h3>{debate.title}</h3>
