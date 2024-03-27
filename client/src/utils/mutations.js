@@ -76,7 +76,8 @@ export const ADD_OPPONENT = gql`
       }
       numOfRounds
       arguments {
-        title
+        _id
+        user
         body
         votes
       }
@@ -113,10 +114,50 @@ export const CREATE_DEBATE = gql`
 `;
 
 export const ADD_ARGUMENT = gql`
-  mutation addArgument($debateId: ID!, $title: String!, $body: String!) {
-    addArgument(debateId: $debateId, title: $title, body: $body) {
+  mutation addArgument($id: ID!, $argument: String!) {
+    addArgument(_id: $id, argument: $argument) {
+      arguments {
+        body
+        votes
+        user
+        _id
+      }
+      _id
+      status
+      numOfRounds
+      createdBy {
+        _id
+        firstName
+        lastName
+        email
+        debates {
+          _id
+          title
+          status
+          numOfRounds
+          arguments {
+            body
+            votes
+          }
+        }
+      }
+      opponent {
+        _id
+        firstName
+        lastName
+        email
+      }
+      comments {
+        user
+        comment
+      }
+      winner {
+        _id
+        firstName
+        lastName
+        email
+      }
       title
-      body
     }
   }
 `;
@@ -141,15 +182,13 @@ export const UPDATE_USER = gql`
   mutation updateUser(
     $firstName: String
     $lastName: String
-    $email: String
-  ) # $password: String
-  {
+    $email: String # $password: String
+  ) {
     updateUser(
       firstName: $firstName
       lastName: $lastName
-      email: $email
-    ) # password: $password
-    {
+      email: $email # password: $password
+    ) {
       _id
       firstName
       lastName

@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [addOpponent] = useMutation(ADD_OPPONENT);
   const navigate = useNavigate();
   const addOpponentHandler = async (id) => {
+    console.log("ADD OPPONENT", id);
     await addOpponent({
       variables: { id },
     });

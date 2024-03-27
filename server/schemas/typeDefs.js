@@ -20,10 +20,10 @@ const typeDefs = `
   }
 
   type Argument {
-    title: String
+    _id: ID
+    user: ID
     body: String
-    comments: [Comment]
-    votes: [String]
+    votes: [ID]
   }
 
   type Comment {
@@ -51,12 +51,14 @@ const typeDefs = `
     numOfRounds: Int!
   } 
 
+
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
     createDebate(debate: DebateInput!): Debate
     addOpponent(_id: ID!): Debate
+    addArgument(_id: ID!, argument: String!): Debate
   }
 `;
 
