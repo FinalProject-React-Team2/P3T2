@@ -15,8 +15,6 @@ export default function CreateDebate({ loggedInUser }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("debateTitle", debateTitle);
-    
-    
 
     try {
       const data = await createDebate({
@@ -32,7 +30,7 @@ export default function CreateDebate({ loggedInUser }) {
       setFormState({
         debateTitle: "",
         numOfRounds: "",
-        });
+      });
       window.location.replace("/dashboard");
     } catch (error) {
       console.error(error);
@@ -45,43 +43,44 @@ export default function CreateDebate({ loggedInUser }) {
     const { name, value } = event.target;
     console.log("name", name);
     setFormState({ ...formState, [name]: value });
+  };
 
-   
-    }
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-floating mb-3">
+          <input
+            className="debateFormInput form-control"
+            id="floatingInput"
+            type="text"
+            name="debateTitle"
+            value={formState.debateTitle}
+            onChange={handleInputChange}
+            placeholder=""
+          />
+          <label for="floatingInput">Debate Title</label>
+        </div>
+        <br />
+        <div className="form-floating">
+          <input
+            className="debateFormInput form-control "
+            type="number"
+            id="numOfRounds"
+            name="numOfRounds"
+            max={7}
+            min={3}
+            value={formState.numOfRounds}
+            onChange={handleInputChange}
+            placeholder=""
+          />
+          <label for="numOfRounds">Number of Rounds [3-7]</label>
+        </div>
+        <br />
 
-    return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <input
-              className="debateFormInput"
-              type="text"
-              name="debateTitle"
-              value={formState.debateTitle}
-              onChange={handleInputChange}
-              placeholder="Enter Debate title..."
-            />
-          </label>
-          <br />
-          <label>
-            <input
-              className="debateFormInput"
-              type="number"
-              name="numOfRounds"
-              max={7}
-              min={3}
-              value={formState.numOfRounds}
-              onChange={handleInputChange}
-              placeholder="Enter number of rounds..."
-            />
-          </label>
-          <br />
-
-          <button className="debateFormInput" type="submit">
-            Create Debate
-          </button>
-        </form>
-      </div>
-    );
-  }
-
+        <button className="debateFormInput" type="submit">
+          Create Debate
+        </button>
+      </form>
+    </div>
+  );
+}

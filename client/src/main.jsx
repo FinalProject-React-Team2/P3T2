@@ -13,7 +13,8 @@ import Login from "./pages/Login/Login.jsx";
 import Dashboard from "./pages/Dashboard";
 import Debates from "./pages/Debates/Debates.jsx";
 import ActiveDebatePage from "./pages/Debates/ActiveDebatePage.jsx";
-
+// Import bootstrap css
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const router = createBrowserRouter([
   {
@@ -50,13 +51,6 @@ const router = createBrowserRouter([
         element: <ActiveDebatePage />,
       },
 
-      {
-        path: "ActiveDebatePage",
-        element: <ActiveDebatePage />,
-      },
-      { path: "Aboutus",
-        element: <About />,
-      },
       { path: "*",
         element: <Notfound></Notfound>
       }
