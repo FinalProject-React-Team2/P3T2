@@ -1,0 +1,36 @@
+/* Nav.css */
+
+.flex-row {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.flex-row li {
+    margin: 0 15px;
+}
+
+.flex-row li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.flex-row li a:hover {
+    color: #ffdde1;
+}
+
+
+
+/* Adjust the below media query as per your design's responsiveness needs */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+    }
+
+    .flex-row {
+        justify-content: space-around;
+        width: 100%;
+    }
+}
