@@ -60,12 +60,6 @@ export const GET_DEBATE = gql`
         firstName
         lastName
         email
-        debates {
-          _id
-          title
-          status
-          numOfRounds
-        }
       }
       opponent {
         _id
@@ -75,7 +69,8 @@ export const GET_DEBATE = gql`
       }
       numOfRounds
       arguments {
-        title
+        _id
+        user
         body
         votes
       }

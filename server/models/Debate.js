@@ -5,25 +5,18 @@ const { Schema, model } = require("mongoose");
 const argumentSchema = new Schema(
   {
     // Define the schema for an argument
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-      defult: "This is a test"
-    },
-    // The title of the argument
     body: {
       type: String,
       required: true,
       trim: true,
     },
     // The statement of the argument
-    user: { 
+    user: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
     // Reference to the user who made the argument
-    votes: [String],
+    votes: [Schema.Types.ObjectId],
     // An array of votes for the argument
   },
   {
@@ -33,7 +26,6 @@ const argumentSchema = new Schema(
     id: false,
   }
 );
-
 
 const commentSchema = new Schema({
   // Define the schema for a comment
@@ -107,7 +99,6 @@ const Debate = model("Debate", debateSchema);
 module.exports = Debate;
 
 // Export the Debate model
-
 
 //possible votes schema
 //votes: [{ type: Schema.Types.ObjectId, ref: 'User'}]
