@@ -6,8 +6,8 @@ export default function Header() {
     <header>
       <h1>
         <Link to="/">
-          <span className="logo-container" role="img" aria-label="gavel-block & cloud">
-            <img className="logo" src="Debate Cloud Logo.png" alt="" />
+          <span className="logo-container" role="img">
+            <img className="logo" src="/debateLogo.png" alt="gavel-block & cloud" />
           </span>
           DebateCloud
         </Link>

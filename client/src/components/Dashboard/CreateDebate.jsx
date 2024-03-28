@@ -58,7 +58,7 @@ export default function CreateDebate({ loggedInUser }) {
             onChange={handleInputChange}
             placeholder=""
           />
-          <label for="floatingInput">&nbsp;&nbsp; Enter Debate Title...</label>
+          <label htmlFor="floatingInput">&nbsp;&nbsp; Enter Debate Title...</label>
         </div>
         <br />
         <div className="form-floating">
@@ -73,7 +73,7 @@ export default function CreateDebate({ loggedInUser }) {
             onChange={handleInputChange}
             placeholder=""
           />
-          <label for="numOfRounds">&nbsp;&nbsp; Enter Number of Rounds [3-7]...</label>
+          <label htmlFor="numOfRounds">&nbsp;&nbsp; Enter Number of Rounds [3-7]...</label>
         </div>
         <br />
 
