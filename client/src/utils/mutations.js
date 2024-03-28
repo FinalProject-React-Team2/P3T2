@@ -11,23 +11,6 @@ export const LOGIN = gql`
   }
 `;
 
-// export const ADD_ORDER = gql`
-//   mutation addOrder($products: [ID]!) {
-//     addOrder(products: $products) {
-//       purchaseDate
-//       products {
-//         _id
-//         name
-//         description
-//         price
-//         quantity
-//         category {
-//           name
-//         }
-//       }
-//     }
-//   }
-// `;
 
 export const ADD_USER = gql`
   mutation AddUser(
@@ -61,12 +44,6 @@ export const ADD_OPPONENT = gql`
         firstName
         lastName
         email
-        debates {
-          _id
-          title
-          status
-          numOfRounds
-        }
       }
       opponent {
         _id
@@ -77,12 +54,23 @@ export const ADD_OPPONENT = gql`
       numOfRounds
       arguments {
         _id
-        user
+        user{
+          _id
+          firstName
+          lastName
+          email
+        }
         body
         votes
       }
       comments {
-        user
+        _id
+        user{
+          _id
+          firstName
+          lastName
+          email
+        }
         comment
       }
       winner {
@@ -117,10 +105,15 @@ export const ADD_ARGUMENT = gql`
   mutation addArgument($id: ID!, $argument: String!) {
     addArgument(_id: $id, argument: $argument) {
       arguments {
-        body
-        votes
-        user
         _id
+        body
+        user{
+          _id
+          firstName
+          lastName
+          email
+        }
+        votes
       }
       _id
       status
@@ -130,16 +123,6 @@ export const ADD_ARGUMENT = gql`
         firstName
         lastName
         email
-        debates {
-          _id
-          title
-          status
-          numOfRounds
-          arguments {
-            body
-            votes
-          }
-        }
       }
       opponent {
         _id
@@ -148,7 +131,12 @@ export const ADD_ARGUMENT = gql`
         email
       }
       comments {
-        user
+        user{
+          _id
+          firstName
+          lastName
+          email
+        }
         comment
       }
       winner {
@@ -163,19 +151,93 @@ export const ADD_ARGUMENT = gql`
 `;
 
 export const ADD_COMMENT = gql`
-  mutation addComment($argumentId: ID!, $comment: String!) {
-    addComment(argumentId: $argumentId, comment: $comment) {
-      comment
+ mutation addComment($id: ID!, $comment: String!) {
+  addComment(_id: $id, comment: $comment) {
+    _id
+    title
+    status
+    createdBy {
+      _id
+      firstName
+      lastName
+      email
+   
     }
-  }
-`;
-
-export const VOTE = gql`
-  mutation vote($argumentId: ID!) {
-    vote(argumentId: $argumentId) {
+    opponent {
+      _id
+      firstName
+      lastName
+      email
+    }
+    numOfRounds
+    arguments {
+      _id
+      user{
+        _id
+        firstName
+        lastName
+        email
+      }
+      body
       votes
     }
+    comments {
+      _id
+      user{
+        _id
+        firstName
+        lastName
+        email
+      }
+      comment
+    }
+    winner {
+      _id
+      firstName
+      lastName
+      email
+    }
   }
+}
+`;
+
+export const ADD_VOTE = gql`
+mutation addVote($id: ID!, $argumentId: ID!) {
+  addVote(_id: $id, argumentId: $argumentId) {
+    _id
+    title
+    status
+    createdBy {
+      _id
+      firstName
+      lastName
+      email
+    }
+    opponent {
+      _id
+      firstName
+      lastName
+      email
+    }
+    numOfRounds
+    arguments {
+      _id
+      user
+      body
+      votes
+    }
+    comments {
+      user
+      comment
+    }
+    winner {
+      _id
+      firstName
+      lastName
+      email
+    }
+  }
+}
 `;
 
 export const UPDATE_USER = gql`
@@ -203,6 +265,6 @@ export default {
   CREATE_DEBATE,
   ADD_ARGUMENT,
   ADD_COMMENT,
-  VOTE,
+  ADD_VOTE,
   UPDATE_USER,
 };

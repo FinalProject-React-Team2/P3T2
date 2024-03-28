@@ -21,13 +21,14 @@ const typeDefs = `
 
   type Argument {
     _id: ID
-    user: ID
+    user: User
     body: String
     votes: [ID]
   }
 
   type Comment {
-    user: String
+    _id: ID
+    user: User
     comment: String
   }
 
@@ -59,6 +60,8 @@ const typeDefs = `
     createDebate(debate: DebateInput!): Debate
     addOpponent(_id: ID!): Debate
     addArgument(_id: ID!, argument: String!): Debate
+    addComment(_id: ID!, comment: String!): Debate
+    addVote(_id: ID!, argumentId: ID!): Debate
   }
 `;
 

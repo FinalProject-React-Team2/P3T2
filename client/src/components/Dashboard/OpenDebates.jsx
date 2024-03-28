@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_DEBATES } from "../../utils/queries";
 import AuthService from "../../utils/auth";
+import { Link } from "react-router-dom";
 
 const OpenDebates = ({ addOpponentHandler }) => {
   const { loading, data } = useQuery(GET_DEBATES);
@@ -17,13 +18,13 @@ const OpenDebates = ({ addOpponentHandler }) => {
 
   return (
     <div>
-      <h2>Open Debates</h2>
+      <h2></h2>
       <div>
         {openDebates.map((debate) => (
           <div key={debate._id}>
-            <a onClick={() => addOpponentHandler(debate._id)}>
-              <h3>{debate.title}</h3>
-            </a>
+            <Link onClick={() => addOpponentHandler(debate._id)}>
+              <h3>{`${debate.createdBy} vs. TBD ${debate.title}`}</h3>
+            </Link>
           </div>
         ))}
       </div>
