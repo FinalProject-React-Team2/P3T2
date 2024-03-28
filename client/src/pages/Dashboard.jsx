@@ -39,9 +39,9 @@ const Dashboard = () => {
           xl={5}
           key={1}
         >
-          <p>
+          <h2>
             <strong>User Stats</strong> :
-          </p>
+          </h2>
           {/* <UserStats /> */}
         </Grid>
         <Grid
@@ -54,9 +54,9 @@ const Dashboard = () => {
           xl={5}
           key={2}
         >
-          <p>
-            <strong>Create Debate:</strong>
-          </p>
+          <h2>
+            <strong>Create a Debate:</strong>
+          </h2>
           {/* <DebateDropdowns /> */}
           <CreateDebate />
         </Grid>
@@ -71,9 +71,9 @@ const Dashboard = () => {
           xl={5}
           key={3}
         >
-          <p className="activeDebates">
+          <h2 className="activeDebates">
             <strong>Active Debates:</strong>
-          </p>
+          </h2>
           <UserActiveChallenges />
         </Grid>
         <Grid
@@ -86,9 +86,9 @@ const Dashboard = () => {
           xl={5}
           key={4}
         >
-          <p className="opendDebates">
+          <h2 className="opendDebates">
             <strong>Open Debates:</strong>
-          </p>
+          </h2>
           <OpenDebates addOpponentHandler={addOpponentHandler} />
         </Grid>
         <Grid
@@ -101,9 +101,9 @@ const Dashboard = () => {
           xl={10}
           key={5}
         >
-          <p className="closedDebates">
+          <h2 className="closedDebates">
             <strong>Concluded Debates:</strong>
-          </p>
+          </h2>
         </Grid>
       </Grid>
     </>

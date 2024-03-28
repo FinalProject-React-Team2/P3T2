@@ -19,7 +19,6 @@ const UserActiveChallenges = () => {
     user.debates?.filter((debate) => debate.status === "active") || [];
   return (
     <div>
-      <h2>Your Active Challenges</h2>
       <div>
         {user.debates?.map((debate) => (
           <div key={debate._id}>

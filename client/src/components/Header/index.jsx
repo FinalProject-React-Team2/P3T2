@@ -6,10 +6,10 @@ export default function Header() {
     <header>
       <h1>
         <Link to="/">
-          <span role="img" aria-label="shopping bag">
-            🛍️
+          <span className="logo-container" role="img" aria-label="gavel-block & cloud">
+            <img className="logo" src="Debate Cloud Logo.png" alt="" />
           </span>
-          DebateBros
+          DebateCloud
         </Link>
       </h1>
       <Nav />

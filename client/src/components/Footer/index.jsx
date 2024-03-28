@@ -14,7 +14,7 @@ export default function Footer() {
                             <p className="text-center">
                                 &copy; The Triumvirate 2024 <Link to="./dashboard" className="footer-link
 
-                                ">Let&apos; Debate</Link>
+                                ">Let&apos;s Debate</Link>
                             </p>
                         </div>
                     </div>

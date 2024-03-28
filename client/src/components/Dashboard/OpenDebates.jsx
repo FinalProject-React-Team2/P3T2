@@ -17,7 +17,7 @@ const OpenDebates = ({ addOpponentHandler }) => {
 
   return (
     <div>
-      <h2>Open Debates</h2>
+      <h2></h2>
       <div>
         {openDebates.map((debate) => (
           <div key={debate._id}>
