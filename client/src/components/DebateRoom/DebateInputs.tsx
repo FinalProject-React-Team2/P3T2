@@ -22,7 +22,7 @@ const DebateInputs = ({ debate, id }) => {
 
   const { data, loading, error } = useQuery(GET_DEBATE, {
     variables: { id: debateId },
-    pollInterval: 2500
+    pollInterval: 2500,
   });
 
   // Determine the user role (creator, opponent, or spectator)
@@ -146,13 +146,19 @@ const DebateInputs = ({ debate, id }) => {
     // alignItems: "center",
     // justifyContent: "center",
     // padding: "1rem",
+    height: "100vw",
+    display: "grid",
+    gridTemplateColumns: "repeat(2, 1fr)",
   };
 
   const gridStyle = {
     display: "flex",
-    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "baseline",
     justifyContent: "center",
     padding: "1rem",
+    height: "100vw",
   };
 
   const inputStyle = {
@@ -168,7 +174,11 @@ const DebateInputs = ({ debate, id }) => {
       <>
         <h3>
           {/* Welcome the debater by name */}
-          Welcome, {currentUserRole === "creator" ? "Callenger" : "Opponent"}!
+          {/* Welcome,{" "}
+          {currentUserRole === "creator"
+            ? `${debate.createdBy.firstName}`
+            : `${debate.opponent.firstName}`}
+          ! */}
         </h3>
         <div className="form-floating input-group mb-3">
           {/* Input form for adding an argument */}
@@ -222,56 +232,48 @@ const DebateInputs = ({ debate, id }) => {
   };
 
   return (
-    <Grid container spacing={12} style={gridStyle}>
-      <Grid item xs={12} sm={12} md={5} lg={5} xl={5} key={6}>
-        <div className="container" style={containerStyle}>
-          {renderInputForm()}
-        </div>
-      </Grid>
-      <Grid item xs={12} sm={12} md={5} lg={5} xl={5} key={7}>
-        <div className="container" style={containerStyle}>
-          <h2>Debate Arguments</h2>
-          {renderArguments()}
-        </div>
-      </Grid>
-      {/* Comment box for spectators */}
-      <Grid item xs={12} sm={12} md={5} lg={5} xl={5} key={8}>
-        <div className="container">
-          <h3>Comments</h3>
-
-          {renderComments()}
-        </div>
-        {/* The rest of your component */}
-      </Grid>
-      {currentUserRole === "spectator" && (
-        <Grid item xs={12} sm={12} md={5} lg={5} xl={5} key={9}>
-          <div className="container">
-            <div className="form-floating input-group mb-3">
-              <input
-                className="form-control"
-                id="commentInput"
-                type="text"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder=""
-                aria-describedby="button-addon3"
-              />
-              <button
-                type="button"
-                id="button-addon3"
-                className="btn btn-outline-secondary"
-                onClick={handleAddComment}
-              >
-                Submit Comment
-              </button>
-              <label htmlFor="commentInput">
-                &nbsp;&nbsp; Enter Comments Here...
-              </label>
-            </div>
+    <>
+      <Grid container spacing={5} style={gridStyle}>
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={7}>
+          <div className="container debateInputs" >
+            {renderInputForm()}
+            <h3>Debate Arguments:</h3>
+            {renderArguments()}
           </div>
         </Grid>
-      )}
-    </Grid>
+
+        <Grid item xs={12} sm={12} md={5} lg={5} xl={5} key={9}>
+          <div className="container debateInputs">
+            {currentUserRole === "spectator" && (
+              <div className="form-floating input-group mb-3">
+                <input
+                  className="form-control"
+                  id="commentInput"
+                  type="text"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder=""
+                  aria-describedby="button-addon3"
+                />
+                <button
+                  type="button"
+                  id="button-addon3"
+                  className="btn btn-outline-secondary"
+                  onClick={handleAddComment}
+                >
+                  Submit Comment
+                </button>
+                <label htmlFor="commentInput">
+                  &nbsp;&nbsp; Enter Comments Here...
+                </label>
+              </div>
+            )}
+            <h3>Spectator Comments:</h3>
+            {renderComments()}
+          </div>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 

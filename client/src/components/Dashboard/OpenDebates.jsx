@@ -23,7 +23,7 @@ const OpenDebates = ({ addOpponentHandler }) => {
         {openDebates.map((debate) => (
           <div key={debate._id}>
             <Link onClick={() => addOpponentHandler(debate._id)}>
-              <h3>{`${debate.createdBy} vs. TBD ${debate.title}`}</h3>
+              <h3>{`${debate?.createdBy.firstName} vs. TBD ${debate.title}`}</h3>
             </Link>
           </div>
         ))}
