@@ -8,10 +8,11 @@ import { GET_DEBATE } from "../../utils/queries";
 import AuthService from "../../utils/auth";
 import Grid from "@mui/material/Unstable_Grid2";
 import "./DebateInputs.css";
+import "./DebateInputs.css";
 
 const DebateInputs = ({ debate, id }) => {
   const userId = AuthService.getProfile().data._id;
-  console.log(typeof userId, userId);
+
   const debateId = id;
   console.log(debateId);
   const [currentUserRole, setCurrentUserRole] = useState<
@@ -23,7 +24,7 @@ const DebateInputs = ({ debate, id }) => {
 
   const { data, loading, error } = useQuery(GET_DEBATE, {
     variables: { id: debateId },
-    pollInterval: 2500,
+    // pollInterval: 5000,
   });
 
   // Determine the user role (creator, opponent, or spectator)
@@ -92,13 +93,15 @@ const DebateInputs = ({ debate, id }) => {
     }
   };
 
-  const handleAddVote = async (argumentId: string) => {
+  const handleAddVote = async (event, argumentId) => {
+    event.preventDefault();
+    event.stopPropagation();
     try {
-      const userId = AuthService.getProfile().data._id;
+      console.log(argumentId);
 
       const response = await addVote({
         variables: {
-          id: userId,
+          id,
           argumentId,
         },
         // Optimistic UI updates or refetch queries could be added here
@@ -125,17 +128,34 @@ const DebateInputs = ({ debate, id }) => {
     return (
       <div className="scroll">
         {data.getDebate.arguments.map((argument, index) => (
-          <div key={argument.id} style={{ marginBottom: "1rem" }}>
-            <div style={{ fontWeight: "bold" }}>Argument {index + 1}</div>
-            <p><strong> {argument?.user.firstName}:</strong> {argument.body}</p>
-           
-            {/* Optionally, render vote count or a button to vote if the current user is allowed to */}
-            {/* Example for displaying vote count (assuming votes is an array of user IDs) */}
+          <div
+            key={index}
+            style={
+              argument.user._id === debate.createdBy._id
+                ? { marginBottom: "1rem", textAlign: "left", direction: "rtl" }
+                : { textAlign: "right" }
+            }
+          >
+            <div style={{ fontWeight: "bold" }}>Argument {index + 1}<strong> {argument.user.firstName}:</strong></div>
+
+            <p style={{ display: "inline" , fontSize: "20px"}}>
+              {" "}
+               {argument?.body}
+            </p>
+            {/*  */}
             {/* Add Vote Button - Conditionally shown */}
             {currentUserRole === "spectator" && (
-              <button onClick={() => handleAddVote(argument.id)}>Vote</button>
-              )}
-              <span>{argument.votes.length} Votes </span>
+              <a onClick={(event) => handleAddVote(event, argument._id)}>
+                <img
+                  title="Click to vote"
+                  className="voteIcon"
+                  src="/voteIcon.png"
+                  alt="gavel icon"
+                  style={{ objectFit: "contain", height: "40px" }}
+                />
+              </a>
+            )}
+            <span> {argument.votes.length} votes </span>
           </div>
         ))}
       </div>
@@ -222,9 +242,9 @@ const DebateInputs = ({ debate, id }) => {
     return (
       <div className="commentsContainer scroll">
         {data.getDebate.comments.map((comment) => (
-          <div key={comment._id} style={{ marginBottom: "0.5rem" }}>
-            <p style={{ fontWeight: "bold" }}>{comment.user.firstName}:</p>
-            <p>{comment.comment}</p>
+          <div key={comment._id} style={{ marginBottom: "1rem", marginLeft: "3rem", textAlign: "left" }}>
+            <p style={{ fontWeight: "bold", display: "inline" }}>{comment.user.firstName}:</p>
+            <p style={{display: "inline", fontSize: "16px"}}>&nbsp;&nbsp;{comment.comment}</p>
           </div>
         ))}
       </div>
@@ -233,19 +253,36 @@ const DebateInputs = ({ debate, id }) => {
 
   return (
     <>
-      <Grid container spacing={5} style={gridStyle}>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={7} style={gridStyle}>
-          <div className="container debateInputs" >
+      <Grid container className="grid-container" spacing={5} style={gridStyle}>
+        <Grid
+          item
+          className="grid-item"
+          xs={12}
+          sm={12}
+          md={6}
+          lg={6}
+          xl={6}
+          key={1}
+          style={gridStyle}
+        >
+          <div className="container debateInputs">
             {renderInputForm()}
             <h3>Debate Arguments:</h3>
-            <div> 
-
-            {renderArguments()}
-            </div>
+            <div>{renderArguments()}</div>
           </div>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={5} lg={5} xl={5} key={9} style={gridStyle}>
+        <Grid
+          item
+          className="grid-item"
+          xs={12}
+          sm={12}
+          md={5}
+          lg={5}
+          xl={5}
+          key={2}
+          style={gridStyle}
+        >
           <div className="container debateInputs">
             {currentUserRole === "spectator" && (
               <div className="form-floating input-group mb-3">

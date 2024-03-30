@@ -27,6 +27,10 @@ const argumentSchema = new Schema(
   }
 );
 
+argumentSchema.virtual('voteCount').get(function() {
+  return this.votes.length;
+});
+
 const commentSchema = new Schema({
   // Define the schema for a comment
   user: {

@@ -3,22 +3,27 @@ main {
   margin-top: 100px;
   margin-bottom: 100px;
   text-align: center;
+  font-family: "Comfortaa", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
 }
 .grid-container{
 
 
-  grid-gap: 10px;
-  padding: 10px;
+  
+
   align-items: center;
   justify-content: center;
-
+  
 }
 
 
 .grid-item {
   min-height: 40vh;
   width: 200px;
-  border: solid 1px black;
+  border: solid 1px #89CFF0;
+  box-shadow: 5px 5px 5px #89CFF0;
   border-radius: 10px;
   background-color: aliceblue;
   margin: 5px;

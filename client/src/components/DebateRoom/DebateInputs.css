@@ -1,5 +1,10 @@
 .scroll{
-    max-height: 80vh;
+    max-height: 50vh;
     overflow-y: auto;
 
+}
+
+.voteIcon:hover{
+    cursor: pointer;
+    
 }

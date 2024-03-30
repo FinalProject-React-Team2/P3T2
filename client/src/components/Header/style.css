@@ -11,7 +11,7 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: #333;
-    background-image: linear-gradient(to right, gold 0%, #ff7eb3 100%);
+    background-image: linear-gradient(to right, orange 0% ,  #89CFF0 100% );
     color: white;
     text-align: center;
     font-size: 1.5em;
@@ -21,6 +21,13 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     border-bottom: 2px solid rgba(255,255,255,0.2);
 
+}
+
+.siteHeader{
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal
 }
 
 header h1 {
