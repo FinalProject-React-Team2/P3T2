@@ -62,8 +62,8 @@ const resolvers = {
         throw new AuthenticationError();
       } // Throwing an AuthenticationError if user is not authenticated
       return await Debate.findById(args._id)
-      .populate("createdBy opponent winner").populate('arguments').populate({ path: "arguments", populate: "user" }).populate('comments').populate({ path: "comments", populate: "user" });
-      // Finding a debate by ID
+      .populate("createdBy opponent winner").populate('arguments').populate({ path: "arguments", populate: "user" }).populate('comments').populate({ path: "comments", populate: "user" }).populate({path: "arguments", populate: 'votes'});
+
     },
 
     getDebates: async (parent, args, context) => {

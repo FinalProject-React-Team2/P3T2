@@ -14,7 +14,7 @@ export default function Footer() {
                             <p className="text-center">
                                 &copy; The Triumvirate 2024 <Link to="./dashboard" className="footer-link
 
-                                ">Let&apos;s Debate</Link>
+                                "><strong> Let&apos;s Debate</strong></Link>
                             </p>
                         </div>
                     </div>
@@ -31,7 +31,7 @@ export default function Footer() {
                                 <p className="text-center">
                                     &copy; The Triumvirate 2024 <Link to="./signup" className="footer-link
 
-                                    ">DebateMe</Link>
+                                    "><strong>DebateMe</strong></Link>
                                 </p>
                             </div>
                         </div>

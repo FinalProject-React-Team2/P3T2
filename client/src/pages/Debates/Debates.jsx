@@ -1,7 +1,6 @@
 // DebatesList.js or a similar file
 
 import { useQuery, useMutation } from "@apollo/client";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { GET_DEBATES } from "../../utils/queries"; // Adjust the import path as necessary
 import { useNavigate } from "react-router-dom";
@@ -36,8 +35,8 @@ const Debates = () => {
   if (data.getDebates.length === 0) {
     return (
       <p>
-        No debates available. Return to your
-        <Link to="/dasboard">Dashboard to Create one!</Link>
+        Sorry, no debates are available. Return to your
+        <Link to="/dashboard"> Dashboard to Create one!</Link>
       </p>
     );
   }
@@ -50,7 +49,7 @@ const Debates = () => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'baseline',
-    height: '100vh',
+    
     position: 'absolute',
     top: "20vh", 
     left: 0,
@@ -63,7 +62,8 @@ const Debates = () => {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    minHeight: '80vh' 
+    maxHeight: '70vh', 
+    overFlowY: 'auto',
   }
 
   return (
@@ -72,16 +72,16 @@ const Debates = () => {
         Welcome {userName}!
       </h1>
     <Grid container style={gridStyle} spacing={2}>
-        <Grid item key={1} xs={6} sm={6} md={5} lg={5} xl={5} style={gridItemStyle}>
+        <Grid item className="grid-item" key={1} xs={6} sm={6} md={5} lg={5} xl={5} style={gridItemStyle}>
           <div className="container" style={{height: '80vh'}}>
-            <h2>Spectate An Active Debates:</h2>
+            <h2>Spectate An Active Debate:</h2>
             <ul style={listStyle}>
               {activeDebates.map(({ createdBy, opponent, _id, title, status }) => (
                 <li key={_id}>
                   {/* Replace '/debate-room/' with your actual route */}
                   <Link to={`/debate/${_id}`}>
                     <h3>
-                      {createdBy.firstName} vs. {opponent.firstName} "{title}" is {status.toUpperCase()}
+                      {createdBy.firstName} vs. {opponent.firstName} &quot;{title}&quot; is {status.toUpperCase()}
                     </h3>
                   </Link>
                 </li>
@@ -89,9 +89,9 @@ const Debates = () => {
             </ul>
           </div>
         </Grid>
-        <Grid item key={2} xs={6} sm={6} md={5} lg={5} xl={5} style={gridItemStyle}>
+        <Grid item className="grid-item" key={2} xs={6} sm={6} md={5} lg={5} xl={5} style={gridItemStyle}>
           <div className="container" style={{height: '80vh'}}>
-            <h2>Or Become an Opponent</h2>
+            <h2>Or Join as an Opponent</h2>
             <OpenDebates addOpponentHandler={addOpponentHandler} />
           </div>
         </Grid>
