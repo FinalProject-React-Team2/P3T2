@@ -60,7 +60,7 @@ export const GET_DEBATE = gql`
       firstName
       lastName
       email
-
+    
     }
     opponent {
       _id
@@ -83,13 +83,13 @@ export const GET_DEBATE = gql`
     comments {
       _id
       comment
-      user {
-       
+       user {
         firstName
         lastName
         email
         _id
       }
+     
     }
     winner {
       _id
