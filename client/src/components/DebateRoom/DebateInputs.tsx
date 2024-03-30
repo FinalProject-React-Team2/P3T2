@@ -136,11 +136,14 @@ const DebateInputs = ({ debate, id }) => {
                 : { textAlign: "right" }
             }
           >
-            <div style={{ fontWeight: "bold" }}>Argument {index + 1}<strong> {argument.user.firstName}:</strong></div>
+            <div style={{ fontWeight: "bold" }}>
+              Argument {index + 1}
+              <strong> {argument.user.firstName}:</strong>
+            </div>
 
-            <p style={{ display: "inline" , fontSize: "20px"}}>
+            <p style={{ display: "inline", fontSize: "20px" }}>
               {" "}
-               {argument?.body}
+              {argument?.body}
             </p>
             {/*  */}
             {/* Add Vote Button - Conditionally shown */}
@@ -178,7 +181,6 @@ const DebateInputs = ({ debate, id }) => {
     alignItems: "baseline",
     justifyContent: "center",
     padding: "1rem",
-  
   };
 
   const inputStyle = {
@@ -192,15 +194,8 @@ const DebateInputs = ({ debate, id }) => {
 
     return (
       <>
-        <h3>
-          {/* Welcome the debater by name */}
-          {/* Welcome,{" "}
-          {currentUserRole === "creator"
-            ? `${debate.createdBy.firstName}`
-            : `${debate.opponent.firstName}`}
-          ! */}
-        </h3>
-        <div className="form-floating input-group mb-3">
+ 
+        <div className="form-floating input-group mb-3 debateFormInput">
           {/* Input form for adding an argument */}
           <input
             className="form-control"
@@ -242,9 +237,24 @@ const DebateInputs = ({ debate, id }) => {
     return (
       <div className="commentsContainer scroll">
         {data.getDebate.comments.map((comment) => (
-          <div key={comment._id} style={{ marginBottom: "1rem", marginLeft: "3rem", textAlign: "right", display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginRight: '5rem' }}>
-            <span style={{ fontWeight: "bold", display: "inline"}}>{comment.user.firstName}...</span>
-            <p style={{display: "inline", fontSize: "16px"}}>&nbsp;&nbsp;{comment.comment}</p>
+          <div
+            key={comment._id}
+            style={{
+              marginBottom: "1rem",
+              marginLeft: "3rem",
+              textAlign: "right",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginRight: "5rem",
+            }}
+          >
+            <span style={{ fontWeight: "bold", display: "inline" }}>
+              {comment.user.firstName}...
+            </span>
+            <p style={{ display: "inline", fontSize: "16px" }}>
+              &nbsp;&nbsp;{comment.comment}
+            </p>
           </div>
         ))}
       </div>
@@ -253,23 +263,23 @@ const DebateInputs = ({ debate, id }) => {
 
   return (
     <>
-      <Grid container className="grid-container" spacing={2} style={gridStyle}>
+      <Grid container className="grid-container" spacing={1} style={gridStyle}>
         <Grid
           item
           className="grid-item"
           xs={12}
           sm={12}
-          md={7}
-          lg={7}
-          xl={7}
+          md={6}
+          lg={6}
+          xl={6}
           key={1}
           style={gridStyle}
         >
           <div className="container debateInputs">
-            {renderInputForm()}
             <h3>Debate Arguments:</h3>
-            <div>{renderArguments()}</div>
+            {renderArguments()}
           </div>
+          <div className="form-floating input-group mb-3" style={{}}>{renderInputForm()}</div>
         </Grid>
 
         <Grid
@@ -277,15 +287,19 @@ const DebateInputs = ({ debate, id }) => {
           className="grid-item"
           xs={12}
           sm={12}
-          md={4}
-          lg={4}
-          xl={4}
+          md={6}
+          lg={6}
+          xl={6}
           key={2}
           style={gridStyle}
         >
-          <div className="container debateInputs">
+          
+            <div className=" debateInputs container">
+              <h3>Spectator Comments:</h3>
+              {renderComments()}
+            </div>
             {currentUserRole === "spectator" && (
-              <div className="form-floating input-group mb-3">
+              <div className="form-floating input-group mb-3 debateFormInput">
                 <input
                   className="form-control"
                   id="commentInput"
@@ -308,9 +322,7 @@ const DebateInputs = ({ debate, id }) => {
                 </label>
               </div>
             )}
-            <h3>Spectator Comments:</h3>
-            {renderComments()}
-          </div>
+          
         </Grid>
       </Grid>
     </>

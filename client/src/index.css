@@ -19,6 +19,8 @@ main {
 }
 
 
+
+
 .grid-item {
   min-height: 40vh;
   width: 200px;
@@ -26,7 +28,7 @@ main {
   box-shadow: 5px 5px 5px #89CFF0;
   border-radius: 10px;
   background-color: aliceblue;
-  margin: 5px;
+  margin: 0px;
 }
 .debateHeader{
   margin: 0;
@@ -34,24 +36,23 @@ main {
   border-radius: 10px;
 
   width: 100vw;
-  background-color: aliceblue;
+  
 }
 
 .debateInputs{
-  margin: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  height: 65vh;
-  width: 400px;
 
+  border-radius: 10px;
+  height: 60vh;
+  width: 300px;
+  
 }
 
 .debateFormInput{
-  margin: 10px;
-  padding: 10px;
+  
+  margin-top: 20px;
   border-radius: 10px;
   height: 45px;
-  width: 400px;
+  width: 300px;
 
 }
 .dashboardWelcome {
