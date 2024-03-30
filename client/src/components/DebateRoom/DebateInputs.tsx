@@ -242,8 +242,8 @@ const DebateInputs = ({ debate, id }) => {
     return (
       <div className="commentsContainer scroll">
         {data.getDebate.comments.map((comment) => (
-          <div key={comment._id} style={{ marginBottom: "1rem", marginLeft: "3rem", textAlign: "right", display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between', marginRight: '5rem' }}>
-            <p style={{ fontWeight: "bold", display: "inline"}}>{comment.user.firstName}:</p>
+          <div key={comment._id} style={{ marginBottom: "1rem", marginLeft: "3rem", textAlign: "right", display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginRight: '5rem' }}>
+            <span style={{ fontWeight: "bold", display: "inline"}}>{comment.user.firstName}...</span>
             <p style={{display: "inline", fontSize: "16px"}}>&nbsp;&nbsp;{comment.comment}</p>
           </div>
         ))}
