@@ -134,10 +134,17 @@ const resolvers = {
     addOpponent: async (parent, { _id }, context) => {
       if (context.user) {
         const updatedDebate = await Debate.findByIdAndUpdate(
+        const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
           { opponent: context.user._id, status: "active" },
           { new: true }
         ).populate("createdBy opponent winner");
+
+        await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { debates: _id } },
+          { new: true }
+        );
 
         await User.findByIdAndUpdate(
           context.user._id,
