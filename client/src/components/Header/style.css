@@ -20,19 +20,20 @@ header {
     padding: 10px 30px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     border-bottom: 2px solid rgba(255,255,255,0.2);
-
+    
 }
 
 .siteHeader{
     font-family: "Comfortaa", sans-serif;
     font-optical-sizing: auto;
     font-weight: bold;
-    font-style: normal
+    font-style: normal;
 }
 
 header h1 {
     margin: 0;
     font-size: 4.5rem;
+    text-decoration: none;
 }
 
 header h1 a {

@@ -17,20 +17,22 @@
     transition: color 0.3s ease;
 }
 
-.flex-row li a:hover {
+/* .flex-row li a:hover {
     color: #ffdde1;
-}
+} */
 
 
 
 /* Adjust the below media query as per your design's responsiveness needs */
-@media (max-width: 600px) {
+@media (max-width: 970px) {
     header {
         flex-direction: column;
     }
 
     .flex-row {
+        flex-direction: column;
         justify-content: space-around;
         width: 100%;
+     
     }
 }

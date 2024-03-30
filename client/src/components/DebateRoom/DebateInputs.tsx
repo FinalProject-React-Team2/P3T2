@@ -242,8 +242,8 @@ const DebateInputs = ({ debate, id }) => {
     return (
       <div className="commentsContainer scroll">
         {data.getDebate.comments.map((comment) => (
-          <div key={comment._id} style={{ marginBottom: "1rem", marginLeft: "3rem", textAlign: "left" }}>
-            <p style={{ fontWeight: "bold", display: "inline" }}>{comment.user.firstName}:</p>
+          <div key={comment._id} style={{ marginBottom: "1rem", marginLeft: "3rem", textAlign: "right", display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between', marginRight: '5rem' }}>
+            <p style={{ fontWeight: "bold", display: "inline"}}>{comment.user.firstName}:</p>
             <p style={{display: "inline", fontSize: "16px"}}>&nbsp;&nbsp;{comment.comment}</p>
           </div>
         ))}
@@ -253,15 +253,15 @@ const DebateInputs = ({ debate, id }) => {
 
   return (
     <>
-      <Grid container className="grid-container" spacing={5} style={gridStyle}>
+      <Grid container className="grid-container" spacing={2} style={gridStyle}>
         <Grid
           item
           className="grid-item"
           xs={12}
           sm={12}
-          md={6}
-          lg={6}
-          xl={6}
+          md={7}
+          lg={7}
+          xl={7}
           key={1}
           style={gridStyle}
         >
@@ -277,9 +277,9 @@ const DebateInputs = ({ debate, id }) => {
           className="grid-item"
           xs={12}
           sm={12}
-          md={5}
-          lg={5}
-          xl={5}
+          md={4}
+          lg={4}
+          xl={4}
           key={2}
           style={gridStyle}
         >
