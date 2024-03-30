@@ -7,6 +7,7 @@ import { ADD_VOTE } from "../../utils/mutations";
 import { GET_DEBATE } from "../../utils/queries";
 import AuthService from "../../utils/auth";
 import Grid from "@mui/material/Unstable_Grid2";
+import "./DebateInputs.css";
 
 const DebateInputs = ({ debate, id }) => {
   const userId = AuthService.getProfile().data._id;
@@ -122,19 +123,19 @@ const DebateInputs = ({ debate, id }) => {
       return <p>No arguments have been made yet.</p>;
 
     return (
-      <div>
+      <div className="scroll">
         {data.getDebate.arguments.map((argument, index) => (
           <div key={argument.id} style={{ marginBottom: "1rem" }}>
             <div style={{ fontWeight: "bold" }}>Argument {index + 1}</div>
-            <p>{argument.body}</p>
-            <div>By: {argument?.user.firstName}</div>
+            <p><strong> {argument?.user.firstName}:</strong> {argument.body}</p>
+           
             {/* Optionally, render vote count or a button to vote if the current user is allowed to */}
             {/* Example for displaying vote count (assuming votes is an array of user IDs) */}
-            <div>Votes: {argument.votes.length}</div>
             {/* Add Vote Button - Conditionally shown */}
             {currentUserRole === "spectator" && (
               <button onClick={() => handleAddVote(argument.id)}>Vote</button>
-            )}
+              )}
+              <span>{argument.votes.length} Votes </span>
           </div>
         ))}
       </div>
@@ -146,9 +147,8 @@ const DebateInputs = ({ debate, id }) => {
     // alignItems: "center",
     // justifyContent: "center",
     // padding: "1rem",
-    height: "100vw",
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
+    // maxHeight: "50vw",
+    // display: "grid",
   };
 
   const gridStyle = {
@@ -158,7 +158,7 @@ const DebateInputs = ({ debate, id }) => {
     alignItems: "baseline",
     justifyContent: "center",
     padding: "1rem",
-    height: "100vw",
+  
   };
 
   const inputStyle = {
@@ -220,7 +220,7 @@ const DebateInputs = ({ debate, id }) => {
       );
 
     return (
-      <div className="commentsContainer">
+      <div className="commentsContainer scroll">
         {data.getDebate.comments.map((comment) => (
           <div key={comment._id} style={{ marginBottom: "0.5rem" }}>
             <p style={{ fontWeight: "bold" }}>{comment.user.firstName}:</p>
@@ -234,15 +234,18 @@ const DebateInputs = ({ debate, id }) => {
   return (
     <>
       <Grid container spacing={5} style={gridStyle}>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={7}>
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={7} style={gridStyle}>
           <div className="container debateInputs" >
             {renderInputForm()}
             <h3>Debate Arguments:</h3>
+            <div> 
+
             {renderArguments()}
+            </div>
           </div>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={5} lg={5} xl={5} key={9}>
+        <Grid item xs={12} sm={12} md={5} lg={5} xl={5} key={9} style={gridStyle}>
           <div className="container debateInputs">
             {currentUserRole === "spectator" && (
               <div className="form-floating input-group mb-3">
