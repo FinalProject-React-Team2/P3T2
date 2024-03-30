@@ -133,17 +133,10 @@ const resolvers = {
     addOpponent: async (parent, { _id }, context) => {
       if (context.user) {
         const updatedDebate = await Debate.findByIdAndUpdate(
-        const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
           { opponent: context.user._id, status: "active" },
           { new: true }
         ).populate("createdBy opponent winner");
-
-        await User.findByIdAndUpdate(
-          context.user._id,
-          { $push: { debates: _id } },
-          { new: true }
-        );
 
         await User.findByIdAndUpdate(
           context.user._id,
@@ -197,7 +190,7 @@ const resolvers = {
           },
           { new: true }
         )
-          .populate("createdBy opponent winner").populate('arguments').populate({ path: "arguments", populate: "user votes" }).populate('comments').populate({ path: "comments", populate: "user" });
+          .populate("createdBy opponent winner").populate('arguments').populate({ path: "arguments", populate: "user" }).populate('comments').populate({ path: "comments", populate: "user" });
           
           
 
