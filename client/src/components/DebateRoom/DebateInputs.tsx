@@ -126,7 +126,6 @@ const DebateInputs = ({ debate, id }) => {
     width: "80%",
     backgroundColor: "#FFD580	",
     boxShadow: "5px 5px 5px 5px #888888",
-    
   };
 
   const argStyleO = {
@@ -162,25 +161,36 @@ const DebateInputs = ({ debate, id }) => {
               <strong> {argument.user.firstName}</strong>
             </div>
 
-            <p style={
-              argument.user._id === debate.createdBy._id
-                ? argStyleC
-                : argStyleO
-            }> {argument?.body}</p>
+            <p
+              style={
+                argument.user._id === debate.createdBy._id
+                  ? argStyleC
+                  : argStyleO
+              }
+            >
+              {" "}
+              {argument?.body}
+            </p>
             {/*  */}
             {/* Add Vote Button - Conditionally shown */}
             {currentUserRole === "spectator" && (
-              <a style={{position: "relative", top: "-20px"}} onClick={(event) => handleAddVote(event, argument._id)}>
+              <a
+                style={{ position: "relative", top: "-20px" }}
+                onClick={(event) => handleAddVote(event, argument._id)}
+              >
                 <img
                   title="Click to vote"
                   className="voteIcon"
                   src="/voteIcon.png"
                   alt="gavel icon"
-                  style={{ objectFit: "contain", height: "40px", }}
+                  style={{ objectFit: "contain", height: "40px" }}
                 />
               </a>
             )}
-            <span style={{position: "relative", top: "-20px"}}> {argument.votes.length} votes </span>
+            <span style={{ position: "relative", top: "-20px" }}>
+              {" "}
+              {argument.votes.length} votes{" "}
+            </span>
           </div>
         ))}
       </div>
@@ -215,8 +225,17 @@ const DebateInputs = ({ debate, id }) => {
     const argumentsArr = data.getDebate.arguments;
     const lastArgument = argumentsArr[argumentsArr.length - 1] || {};
     console.log(argumentsArr, lastArgument);
-    
-    if (currentUserRole === "spectator" || lastArgument.user?._id === userId || currentUserRole === "opponent" && argumentsArr.length === 0) return null;
+
+    if (
+      currentUserRole === "spectator" ||
+      lastArgument.user?._id === userId ||
+      (currentUserRole === "opponent" && argumentsArr.length === 0)
+    )
+      return (
+        <div style={{display: "flex", justifyContent: "center"}}>
+          {currentUserRole !== "spectator" && (<p >Waiting for your turn...</p>)}
+        </div>
+      );
 
     return (
       <>
