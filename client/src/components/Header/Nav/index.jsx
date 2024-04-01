@@ -55,11 +55,11 @@ function Nav() {
               About Us
             </Link>
           </li>
-          <li className="mx-3 nav-item menu">
+          {/* <li className="mx-3 nav-item menu">
             <Link to="/Donations" className="nav-link">
               Donations
             </Link>
-          </li>
+          </li> */}
         </ul>
       );
     }

@@ -118,6 +118,17 @@ const DebateInputs = ({ debate, id }) => {
     }
   };
 
+  const argStyle = {
+    border: "1px solid black",
+    borderRadius: "10px",
+    padding: "10px",
+    margin: "10px",
+    width: "80%",
+    backgroundColor: "#FFD580	",
+    boxShadow: "5px 5px 5px 5px #888888",
+    
+  };
+
   const renderArguments = () => {
     // Check if data is loaded and has arguments
     if (loading) return <p>Loading arguments...</p>;
@@ -138,10 +149,10 @@ const DebateInputs = ({ debate, id }) => {
           >
             <div style={{ fontWeight: "bold" }}>
               Argument {index + 1}
-              <strong> {argument.user.firstName}:</strong>
+              <strong> {argument.user.firstName}</strong>
             </div>
 
-            <p style={{ display: "inline", fontSize: "20px" }}>
+            <p style={{ display: "inline", fontSize: "20px" }} style={argStyle}>
               {" "}
               {argument?.body}
             </p>
@@ -194,7 +205,6 @@ const DebateInputs = ({ debate, id }) => {
 
     return (
       <>
- 
         <div className="form-floating input-group mb-3 debateFormInput">
           {/* Input form for adding an argument */}
           <input
@@ -252,7 +262,19 @@ const DebateInputs = ({ debate, id }) => {
             <span style={{ fontWeight: "bold", display: "inline" }}>
               {comment.user.firstName}...
             </span>
-            <p style={{ display: "inline", fontSize: "16px" }}>
+            <p
+              style={{
+                display: "inline",
+                fontSize: "16px",
+                border: "1px solid black",
+                borderRadius: "10px",
+                padding: "10px",
+                margin: "10px",
+                width: "80%",
+                backgroundColor: "aliceblue",
+                boxShadow: "5px 5px 5px 5px #888888",
+              }}
+            >
               &nbsp;&nbsp;{comment.comment}
             </p>
           </div>
@@ -279,7 +301,9 @@ const DebateInputs = ({ debate, id }) => {
             <h3>Debate Arguments:</h3>
             {renderArguments()}
           </div>
-          <div className="form-floating input-group mb-3" style={{}}>{renderInputForm()}</div>
+          <div className="form-floating input-group mb-3" style={{}}>
+            {renderInputForm()}
+          </div>
         </Grid>
 
         <Grid
@@ -293,36 +317,34 @@ const DebateInputs = ({ debate, id }) => {
           key={2}
           style={gridStyle}
         >
-          
-            <div className=" debateInputs container">
-              <h3>Spectator Comments:</h3>
-              {renderComments()}
+          <div className=" debateInputs container">
+            <h3>Spectator Comments:</h3>
+            {renderComments()}
+          </div>
+          {currentUserRole === "spectator" && (
+            <div className="form-floating input-group mb-3 debateFormInput">
+              <input
+                className="form-control"
+                id="commentInput"
+                type="text"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder=""
+                aria-describedby="button-addon3"
+              />
+              <button
+                type="button"
+                id="button-addon3"
+                className="btn btn-outline-secondary"
+                onClick={handleAddComment}
+              >
+                Submit Comment
+              </button>
+              <label htmlFor="commentInput">
+                &nbsp;&nbsp; Enter Comments Here...
+              </label>
             </div>
-            {currentUserRole === "spectator" && (
-              <div className="form-floating input-group mb-3 debateFormInput">
-                <input
-                  className="form-control"
-                  id="commentInput"
-                  type="text"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder=""
-                  aria-describedby="button-addon3"
-                />
-                <button
-                  type="button"
-                  id="button-addon3"
-                  className="btn btn-outline-secondary"
-                  onClick={handleAddComment}
-                >
-                  Submit Comment
-                </button>
-                <label htmlFor="commentInput">
-                  &nbsp;&nbsp; Enter Comments Here...
-                </label>
-              </div>
-            )}
-          
+          )}
         </Grid>
       </Grid>
     </>
