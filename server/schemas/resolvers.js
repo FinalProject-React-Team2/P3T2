@@ -62,8 +62,12 @@ const resolvers = {
         throw new AuthenticationError();
       } // Throwing an AuthenticationError if user is not authenticated
       return await Debate.findById(args._id)
-      .populate("createdBy opponent winner").populate('arguments').populate({ path: "arguments", populate: "user" }).populate('comments').populate({ path: "comments", populate: "user" }).populate({path: "arguments", populate: 'votes'});
-
+        .populate("createdBy opponent winner")
+        .populate("arguments")
+        .populate({ path: "arguments", populate: "user" })
+        .populate("comments")
+        .populate({ path: "comments", populate: "user" })
+        // .populate({ path: "arguments", populate: "votes" });
     },
 
     getDebates: async (parent, args, context) => {
@@ -190,9 +194,11 @@ const resolvers = {
           },
           { new: true }
         )
-          .populate("createdBy opponent winner").populate('arguments').populate({ path: "arguments", populate: "user votes" }).populate('comments').populate({ path: "comments", populate: "user" });
-          
-          
+          .populate("createdBy opponent winner")
+          .populate("arguments")
+          .populate({ path: "arguments", populate: "user" })
+          .populate("comments")
+          .populate({ path: "comments", populate: "user" });
 
         return updatedDebate;
       }
