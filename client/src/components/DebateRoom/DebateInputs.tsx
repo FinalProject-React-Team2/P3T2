@@ -127,6 +127,7 @@ const DebateInputs = ({ debate, id }) => {
     backgroundColor: "#FFD580	",
     boxShadow: "5px 5px 5px 5px #888888",
     
+    
   };
 
   const renderArguments = () => {
@@ -152,7 +153,7 @@ const DebateInputs = ({ debate, id }) => {
               <strong> {argument.user.firstName}</strong>
             </div>
 
-            <p style={{ display: "inline", fontSize: "20px" }} style={argStyle}>
+            <p style={argStyle}>
               {" "}
               {argument?.body}
             </p>
