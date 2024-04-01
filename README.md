@@ -13,7 +13,7 @@ A webservice community for debate lovers that allows them to debate as a partici
 https://github.com/FinalProject-React-Team2/P3T2
 
 - Render Deployment:   
-https://p3t2.onrender.com/...one
+https://p3t2.onrender.com/
 
 ## User Story:
 ```
