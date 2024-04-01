@@ -118,7 +118,7 @@ const DebateInputs = ({ debate, id }) => {
     }
   };
 
-  const argStyle = {
+  const argStyleC = {
     border: "1px solid black",
     borderRadius: "10px",
     padding: "10px",
@@ -126,8 +126,16 @@ const DebateInputs = ({ debate, id }) => {
     width: "80%",
     backgroundColor: "#FFD580	",
     boxShadow: "5px 5px 5px 5px #888888",
-    
-    
+  };
+
+  const argStyleO = {
+    border: "1px solid black",
+    borderRadius: "10px",
+    padding: "10px",
+    margin: "10px",
+    width: "80%",
+    backgroundColor: "aliceblue	",
+    boxShadow: "5px 5px 5px 5px #888888",
   };
 
   const renderArguments = () => {
@@ -153,14 +161,23 @@ const DebateInputs = ({ debate, id }) => {
               <strong> {argument.user.firstName}</strong>
             </div>
 
-            <p style={argStyle}>
+            <p
+              style={
+                argument.user._id === debate.createdBy._id
+                  ? argStyleC
+                  : argStyleO
+              }
+            >
               {" "}
               {argument?.body}
             </p>
             {/*  */}
             {/* Add Vote Button - Conditionally shown */}
             {currentUserRole === "spectator" && (
-              <a onClick={(event) => handleAddVote(event, argument._id)}>
+              <a
+                style={{ position: "relative", top: "-20px" }}
+                onClick={(event) => handleAddVote(event, argument._id)}
+              >
                 <img
                   title="Click to vote"
                   className="voteIcon"
@@ -170,7 +187,10 @@ const DebateInputs = ({ debate, id }) => {
                 />
               </a>
             )}
-            <span> {argument.votes.length} votes </span>
+            <span style={{ position: "relative", top: "-20px" }}>
+              {" "}
+              {argument.votes.length} votes{" "}
+            </span>
           </div>
         ))}
       </div>
@@ -202,7 +222,20 @@ const DebateInputs = ({ debate, id }) => {
 
   // Conditional rendering based on user role
   const renderInputForm = () => {
-    if (currentUserRole === "spectator") return null;
+    const argumentsArr = data.getDebate.arguments;
+    const lastArgument = argumentsArr[argumentsArr.length - 1] || {};
+    console.log(argumentsArr, lastArgument);
+
+    if (
+      currentUserRole === "spectator" ||
+      lastArgument.user?._id === userId ||
+      (currentUserRole === "opponent" && argumentsArr.length === 0)
+    )
+      return (
+        <div style={{display: "flex", justifyContent: "center"}}>
+          {currentUserRole !== "spectator" && (<p >Waiting for your turn...</p>)}
+        </div>
+      );
 
     return (
       <>
@@ -272,7 +305,7 @@ const DebateInputs = ({ debate, id }) => {
                 padding: "10px",
                 margin: "10px",
                 width: "80%",
-                backgroundColor: "aliceblue",
+                backgroundColor: "white",
                 boxShadow: "5px 5px 5px 5px #888888",
               }}
             >
