@@ -1,0 +1,56 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-height: 60px; 
+    z-index: 100;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    background-image: linear-gradient(to right, orange 0% ,  #89CFF0 100% );
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 10px 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    
+}
+
+.siteHeader{
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 4.5rem;
+    text-decoration: none;
+}
+
+header h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+.logo-container {
+   
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-right: 10px;
+}

@@ -1,70 +1,102 @@
-import { gql } from '@apollo/client';
-
-export const QUERY_PRODUCTS = gql`
-  query getProducts($category: ID) {
-    products(category: $category) {
-      _id
-      name
-      description
-      price
-      quantity
-      image
-      category {
-        _id
-      }
-    }
-  }
-`;
-
-export const QUERY_CHECKOUT = gql`
-  query getCheckout($products: [ProductInput]) {
-    checkout(products: $products) {
-      session
-    }
-  }
-`;
-
-export const QUERY_ALL_PRODUCTS = gql`
-  {
-    products {
-      _id
-      name
-      description
-      price
-      quantity
-      category {
-        name
-      }
-    }
-  }
-`;
-
-export const QUERY_CATEGORIES = gql`
-  {
-    categories {
-      _id
-      name
-    }
-  }
-`;
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
-  {
-    user {
-      firstName
-      lastName
-      orders {
+  query MyProfile {
+    myProfile {
+      debates {
         _id
-        purchaseDate
-        products {
+        createdBy {
           _id
-          name
-          description
-          price
-          quantity
-          image
+          firstName
+        }
+        numOfRounds
+        opponent {
+          _id
+          firstName
+        }
+        title
+        status
+        winner {
+          _id
+          firstName
         }
       }
     }
   }
+`;
+
+export const GET_DEBATES = gql`
+  query getDebates {
+    getDebates {
+      title
+      createdBy {
+        _id
+        firstName
+      }
+      opponent {
+        _id
+        firstName
+      }
+      status
+      numOfRounds
+      winner {
+        _id
+        firstName
+        lastName
+      }
+      _id
+    }
+  }
+`;
+
+export const GET_DEBATE = gql`
+  query getDebate($id: ID!) {
+  getDebate(_id: $id) {
+    _id
+    title
+    status
+    createdBy {
+      _id
+      firstName
+      lastName
+      email
+    
+    }
+    opponent {
+      _id
+      firstName
+      lastName
+      email
+    }
+    numOfRounds
+    arguments {
+      _id
+      user {
+        _id
+        firstName
+        lastName
+        email
+      }
+      body
+      votes
+    }
+    comments {
+      _id
+      comment
+       user {
+        firstName
+        lastName
+        email
+        _id
+      }
+     
+    }
+    winner {
+      _id
+      firstName
+      lastName
+      email
+    }
+  }
+}
 `;

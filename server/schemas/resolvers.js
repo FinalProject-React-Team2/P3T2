@@ -1,89 +1,83 @@
-const { User, Product, Category, Order } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const { User, Debate } = require("../models");
+const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    categories: async () => {
-      return await Category.find();
+    users: async () => {
+      return User.find();
     },
-    products: async (parent, { category, name }) => {
-      const params = {};
 
-      if (category) {
-        params.category = category;
-      }
-
-      if (name) {
-        params.name = {
-          $regex: name
-        };
-      }
-
-      return await Product.find(params).populate('category');
-    },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate('category');
-    },
-    user: async (parent, args, context) => {
+    user: async (parent, { userId }, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
+        return await User.findById({ _id: userId }).populate("debates");
+      }
+
+      throw new Error(`User with ID ${userId} not found`);
+    },
+
+    myProfile: async (_, __, context) => {
+      // Ensure there is a user in the context
+      if (!context.user) {
+        throw new Error("You must be logged in.");
+      }
+      // Use context.user._id to fetch the user profile
+      const userProfile = await User.findById(context.user._id)
+        .populate("debates")
+        .populate({
+          path: "debates",
+          populate: "createdBy opponent winner",
+        });
+      return userProfile;
+    },
+
+    getUserDebates: async (_, __, context) => {
+      try {
+        // Assuming context.userId contains the ID of the user making the request
+        const userId = context.userId;
+
+        if (!userId) {
+          throw new Error("User ID not found in context");
+        }
+
+        // Fetch the user and populate the debates
+        const user = await User.findById(userId).populate({
+          path: "debates",
+          select: "title -_id", // Select only the title field, exclude the id
         });
 
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+        if (!user) {
+          throw new Error("User not found");
+        }
 
+        // Return the user with populated debate titles
         return user;
+      } catch (error) {
+        console.error(error);
+        throw new Error("Error fetching user debates");
       }
-
-      throw AuthenticationError;
     },
-    order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
 
-        return user.orders.id(_id);
-      }
-
-      throw AuthenticationError;
+    getDebate: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError();
+      } // Throwing an AuthenticationError if user is not authenticated
+      return await Debate.findById(args._id)
+        .populate("createdBy opponent winner")
+        .populate("arguments")
+        .populate({ path: "arguments", populate: "user" })
+        .populate("comments")
+        .populate({ path: "comments", populate: "user" })
+        // .populate({ path: "arguments", populate: "votes" });
     },
-    checkout: async (parent, args, context) => {
-      const url = new URL(context.headers.referer).origin;
-      await Order.create({ products: args.products.map(({ _id }) => _id) });
-      // eslint-disable-next-line camelcase
-      const line_items = [];
 
-      // eslint-disable-next-line no-restricted-syntax
-      for (const product of args.products) {
-        line_items.push({
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: product.name,
-              description: product.description,
-              images: [`${url}/images/${product.image}`]
-            },
-            unit_amount: product.price * 100,
-          },
-          quantity: product.purchaseQuantity,
-        });
-      }
-
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items,
-        mode: 'payment',
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`,
-      });
-
-      return { session: session.id };
+    getDebates: async (parent, args, context) => {
+      // if (!context.user) {
+      //   throw new AuthenticationError();
+      // } // Throwing an AuthenticationError if user is not authenticated
+      return await Debate.find({}).populate("createdBy opponent winner"); // Finding all debates created by the user
     },
   },
+
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
@@ -91,29 +85,17 @@ const resolvers = {
 
       return { token, user };
     },
-    addOrder: async (parent, { products }, context) => {
-      if (context.user) {
-        const order = new Order({ products });
 
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-        return order;
-      }
-
-      throw AuthenticationError;
-    },
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
       }
 
       throw AuthenticationError;
     },
-    updateProduct: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
 
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -130,8 +112,98 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
-  }
+    },
+
+    createDebate: async (parent, { debate }, context) => {
+      console.log("createDebate called!", debate.title); // Logging a message to the console
+      if (context.user) {
+        const debateInit = await Debate.create({
+          title: debate.title,
+          createdBy: context.user._id,
+        }); // Creating a new debate
+        //  title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
+        console.log(debateInit); // Logging the debate to the console
+        // return debateInit; // Returning the debate
+        const userDebate = await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { debates: debateInit._id } },
+          { new: true }
+        ); // Updating the user's debates
+
+        return debateInit;
+      }
+      throw new AuthenticationError("You need to be logged in!"); // Throwing an AuthenticationError if user is not authenticated
+    },
+    addOpponent: async (parent, { _id }, context) => {
+      if (context.user) {
+        const updatedDebate = await Debate.findByIdAndUpdate(
+          _id,
+          { opponent: context.user._id, status: "active" },
+          { new: true }
+        ).populate("createdBy opponent winner");
+
+        await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { debates: _id } },
+          { new: true }
+        );
+
+        return updatedDebate;
+      }
+    },
+
+    addArgument: async (parent, { _id, argument }, context) => {
+      if (context.user) {
+        // create argument object
+        newArgument = {
+          body: argument,
+          user: context.user._id,
+          votes: [],
+        };
+        const updatedDebate = await Debate.findByIdAndUpdate(
+          _id,
+          { $push: { arguments: newArgument } },
+          { new: true }
+        ).populate("createdBy opponent winner");
+
+        return updatedDebate;
+      }
+    },
+
+    addComment: async (parent, { _id, comment }, context) => {
+      if (context.user) {
+        const updatedDebate = await Debate.findByIdAndUpdate(
+          _id,
+          { $push: { comments: { user: context.user._id, comment } } },
+          { new: true }
+        )
+          .populate("createdBy opponent winner")
+          .populate({ path: "arguments", populate: "user" })
+          .populate({ path: "comments", populate: "user" });
+
+        return updatedDebate;
+      }
+    },
+
+    addVote: async (parent, { _id, argumentId }, context) => {
+      if (context.user) {
+        const updatedDebate = await Debate.findByIdAndUpdate(
+          _id,
+          {
+            $push: { arguments: { _id: argumentId, votes: context.user._id } },
+          },
+          { new: true }
+        )
+          .populate("createdBy opponent winner")
+          .populate("arguments")
+          .populate({ path: "arguments", populate: "user" })
+          .populate("comments")
+          .populate({ path: "comments", populate: "user" });
+
+        return updatedDebate;
+      }
+    },
+  },
 };
 
 module.exports = resolvers;

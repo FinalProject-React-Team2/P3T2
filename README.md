@@ -68,6 +68,45 @@ THEN I am logged out of the app.
 ![alt text](image-2.png)
 ![alt text](image-3.png)
 
+## Component Structure (best viewed in raw markdown)
+
+App  
+├── Header  
+│   ├── Navigation  
+│   └── UserMenu  
+├── Routes  
+│   ├── HomePage  
+│   │   ├── DebateFundamentals  
+│   │   ├── SearchTopics  
+│   │   ├── PredefinedTopics  
+│   │   └── FeaturedDebates  
+│   ├── AboutPage  
+│   │   ├── MissionStatement  
+│   │   ├── Contributors  
+│   │   └── DebateFundamentalsLink  
+│   ├── SignUpPage  
+│   │   └── SignUpForm  
+│   ├── LoginPage   
+│   │   └── LoginForm  
+│   ├── DashboardPage  
+│   │   ├── ChallengeLinks  
+│   │   ├── SpectateDebatesLinks  
+│   │   ├── OpenDebateChallenges  
+│   │   ├── ProposeTopicForm  
+│   │   └── AcceptDebateChallenges  
+│   └── DebatePage  
+│       ├── DebateRoom  
+│       │   ├── TurnIndicator  
+│       │   ├── ArgumentList  
+│       │   │   └── ArgumentItem  
+│       │   └── CommentSection  
+│       │       └── CommentItem  
+│       └── SpectatorView  
+│           ├── SpectatorRoom  
+│           │   └── VoteAndComment  
+│           └── SpectateDebateList  
+└── Footer
+
 ## Contributors 
 
 - Sean Harrigan
@@ -80,3 +119,5 @@ THEN I am logged out of the app.
 - Stuart Osborn
     - [![GitHub](https://img.shields.io/badge/GitHub-My_Profile-pink?style=for-the-badge&logo=github)](https://github.com/stuartgosborn)
     [![Linkedin](https://img.shields.io/badge/LinkedIn-My_Profile-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/stuartgosborn?trk=profile-badge)
+
+- /

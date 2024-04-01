@@ -1,0 +1,66 @@
+.container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .flex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .space-between {
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .my-1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .my-2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .flex-end {
+    justify-content: flex-end;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .error-text {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  label {
+    min-width: 100px;
+  }
