@@ -213,8 +213,10 @@ const DebateInputs = ({ debate, id }) => {
   // Conditional rendering based on user role
   const renderInputForm = () => {
     const argumentsArr = data.getDebate.arguments;
-    const lastArgument = argumentsArr[argumentsArr.length - 1];
-    if (currentUserRole === "spectator" || lastArgument.user._id === userId ) return null;
+    const lastArgument = argumentsArr[argumentsArr.length - 1] || {};
+    console.log(argumentsArr, lastArgument);
+    
+    if (currentUserRole === "spectator" || lastArgument.user?._id === userId || currentUserRole === "opponent" && argumentsArr.length === 0) return null;
 
     return (
       <>
