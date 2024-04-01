@@ -1,4 +1,4 @@
-//create an about us page where we just talk about our mission behind debate bros. make it simple and export it
+
 
 import './aboutus.css';
 
@@ -12,40 +12,12 @@ function About() {
             {/* <h1>About Us</h1> */}
             <div className="about">
                 <div className="text">
-                    <h2>Sean</h2>
-                        <p>"Short Bio about yourself".</p>
+                    <h2>About Us</h2>
+                        <p>The Triumvirate is a passionate, three person team dedicated to bringing the best of digital debates into homes everywhere. The team is made up Stuart &quot;Big O&quot; Osborn, Patric &quot;The Star&quot; Ziong, and Sean &quot;no nickname&quot; Harrigan.</p>
                     <div className="data">
-                    <img src="/images/sean.png" alt="Sean Harrigan" className="profile-image"></img>
-        <a href="https://www.linkedin.com/in/sean-harrigan8/" className="hire">LinkedIn</a>
-                        
-                    </div>
-                </div>
-                </div>
-                <div className="about">
-                <div className="text">
-                    <h2>Stuart</h2>
-                        <p>"Short Bio about yourself".</p>
-                    <div className="data">
-                    <img src="/images/stuart.png" alt="Stuart" className="profile-image"></img>
-        <a href="https://www.linkedin.com/in/stuartgosborn/" className="hire">LinkedIn</a>
-                        
-                    </div>
-                </div>
-                </div>
-                <div className="about">
-                <div className="text">
-                    <h2>Patric</h2>
-                        <p>"Short Bio about yourself".</p>
-                    <div className="data">
-                    <img src="/images/patric.png" alt="Patric" className="profile-image"></img>
-        <a href="https://www.linkedin.com/in/patric-xiong-80a383284" className="hire">LinkedIn</a>
-                        
-                    </div>
-                </div>
-                </div>
-                <div class="promise">
-        <h2>Our Promise</h2>
-        <p>As we continue to grow, we promise to stay true to our core values of inclusivity, innovation, and integrity. Join us on this journey, share your voice, and let's make history together.</p>
+        {/* <a href="#" className="hire">Hire Me</a> */}
+        </div>
+      </div>
     </div>
         </div>
     

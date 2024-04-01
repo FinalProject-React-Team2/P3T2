@@ -23,7 +23,7 @@ const typeDefs = `
     _id: ID
     user: User
     body: String
-    votes: [ID]
+    votes: [ID!]!
   }
 
   type Comment {

@@ -113,7 +113,7 @@ export const ADD_ARGUMENT = gql`
           lastName
           email
         }
-        votes
+        votes 
       }
       _id
       status
@@ -222,12 +222,22 @@ mutation addVote($id: ID!, $argumentId: ID!) {
     numOfRounds
     arguments {
       _id
-      user
+      user{
+        _id
+        firstName
+        lastName
+        email
+      } 
       body
       votes
     }
     comments {
-      user
+      user{
+        _id
+        firstName
+        lastName
+        email
+      }
       comment
     }
     winner {

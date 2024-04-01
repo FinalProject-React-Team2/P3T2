@@ -7,10 +7,12 @@ import { ADD_VOTE } from "../../utils/mutations";
 import { GET_DEBATE } from "../../utils/queries";
 import AuthService from "../../utils/auth";
 import Grid from "@mui/material/Unstable_Grid2";
+import "./DebateInputs.css";
+import "./DebateInputs.css";
 
 const DebateInputs = ({ debate, id }) => {
   const userId = AuthService.getProfile().data._id;
-  console.log(typeof userId, userId);
+
   const debateId = id;
   console.log(debateId);
   const [currentUserRole, setCurrentUserRole] = useState<
@@ -22,7 +24,7 @@ const DebateInputs = ({ debate, id }) => {
 
   const { data, loading, error } = useQuery(GET_DEBATE, {
     variables: { id: debateId },
-    pollInterval: 2500,
+    // pollInterval: 5000,
   });
 
   // Determine the user role (creator, opponent, or spectator)
@@ -91,13 +93,15 @@ const DebateInputs = ({ debate, id }) => {
     }
   };
 
-  const handleAddVote = async (argumentId: string) => {
+  const handleAddVote = async (event, argumentId) => {
+    event.preventDefault();
+    event.stopPropagation();
     try {
-      const userId = AuthService.getProfile().data._id;
+      console.log(argumentId);
 
       const response = await addVote({
         variables: {
-          id: userId,
+          id,
           argumentId,
         },
         // Optimistic UI updates or refetch queries could be added here
@@ -114,6 +118,26 @@ const DebateInputs = ({ debate, id }) => {
     }
   };
 
+  const argStyleC = {
+    border: "1px solid black",
+    borderRadius: "10px",
+    padding: "10px",
+    margin: "10px",
+    width: "80%",
+    backgroundColor: "#FFD580	",
+    boxShadow: "5px 5px 5px 5px #888888",
+  };
+
+  const argStyleO = {
+    border: "1px solid black",
+    borderRadius: "10px",
+    padding: "10px",
+    margin: "10px",
+    width: "80%",
+    backgroundColor: "aliceblue	",
+    boxShadow: "5px 5px 5px 5px #888888",
+  };
+
   const renderArguments = () => {
     // Check if data is loaded and has arguments
     if (loading) return <p>Loading arguments...</p>;
@@ -122,19 +146,51 @@ const DebateInputs = ({ debate, id }) => {
       return <p>No arguments have been made yet.</p>;
 
     return (
-      <div>
+      <div className="scroll">
         {data.getDebate.arguments.map((argument, index) => (
-          <div key={argument.id} style={{ marginBottom: "1rem" }}>
-            <div style={{ fontWeight: "bold" }}>Argument {index + 1}</div>
-            <p>{argument.body}</p>
-            <div>By: {argument?.user.firstName}</div>
-            {/* Optionally, render vote count or a button to vote if the current user is allowed to */}
-            {/* Example for displaying vote count (assuming votes is an array of user IDs) */}
-            <div>Votes: {argument.votes.length}</div>
+          <div
+            key={index}
+            style={
+              argument.user._id === debate.createdBy._id
+                ? { marginBottom: "1rem", textAlign: "left", direction: "rtl" }
+                : { textAlign: "right" }
+            }
+          >
+            <div style={{ fontWeight: "bold" }}>
+              Argument {index + 1}
+              <strong> {argument.user.firstName}</strong>
+            </div>
+
+            <p
+              style={
+                argument.user._id === debate.createdBy._id
+                  ? argStyleC
+                  : argStyleO
+              }
+            >
+              {" "}
+              {argument?.body}
+            </p>
+            {/*  */}
             {/* Add Vote Button - Conditionally shown */}
             {currentUserRole === "spectator" && (
-              <button onClick={() => handleAddVote(argument.id)}>Vote</button>
+              <a
+                style={{ position: "relative", top: "-20px" }}
+                onClick={(event) => handleAddVote(event, argument._id)}
+              >
+                <img
+                  title="Click to vote"
+                  className="voteIcon"
+                  src="/voteIcon.png"
+                  alt="gavel icon"
+                  style={{ objectFit: "contain", height: "40px" }}
+                />
+              </a>
             )}
+            <span style={{ position: "relative", top: "-20px" }}>
+              {" "}
+              {argument.votes.length} votes{" "}
+            </span>
           </div>
         ))}
       </div>
@@ -146,9 +202,8 @@ const DebateInputs = ({ debate, id }) => {
     // alignItems: "center",
     // justifyContent: "center",
     // padding: "1rem",
-    height: "100vw",
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
+    // maxHeight: "50vw",
+    // display: "grid",
   };
 
   const gridStyle = {
@@ -158,7 +213,6 @@ const DebateInputs = ({ debate, id }) => {
     alignItems: "baseline",
     justifyContent: "center",
     padding: "1rem",
-    height: "100vw",
   };
 
   const inputStyle = {
@@ -168,19 +222,24 @@ const DebateInputs = ({ debate, id }) => {
 
   // Conditional rendering based on user role
   const renderInputForm = () => {
-    if (currentUserRole === "spectator") return null;
+    const argumentsArr = data.getDebate.arguments;
+    const lastArgument = argumentsArr[argumentsArr.length - 1] || {};
+    console.log(argumentsArr, lastArgument);
+
+    if (
+      currentUserRole === "spectator" ||
+      lastArgument.user?._id === userId ||
+      (currentUserRole === "opponent" && argumentsArr.length === 0)
+    )
+      return (
+        <div style={{display: "flex", justifyContent: "center"}}>
+          {currentUserRole !== "spectator" && (<p >Waiting for your turn...</p>)}
+        </div>
+      );
 
     return (
       <>
-        <h3>
-          {/* Welcome the debater by name */}
-          {/* Welcome,{" "}
-          {currentUserRole === "creator"
-            ? `${debate.createdBy.firstName}`
-            : `${debate.opponent.firstName}`}
-          ! */}
-        </h3>
-        <div className="form-floating input-group mb-3">
+        <div className="form-floating input-group mb-3 debateFormInput">
           {/* Input form for adding an argument */}
           <input
             className="form-control"
@@ -220,11 +279,38 @@ const DebateInputs = ({ debate, id }) => {
       );
 
     return (
-      <div className="commentsContainer">
+      <div className="commentsContainer scroll">
         {data.getDebate.comments.map((comment) => (
-          <div key={comment._id} style={{ marginBottom: "0.5rem" }}>
-            <p style={{ fontWeight: "bold" }}>{comment.user.firstName}:</p>
-            <p>{comment.comment}</p>
+          <div
+            key={comment._id}
+            style={{
+              marginBottom: "1rem",
+              marginLeft: "3rem",
+              textAlign: "right",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginRight: "5rem",
+            }}
+          >
+            <span style={{ fontWeight: "bold", display: "inline" }}>
+              {comment.user.firstName}...
+            </span>
+            <p
+              style={{
+                display: "inline",
+                fontSize: "16px",
+                border: "1px solid black",
+                borderRadius: "10px",
+                padding: "10px",
+                margin: "10px",
+                width: "80%",
+                backgroundColor: "white",
+                boxShadow: "5px 5px 5px 5px #888888",
+              }}
+            >
+              &nbsp;&nbsp;{comment.comment}
+            </p>
           </div>
         ))}
       </div>
@@ -233,44 +319,66 @@ const DebateInputs = ({ debate, id }) => {
 
   return (
     <>
-      <Grid container spacing={5} style={gridStyle}>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={7}>
-          <div className="container debateInputs" >
-            {renderInputForm()}
+      <Grid container className="grid-container" spacing={1} style={gridStyle}>
+        <Grid
+          item
+          className="grid-item"
+          xs={12}
+          sm={12}
+          md={6}
+          lg={6}
+          xl={6}
+          key={1}
+          style={gridStyle}
+        >
+          <div className="container debateInputs">
             <h3>Debate Arguments:</h3>
             {renderArguments()}
           </div>
+          <div className="form-floating input-group mb-3" style={{}}>
+            {renderInputForm()}
+          </div>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={5} lg={5} xl={5} key={9}>
-          <div className="container debateInputs">
-            {currentUserRole === "spectator" && (
-              <div className="form-floating input-group mb-3">
-                <input
-                  className="form-control"
-                  id="commentInput"
-                  type="text"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder=""
-                  aria-describedby="button-addon3"
-                />
-                <button
-                  type="button"
-                  id="button-addon3"
-                  className="btn btn-outline-secondary"
-                  onClick={handleAddComment}
-                >
-                  Submit Comment
-                </button>
-                <label htmlFor="commentInput">
-                  &nbsp;&nbsp; Enter Comments Here...
-                </label>
-              </div>
-            )}
+        <Grid
+          item
+          className="grid-item"
+          xs={12}
+          sm={12}
+          md={6}
+          lg={6}
+          xl={6}
+          key={2}
+          style={gridStyle}
+        >
+          <div className=" debateInputs container">
             <h3>Spectator Comments:</h3>
             {renderComments()}
           </div>
+          {currentUserRole === "spectator" && (
+            <div className="form-floating input-group mb-3 debateFormInput">
+              <input
+                className="form-control"
+                id="commentInput"
+                type="text"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder=""
+                aria-describedby="button-addon3"
+              />
+              <button
+                type="button"
+                id="button-addon3"
+                className="btn btn-outline-secondary"
+                onClick={handleAddComment}
+              >
+                Submit Comment
+              </button>
+              <label htmlFor="commentInput">
+                &nbsp;&nbsp; Enter Comments Here...
+              </label>
+            </div>
+          )}
         </Grid>
       </Grid>
     </>

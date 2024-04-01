@@ -63,8 +63,11 @@ const resolvers = {
       } // Throwing an AuthenticationError if user is not authenticated
       return await Debate.findById(args._id)
         .populate("createdBy opponent winner")
+        .populate("arguments")
         .populate({ path: "arguments", populate: "user" })
-        .populate({ path: "comments", populate: "user" }); // Finding a debate by ID
+        .populate("comments")
+        .populate({ path: "comments", populate: "user" })
+        // .populate({ path: "arguments", populate: "votes" });
     },
 
     getDebates: async (parent, args, context) => {
@@ -190,7 +193,12 @@ const resolvers = {
             $push: { arguments: { _id: argumentId, votes: context.user._id } },
           },
           { new: true }
-        ).populate("createdBy opponent winner");
+        )
+          .populate("createdBy opponent winner")
+          .populate("arguments")
+          .populate({ path: "arguments", populate: "user" })
+          .populate("comments")
+          .populate({ path: "comments", populate: "user" });
 
         return updatedDebate;
       }

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery} from "@apollo/client";
 import { GET_DEBATE } from "../../utils/queries";
 import Grid from "@mui/material/Unstable_Grid2";
 import DebateInputs from "../../components/DebateRoom/DebateInputs";
@@ -7,7 +7,7 @@ import DebateInputs from "../../components/DebateRoom/DebateInputs";
 function DebateRoom() {
   const { id } = useParams();
   // const {debate, setDebate} = useState({});
-  const { loading, data } = useQuery(GET_DEBATE, { variables: { id } });
+  const { loading, data } = useQuery(GET_DEBATE, { variables: { id } , pollInterval: 5000 });
   console.log("DATA", loading, data, id);
 
   // execute query to Debate details from graphql
@@ -21,11 +21,11 @@ function DebateRoom() {
 
   return (
     <>
-    <Grid container spacing={1}>
-      <Grid item xs={12} sm={12} md={12} lg={12} xl={12} key={11}>
+    <Grid container className="grid-container" style={{height: "150px", margin: "5px", padding: "1rem"}} spacing={1}>
+      <Grid item  style={{height: "200px"}} xs={12} sm={12} md={12} lg={12} xl={12} key={1}>
 
         
-      <div className="container debateHeader">
+      <div className="debateHeader">
         <div>
           <h2>{debate.title}</h2>
           <p>Challenger: {debate?.createdBy?.firstName || "error"}</p>
@@ -38,7 +38,7 @@ function DebateRoom() {
       </Grid>
     </Grid>
       <DebateInputs debate={debate} id={debate._id} />
-      {console.log("D.id" , debate._id)};
+      {console.log("D.id" , debate._id)}
       
     </>
   );

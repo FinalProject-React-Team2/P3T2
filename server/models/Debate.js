@@ -16,7 +16,7 @@ const argumentSchema = new Schema(
       ref: "User",
     },
     // Reference to the user who made the argument
-    votes: [Schema.Types.ObjectId],
+    votes: [{type: Schema.Types.ObjectId, ref: 'User', unique: true}],
     // An array of votes for the argument
   },
   {
@@ -26,6 +26,10 @@ const argumentSchema = new Schema(
     id: false,
   }
 );
+
+argumentSchema.virtual('voteCount').get(function() {
+  return this.votes.length;
+});
 
 const commentSchema = new Schema({
   // Define the schema for a comment

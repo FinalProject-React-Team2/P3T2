@@ -7,11 +7,11 @@ export default function UserMenu() {
 
   if (loggedIn) {
     return (
-      <ul className="flex-row">
-        <li className="mx-1">
-          <Link to="/Dashboard">Dashboard</Link>
+     
+        <li className="mx-3 nav-item menu">
+          <Link className="nav-link" to="/Dashboard">Dashboard</Link>
         </li>
-      </ul>
+      
     );
   } else {
     return (

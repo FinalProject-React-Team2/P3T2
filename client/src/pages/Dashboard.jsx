@@ -1,12 +1,12 @@
 // import UserStats from "../components/UserStats";
 // import UserOpenChallenges from "../components/OpenChallenges/UserOpenChallenges";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_OPPONENT } from "../utils/mutations";
 import Grid from "@mui/material/Unstable_Grid2";
 // import DebateDropdowns from "../components/Dashboard/DebateDropdown/index.jsx";
 // import CategoryMenu from "../components/CategoryMenu";
-import UserOpenChallenges from "../components/Dashboard/UserDebates/UserOpenChallenges.jsx";
+
 import UserActiveChallenges from "../components/Dashboard/UserDebates/UserActiveChallenges.jsx";
 import OpenDebates from "../components/Dashboard/OpenDebates.jsx";
 import AuthService from "../utils/auth";

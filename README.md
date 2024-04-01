@@ -7,6 +7,14 @@ A webservice community for debate lovers that allows them to debate as a partici
 
 - [Debate Beta: Wire Frame](https://www.icloud.com/freeform/0c4kjEBvm82DzXh2cVhdYQH9w#Debate_App_Beta_(Homepage))
 
+## Repository & Deployment Links
+
+- GitHub Repository:  
+https://github.com/FinalProject-React-Team2/P3T2
+
+- Render Deployment:   
+https://p3t2.onrender.com/...one
+
 ## User Story:
 ```
 - As a lover of debate eager for intellectual stimulation and a venue to express my thoughts with eloquent rhetoric
