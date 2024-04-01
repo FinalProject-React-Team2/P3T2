@@ -1,4 +1,4 @@
-//create an about us page where we just talk about our mission behind debate bros. make it simple and export it
+
 
 import './aboutus.css';
 
