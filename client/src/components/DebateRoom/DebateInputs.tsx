@@ -118,7 +118,7 @@ const DebateInputs = ({ debate, id }) => {
     }
   };
 
-  const argStyle = {
+  const argStyleC = {
     border: "1px solid black",
     borderRadius: "10px",
     padding: "10px",
@@ -127,7 +127,16 @@ const DebateInputs = ({ debate, id }) => {
     backgroundColor: "#FFD580	",
     boxShadow: "5px 5px 5px 5px #888888",
     
-    
+  };
+
+  const argStyleO = {
+    border: "1px solid black",
+    borderRadius: "10px",
+    padding: "10px",
+    margin: "10px",
+    width: "80%",
+    backgroundColor: "aliceblue	",
+    boxShadow: "5px 5px 5px 5px #888888",
   };
 
   const renderArguments = () => {
@@ -153,24 +162,25 @@ const DebateInputs = ({ debate, id }) => {
               <strong> {argument.user.firstName}</strong>
             </div>
 
-            <p style={argStyle}>
-              {" "}
-              {argument?.body}
-            </p>
+            <p style={
+              argument.user._id === debate.createdBy._id
+                ? argStyleC
+                : argStyleO
+            }> {argument?.body}</p>
             {/*  */}
             {/* Add Vote Button - Conditionally shown */}
             {currentUserRole === "spectator" && (
-              <a onClick={(event) => handleAddVote(event, argument._id)}>
+              <a style={{position: "relative", top: "-20px"}} onClick={(event) => handleAddVote(event, argument._id)}>
                 <img
                   title="Click to vote"
                   className="voteIcon"
                   src="/voteIcon.png"
                   alt="gavel icon"
-                  style={{ objectFit: "contain", height: "40px" }}
+                  style={{ objectFit: "contain", height: "40px", }}
                 />
               </a>
             )}
-            <span> {argument.votes.length} votes </span>
+            <span style={{position: "relative", top: "-20px"}}> {argument.votes.length} votes </span>
           </div>
         ))}
       </div>
@@ -272,7 +282,7 @@ const DebateInputs = ({ debate, id }) => {
                 padding: "10px",
                 margin: "10px",
                 width: "80%",
-                backgroundColor: "aliceblue",
+                backgroundColor: "white",
                 boxShadow: "5px 5px 5px 5px #888888",
               }}
             >
