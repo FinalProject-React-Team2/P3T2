@@ -2,6 +2,7 @@
 main {
   margin-top: 100px;
   margin-bottom: 100px;
+  text-align: center;
 }
 .grid-container{
 
@@ -22,12 +23,29 @@ main {
   background-color: aliceblue;
   margin: 5px;
 }
+.debateHeader{
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
+
+  width: 100vw;
+  background-color: aliceblue;
+}
+
+.debateInputs{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  height: 100vw;
+  width: 400px;
+
+}
 
 .debateFormInput{
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid black;
+  height: 45px;
   width: 400px;
 
 }

@@ -51,44 +51,52 @@ export const GET_DEBATES = gql`
 
 export const GET_DEBATE = gql`
   query getDebate($id: ID!) {
-    getDebate(_id: $id) {
+  getDebate(_id: $id) {
+    _id
+    title
+    status
+    createdBy {
       _id
-      title
-      status
-      createdBy {
+      firstName
+      lastName
+      email
+
+    }
+    opponent {
+      _id
+      firstName
+      lastName
+      email
+    }
+    numOfRounds
+    arguments {
+      _id
+      user {
         _id
         firstName
         lastName
         email
-        debates {
-          _id
-          title
-          status
-          numOfRounds
-        }
       }
-      opponent {
-        _id
+      body
+      votes
+    }
+    comments {
+      _id
+      comment
+      user {
+       
         firstName
         lastName
         email
-      }
-      numOfRounds
-      arguments {
-        title
-        body
-        votes
-      }
-      comments {
-        user
-        comment
-      }
-      winner {
         _id
-        firstName
-        lastName
-        email
       }
     }
+    winner {
+      _id
+      firstName
+      lastName
+      email
+    }
   }
+}
 `;

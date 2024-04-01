@@ -10,12 +10,16 @@ function ActiveDebatePage() {
   const { id } = useParams();
   // const {debate, setDebate} = useState({});
   const { loading, data } = useQuery(GET_DEBATE, { variables: { id } });
-  console.log("DATA", data);
+  console.log("DATA", loading, data, id);
 
   // execute query to Debate details from graphql
   //populage local state with debate details
   const debate = data?.getDebate || {};
   console.log(debate);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container">

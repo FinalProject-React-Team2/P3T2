@@ -61,9 +61,10 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError();
       } // Throwing an AuthenticationError if user is not authenticated
-      return await Debate.findById(args._id).populate(
-        "createdBy opponent winner"
-      ); // Finding a debate by ID
+      return await Debate.findById(args._id)
+        .populate("createdBy opponent winner")
+        .populate({ path: "arguments", populate: "user" })
+        .populate({ path: "comments", populate: "user" }); // Finding a debate by ID
     },
 
     getDebates: async (parent, args, context) => {
@@ -132,18 +133,65 @@ const resolvers = {
     },
     addOpponent: async (parent, { _id }, context) => {
       if (context.user) {
-        const updatedDebate =  await Debate.findByIdAndUpdate(
+        const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
           { opponent: context.user._id, status: "active" },
           { new: true }
         ).populate("createdBy opponent winner");
 
-          await User.findByIdAndUpdate(
-            context.user._id,
-            { $push: { debates: _id } },
-            { new: true }
-          );
-          
+        await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { debates: _id } },
+          { new: true }
+        );
+
+        return updatedDebate;
+      }
+    },
+
+    addArgument: async (parent, { _id, argument }, context) => {
+      if (context.user) {
+        // create argument object
+        newArgument = {
+          body: argument,
+          user: context.user._id,
+          votes: [],
+        };
+        const updatedDebate = await Debate.findByIdAndUpdate(
+          _id,
+          { $push: { arguments: newArgument } },
+          { new: true }
+        ).populate("createdBy opponent winner");
+
+        return updatedDebate;
+      }
+    },
+
+    addComment: async (parent, { _id, comment }, context) => {
+      if (context.user) {
+        const updatedDebate = await Debate.findByIdAndUpdate(
+          _id,
+          { $push: { comments: { user: context.user._id, comment } } },
+          { new: true }
+        )
+          .populate("createdBy opponent winner")
+          .populate({ path: "arguments", populate: "user" })
+          .populate({ path: "comments", populate: "user" });
+
+        return updatedDebate;
+      }
+    },
+
+    addVote: async (parent, { _id, argumentId }, context) => {
+      if (context.user) {
+        const updatedDebate = await Debate.findByIdAndUpdate(
+          _id,
+          {
+            $push: { arguments: { _id: argumentId, votes: context.user._id } },
+          },
+          { new: true }
+        ).populate("createdBy opponent winner");
+
         return updatedDebate;
       }
     },

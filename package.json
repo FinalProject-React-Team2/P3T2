@@ -12,7 +12,7 @@
     "render-build": "npm install && npm run build"
   },
   "keywords": [],
-  "author": "",
+  "author": "", 
   "license": "ISC",
   "dependencies": {
     "@emotion/styled": "^11.11.0",
