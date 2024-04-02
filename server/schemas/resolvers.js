@@ -66,15 +66,19 @@ const resolvers = {
         .populate("arguments")
         .populate({ path: "arguments", populate: "user" })
         .populate("comments")
-        .populate({ path: "comments", populate: "user" })
-        // .populate({ path: "arguments", populate: "votes" });
+        .populate({ path: "comments", populate: "user" });
+      // .populate({ path: "arguments", populate: "votes" });
     },
 
     getDebates: async (parent, args, context) => {
       // if (!context.user) {
       //   throw new AuthenticationError();
       // } // Throwing an AuthenticationError if user is not authenticated
-      return await Debate.find({}).populate("createdBy opponent winner"); // Finding all debates created by the user
+      return await Debate.find({})
+        .populate("createdBy opponent winner")
+        .populate({ path: "arguments", populate: "user" })
+        .populate("comments")
+        .populate({ path: "comments", populate: "user" }); // Finding all debates created by the user
     },
   },
 
@@ -124,11 +128,11 @@ const resolvers = {
           arguments: [],
           comments: [],
           status: "open",
-          winner: null
+          winner: null,
         }); // Creating a new debate
-        console.log("DEBATE CREATED", debateInit); // Logging the debate to the console   
+        console.log("DEBATE CREATED", debateInit); // Logging the debate to the console
         //  title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
-        console
+        console;
         // return debateInit; // Returning the debate
         const userDebate = await User.findByIdAndUpdate(
           context.user._id,
@@ -193,17 +197,14 @@ const resolvers = {
 
     addVote: async (parent, { _id, argumentId }, context) => {
       if (context.user) {
-        const debate = await Debate.findById(_id)
-          .populate("createdBy opponent winner")
-          .populate("arguments")
-          .populate({ path: "arguments", populate: "user" })
-          .populate("comments")
-          .populate({ path: "comments", populate: "user" });
+        const debate = await Debate.findById(_id);
+        
 
+        console.log("DEBATE", debate);
         // find the argument by its ID
         //add the vote if that ID is not already in the array
         debate.arguments.id(argumentId).votes.push(context.user._id);
-        
+
         debate.save();
 
         // const updatedDebate = await Debate.findByIdAndUpdate(
@@ -218,7 +219,6 @@ const resolvers = {
         //   .populate({ path: "arguments", populate: "user" })
         //   .populate("comments")
         //   .populate({ path: "comments", populate: "user" });
-        
 
         return debate;
       }

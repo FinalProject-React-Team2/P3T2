@@ -103,7 +103,6 @@ const DebateInputs = ({ debate, id }) => {
           argumentId,
         },
         // Optimistic UI updates or refetch queries could be added here
-      
       });
 
       if (response.data) {
@@ -154,15 +153,19 @@ const DebateInputs = ({ debate, id }) => {
             </div>
 
             <div className="d-flex justify-content-between">
-              <p> 
+              <p>
                 {" "}
                 {argument?.body}
                 <span>{argument.votes.length} votes</span>
               </p>
               {currentUserRole === "spectator" && (
-                <button className="btn btn-sm btn-primary" 
-                // onClick={() => handleAddVote(argument._id)}
-                >👍</button>
+                <button
+                  className="btn btn-sm btn-primary"
+                  onClick={() => handleAddVote(argument._id)}
+                  disabled={argument.votes.some((vote) => vote === userId)}
+                >
+                  👍
+                </button>
               )}
             </div>
             {/*  */}
