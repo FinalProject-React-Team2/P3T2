@@ -193,20 +193,34 @@ const resolvers = {
 
     addVote: async (parent, { _id, argumentId }, context) => {
       if (context.user) {
-        const updatedDebate = await Debate.findByIdAndUpdate(
-          _id,
-          {
-            $push: { arguments: { _id: argumentId, votes: context.user._id } },
-          },
-          { new: true }
-        )
+        const debate = await Debate.findById(_id)
           .populate("createdBy opponent winner")
           .populate("arguments")
           .populate({ path: "arguments", populate: "user" })
           .populate("comments")
           .populate({ path: "comments", populate: "user" });
 
-        return updatedDebate;
+        // find the argument by its ID
+        //add the vote if that ID is not already in the array
+        debate.arguments.id(argumentId).votes.push(context.user._id);
+        
+        debate.save();
+
+        // const updatedDebate = await Debate.findByIdAndUpdate(
+        //   _id,
+        //   {
+        //     $push: { arguments: { _id: argumentId, votes: context.user._id } },
+        //   },
+        //   { new: true }
+        // )
+        //   .populate("createdBy opponent winner")
+        //   .populate("arguments")
+        //   .populate({ path: "arguments", populate: "user" })
+        //   .populate("comments")
+        //   .populate({ path: "comments", populate: "user" });
+        
+
+        return debate;
       }
     },
   },
