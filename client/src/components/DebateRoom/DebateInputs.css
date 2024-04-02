@@ -1,10 +1,67 @@
-.scroll{
-    max-height: 50vh;
-    overflow-y: auto;
-
+.scroll {
+  max-height: 50vh;
+  overflow-y: auto;
 }
 
-.voteIcon:hover{
-    cursor: pointer;
-    
+.voteIcon:hover {
+  cursor: pointer;
+}
+
+div.arguments > div:nth-child(odd) p {
+  background-color: #ffd580;
+  border: solid 1px black;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 80%;
+  box-shadow: 5px 5px 5px 5px #888888;
+  text-align: left;
+  position: relative;
+}
+
+div.arguments > div:nth-child(odd) div.d-flex {
+  flex-direction: row;
+  text-align: left;
+}
+
+div.arguments > div:nth-child(even) p {
+  background-color: aliceblue;
+  border: solid 1px black;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 80%;
+  box-shadow: 5px 5px 5px 5px #888888;
+  text-align: right;
+  position: relative;
+  margin-right: .5em;
+}
+
+div.arguments > div:nth-child(even) div.d-flex {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+div.arguments span {
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  width: 6em;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0.8em;
+  padding: 2px 4px;
+}
+
+div.arguments > div:nth-child(odd) span {
+  right: -5em;
+  bottom: -0.5em;
+}
+div.arguments > div:nth-child(even) span {
+  left: -5em;
+  bottom: -0.5em;
+  text-align: left;
+}
+
+div.arguments button {
+  height: 2em;
+  font-size: 2em;
 }

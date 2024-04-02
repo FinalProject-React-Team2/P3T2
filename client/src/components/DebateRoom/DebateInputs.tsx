@@ -8,12 +8,10 @@ import { GET_DEBATE } from "../../utils/queries";
 import AuthService from "../../utils/auth";
 import Grid from "@mui/material/Unstable_Grid2";
 import "./DebateInputs.css";
-import "./DebateInputs.css";
 
 const DebateInputs = ({ debate, id }) => {
   const userId = AuthService.getProfile().data._id;
   console.log(AuthService.getProfile().data.firstName);
-  
 
   const debateId = id;
   console.log(debateId);
@@ -125,7 +123,7 @@ const DebateInputs = ({ debate, id }) => {
     borderRadius: "10px",
     padding: "10px",
     margin: "10px",
-    width: "80%",
+    maxWidth: "80%",
     backgroundColor: "#FFD580	",
     boxShadow: "5px 5px 5px 5px #888888",
   };
@@ -135,7 +133,7 @@ const DebateInputs = ({ debate, id }) => {
     borderRadius: "10px",
     padding: "10px",
     margin: "10px",
-    width: "80%",
+    maxWidth: "80%",
     backgroundColor: "aliceblue	",
     boxShadow: "5px 5px 5px 5px #888888",
   };
@@ -148,34 +146,27 @@ const DebateInputs = ({ debate, id }) => {
       return <p>No arguments have been made yet.</p>;
 
     return (
-      <div className="scroll">
+      <div className="scroll arguments">
         {data.getDebate.arguments.map((argument, index) => (
-          <div
-            key={index}
-            style={
-              argument.user._id === debate.createdBy._id
-                ? { marginBottom: "1rem", textAlign: "left", direction: "rtl" }
-                : { textAlign: "right" }
-            }
-          >
+          <div key={index}>
             <div style={{ fontWeight: "bold" }}>
               Argument {index + 1}
               <strong> {argument.user.firstName}</strong>
             </div>
 
-            <p
-              style={
-                argument.user._id === debate.createdBy._id
-                  ? argStyleC
-                  : argStyleO
-              }
-            >
-              {" "}
-              {argument?.body}
-            </p>
+            <div className="d-flex justify-content-between">
+              <p>
+                {" "}
+                {argument?.body}
+                <span>{argument.votes.length} votes</span>
+              </p>
+              {currentUserRole === "spectator" && (
+                <button className="btn btn-sm btn-primary">👍</button>
+              )}
+            </div>
             {/*  */}
             {/* Add Vote Button - Conditionally shown */}
-            {currentUserRole === "spectator" && (
+            {/* {currentUserRole === "spectator" && (
               <a
                 style={{ position: "relative", top: "-20px" }}
                 onClick={(event) => handleAddVote(event, argument._id)}
@@ -192,7 +183,7 @@ const DebateInputs = ({ debate, id }) => {
             <span style={{ position: "relative", top: "-20px" }}>
               {" "}
               {argument.votes.length} votes{" "}
-            </span>
+            </span> */}
           </div>
         ))}
       </div>
@@ -234,8 +225,12 @@ const DebateInputs = ({ debate, id }) => {
       (currentUserRole === "opponent" && argumentsArr.length === 0)
     )
       return (
-        <div style={{display: "flex", justifyContent: "center"}}>
-          {currentUserRole !== "spectator" && (<p >Waiting for your turn {AuthService.getProfile().data.firstName}...</p>)}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {currentUserRole !== "spectator" && (
+            <p>
+              Waiting for your turn {AuthService.getProfile().data.firstName}...
+            </p>
+          )}
         </div>
       );
 
