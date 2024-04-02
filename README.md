@@ -115,6 +115,10 @@ App
 │           └── SpectateDebateList  
 └── Footer
 
+## Site Screen Shot (Debate Room)
+
+![alt text](image-4.png)
+
 ## Contributors 
 
 - Sean Harrigan
