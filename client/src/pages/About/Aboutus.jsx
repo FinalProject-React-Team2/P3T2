@@ -1,10 +1,15 @@
-//create an about us page where we just talk about our mission behind debate bros. make it simple and export it
+
 
 import './aboutus.css';
 
 function About() {
     return (
         <div className="about-us">
+             <div className="mission">
+        <h2>Our Mission</h2>
+        <p>At DebateCloud, we believe in the power of debate to inspire change, foster understanding, and build communities. Our mission is to provide a user-friendly, accessible platform where anyone, anywhere, can participate in meaningful debates on a wide range of topics. The Triumvirate is a passionate, three person team dedicated to bringing the best of digital debates into homes everywhere.
+        </p></div>
+            {/* <h1>About Us</h1> */}
             <div className="about">
                 <div className="text">
                     <h2>About Us</h2>
@@ -15,7 +20,7 @@ function About() {
       </div>
     </div>
         </div>
-
+    
         
     );
     }

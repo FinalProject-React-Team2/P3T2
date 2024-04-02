@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import Error from "./pages/404";
 import Home from "./pages/Home";
 import About from "./pages/About/Aboutus.jsx";
+import CreateDebate from "./components/Dashboard/CreateDebate.jsx";
 // import Donations from "./pages/Donations.jsx";
 import Notfound from "./pages/404";
 import Signup from "./pages/Signup/Signup.jsx";
