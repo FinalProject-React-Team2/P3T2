@@ -117,12 +117,18 @@ const resolvers = {
     createDebate: async (parent, { debate }, context) => {
       console.log("createDebate called!", debate.title); // Logging a message to the console
       if (context.user) {
+        console.log("CREATING DEBATE");
         const debateInit = await Debate.create({
           title: debate.title,
           createdBy: context.user._id,
+          arguments: [],
+          comments: [],
+          status: "open",
+          winner: null
         }); // Creating a new debate
+        console.log("DEBATE CREATED", debateInit); // Logging the debate to the console   
         //  title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
-        console.log(debateInit); // Logging the debate to the console
+        console
         // return debateInit; // Returning the debate
         const userDebate = await User.findByIdAndUpdate(
           context.user._id,

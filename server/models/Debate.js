@@ -16,7 +16,7 @@ const argumentSchema = new Schema(
       ref: "User",
     },
     // Reference to the user who made the argument
-    votes: [{type: Schema.Types.ObjectId, ref: 'User', unique: true}],
+    votes: [{type: Schema.Types.ObjectId, ref: 'User', }],
     // An array of votes for the argument
   },
   {

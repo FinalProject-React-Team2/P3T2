@@ -1,4 +1,4 @@
-//code a page that welcomes users to the website. it should contain a title of "DebateBros" , with a brief description of what we do. Include a button that says "Login" and another button that says "Signup". These will link to the login and sign up pages once clicked as i have those already created, include that code as well if you can.
+
 
 function Home() {
   return (
