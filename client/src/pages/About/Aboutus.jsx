@@ -1,6 +1,6 @@
 
 
-import './aboutus.css';
+import './Aboutus.css';
 
 function About() {
     return (
