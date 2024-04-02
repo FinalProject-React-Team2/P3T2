@@ -125,6 +125,7 @@ const resolvers = {
         const debateInit = await Debate.create({
           title: debate.title,
           createdBy: context.user._id,
+          numOfRounds: debate.numOfRounds,
           arguments: [],
           comments: [],
           status: "open",
