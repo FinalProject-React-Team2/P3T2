@@ -12,6 +12,8 @@ import "./DebateInputs.css";
 
 const DebateInputs = ({ debate, id }) => {
   const userId = AuthService.getProfile().data._id;
+  console.log(AuthService.getProfile().data.firstName);
+  
 
   const debateId = id;
   console.log(debateId);
@@ -233,7 +235,7 @@ const DebateInputs = ({ debate, id }) => {
     )
       return (
         <div style={{display: "flex", justifyContent: "center"}}>
-          {currentUserRole !== "spectator" && (<p >Waiting for your turn...</p>)}
+          {currentUserRole !== "spectator" && (<p >Waiting for your turn {AuthService.getProfile().data.firstName}...</p>)}
         </div>
       );
 
