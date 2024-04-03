@@ -30,6 +30,7 @@ main {
   border-radius: 10px;
   background-color: aliceblue;
   margin: 0px;
+  overflow-y: auto;
 }
 .debateHeader{
   margin: 0;
