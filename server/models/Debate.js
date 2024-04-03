@@ -93,6 +93,7 @@ const debateSchema = new Schema(
       virtuals: true,
     },
     id: false,
+    timestamps: true,
   }
 );
 

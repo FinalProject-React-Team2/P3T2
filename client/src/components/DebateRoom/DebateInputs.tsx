@@ -224,6 +224,7 @@ const DebateInputs = ({ debate, id }) => {
     console.log(argumentsArr, lastArgument);
 
     if (
+      argumentsArr.length === 2 * data.getDebate.numOfRounds ||
       currentUserRole === "spectator" ||
       lastArgument.user?._id === userId ||
       (currentUserRole === "opponent" && argumentsArr.length === 0)

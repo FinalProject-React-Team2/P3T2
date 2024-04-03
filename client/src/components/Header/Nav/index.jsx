@@ -11,7 +11,7 @@ function Nav() {
       return (
         <ul className="flex-row nav menu">
           
-            <li className="mx-3 nav-item menu">
+            <li className="mx-3 ">
               <Link to="/open&activedebates" className="nav-link">
                 Current Debates
               </Link>
@@ -40,7 +40,7 @@ function Nav() {
     } else {
       return (
         <ul className="flex-row nav menu">
-          <li className="mx-3 nav-item menu">
+          <li className="mx-3 menu">
             <Link to="/signup" className="nav-link">
               Signup
             </Link>

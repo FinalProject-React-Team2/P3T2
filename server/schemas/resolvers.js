@@ -130,6 +130,8 @@ const resolvers = {
           comments: [],
           status: "open",
           winner: null,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }); // Creating a new debate
         console.log("DEBATE CREATED", debateInit); // Logging the debate to the console
         //  title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
@@ -149,7 +151,7 @@ const resolvers = {
       if (context.user) {
         const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
-          { opponent: context.user._id, status: "active" },
+          { opponent: context.user._id, status: "active", updatedAt: new Date()},
           { new: true }
         ).populate("createdBy opponent winner");
 
@@ -173,7 +175,7 @@ const resolvers = {
         };
         const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
-          { $push: { arguments: newArgument } },
+          { $push: { arguments: newArgument, updatedAt: new Date() } },
           { new: true }
         ).populate("createdBy opponent winner");
 
@@ -185,7 +187,7 @@ const resolvers = {
       if (context.user) {
         const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
-          { $push: { comments: { user: context.user._id, comment } } },
+          { $push: { comments: { user: context.user._id, comment }, updatedAt: new Date() } },
           { new: true }
         )
           .populate("createdBy opponent winner")
@@ -203,9 +205,9 @@ const resolvers = {
 
         console.log("DEBATE", debate);
         // find the argument by its ID
-        //add the vote if that ID is not already in the array
+        //add the vote if that ID is not already in the array and update the updatedAt field
         debate.arguments.id(argumentId).votes.push(context.user._id);
-
+        debate.updatedAt = new Date();
         debate.save();
 
         // const updatedDebate = await Debate.findByIdAndUpdate(

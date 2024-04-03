@@ -20,13 +20,20 @@ const OpenDebates = ({ addOpponentHandler }) => {
     <div>
       <h2></h2>
       <div>
-        {openDebates.map((debate) => (
-          <div key={debate._id}>
-            <Link onClick={() => addOpponentHandler(debate._id)}>
-              <h3>{`${debate?.createdBy.firstName} vs. TBD ${debate.title}`}</h3>
-            </Link>
-          </div>
-        ))}
+        <ol>
+          {openDebates.map((debate) => (
+            <li key={debate._id}>
+              <Link onClick={() => addOpponentHandler(debate._id)}>
+                <h3>
+                  🗣️
+                  {`${debate?.createdBy.firstName} vs. TBD ${
+                    debate.title
+                  } is (${debate.status.toUpperCase()}) `}
+                </h3>
+              </Link>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   );
