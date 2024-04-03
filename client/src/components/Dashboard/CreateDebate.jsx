@@ -63,7 +63,7 @@ export default function CreateDebate({ loggedInUser }) {
         <br />
         <div className="form-floating">
           <input
-            className="debateFormInput form-control "
+            className="debateFormInput form-control input"
             type="number"
             id="numOfRounds"
             name="numOfRounds"

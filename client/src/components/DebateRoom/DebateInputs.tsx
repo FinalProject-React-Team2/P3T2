@@ -213,8 +213,7 @@ const DebateInputs = ({ debate, id }) => {
   };
 
   const inputStyle = {
-    // marginRight: "20rem",
-    // width: "100%",
+    fontSize: "16px",
   };
 
   // Conditional rendering based on user role
@@ -222,19 +221,24 @@ const DebateInputs = ({ debate, id }) => {
     const argumentsArr = data.getDebate.arguments;
     const lastArgument = argumentsArr[argumentsArr.length - 1] || {};
     console.log(argumentsArr, lastArgument);
-
-    if (
-      argumentsArr.length === 2 * data.getDebate.numOfRounds ||
+    if (argumentsArr.length === 2 * data.getDebate.numOfRounds){
+      return (
+        <div style={{ textAlign: "center" }}>
+          <h3>Arguments are in and votes will be tallied within 24hrs!</h3>
+        </div>
+      );
+    } else if (
+      
       currentUserRole === "spectator" ||
       lastArgument.user?._id === userId ||
       (currentUserRole === "opponent" && argumentsArr.length === 0)
     )
       return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ textAlign: "center" }}>
           {currentUserRole !== "spectator" && (
-            <p>
+            <h3 style={{display: "inline"}}>
               Waiting for your turn {AuthService.getProfile().data.firstName}...
-            </p>
+            </h3>
           )}
         </div>
       );
@@ -244,7 +248,7 @@ const DebateInputs = ({ debate, id }) => {
         <div className="form-floating input-group mb-3 debateFormInput">
           {/* Input form for adding an argument */}
           <input
-            className="form-control"
+            className="form-control input"
             id="argumentInput"
             type="text"
             value={inputValue}
@@ -337,7 +341,7 @@ const DebateInputs = ({ debate, id }) => {
             <h3>Debate Arguments:</h3>
             {renderArguments()}
           </div>
-          <div className="form-floating input-group mb-3" style={{}}>
+          <div className="form-floating input-group mb-3" style={{display: 'flex', justifyContent: 'center', marginTop: '2rem'}}>
             {renderInputForm()}
           </div>
         </Grid>
@@ -360,13 +364,14 @@ const DebateInputs = ({ debate, id }) => {
           {currentUserRole === "spectator" && (
             <div className="form-floating input-group mb-3 debateFormInput">
               <input
-                className="form-control"
+                className="form-control input"
                 id="commentInput"
                 type="text"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder=""
                 aria-describedby="button-addon3"
+                style={inputStyle}
               />
               <button
                 type="button"
