@@ -187,7 +187,7 @@ const resolvers = {
       if (context.user) {
         const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
-          { $push: { comments: { user: context.user._id, comment }, updatedAt: new Date() } },
+          { $push: { comments: { user: context.user._id, comment, updatedAt: new Date() } } },
           { new: true }
         )
           .populate("createdBy opponent winner")

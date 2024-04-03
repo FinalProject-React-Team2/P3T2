@@ -31,7 +31,7 @@ const DebateInputs = ({ debate, id }) => {
   useEffect(() => {
     if (data) {
       const { createdBy, opponent } = data.getDebate;
-      // Assuming context.user._id is accessible via some form of global state or context
+      
 
       if (userId === createdBy._id) {
         setCurrentUserRole("creator");
@@ -48,9 +48,9 @@ const DebateInputs = ({ debate, id }) => {
   const [addComment] = useMutation(ADD_COMMENT);
   const [addVote] = useMutation(ADD_VOTE);
 
-  // Handler functions (simplified)
+ 
   const handleAddArgument = async () => {
-    if (!inputValue.trim()) return; // Basic validation
+    if (!inputValue.trim()) return; 
 
     try {
       const response = await addArgument({
@@ -62,9 +62,9 @@ const DebateInputs = ({ debate, id }) => {
       });
 
       if (response.data) {
-        // Assuming you have a way to display or refetch the updated list of arguments
+        
         console.log("Argument added successfully:", response.data.addArgument);
-        setInputValue(""); // Reset input after successful submission
+        setInputValue(""); 
       }
     } catch (error) {
       console.error("Error adding argument:", error);
@@ -72,7 +72,7 @@ const DebateInputs = ({ debate, id }) => {
   };
 
   const handleAddComment = async () => {
-    if (!comment.trim()) return; // Basic validation
+    if (!comment.trim()) return; 
 
     try {
       const response = await addComment({
@@ -84,9 +84,9 @@ const DebateInputs = ({ debate, id }) => {
       });
 
       if (response.data) {
-        // Assuming you have a way to display or refetch the updated list of comments
+        
         console.log("Comment added successfully:", response.data.addComment);
-        setComment(""); // Reset comment input after successful submission
+        setComment(""); 
       }
     } catch (error) {
       console.error("Error adding comment:", error);
@@ -102,7 +102,7 @@ const DebateInputs = ({ debate, id }) => {
           id,
           argumentId,
         },
-        // Optimistic UI updates or refetch queries could be added here
+        
       });
 
       if (response.data) {
