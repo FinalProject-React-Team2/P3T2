@@ -1,4 +1,5 @@
 const typeDefs = `
+  scalar DateTime
   type User {
     _id: ID
     firstName: String
@@ -17,6 +18,8 @@ const typeDefs = `
     arguments: [Argument]
     comments: [Comment]
     winner: User
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type Argument {

@@ -93,9 +93,7 @@ const DebateInputs = ({ debate, id }) => {
     }
   };
 
-  const handleAddVote = async (event, argumentId) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const handleAddVote = async (argumentId) => {
     try {
       console.log(argumentId);
 
@@ -161,7 +159,13 @@ const DebateInputs = ({ debate, id }) => {
                 <span>{argument.votes.length} votes</span>
               </p>
               {currentUserRole === "spectator" && (
-                <button className="btn btn-sm btn-primary">👍</button>
+                <button
+                  className="btn btn-sm btn-primary"
+                  onClick={() => handleAddVote(argument._id)}
+                  disabled={argument.votes.some((vote) => vote === userId)}
+                >
+                  👍
+                </button>
               )}
             </div>
             {/*  */}
@@ -220,6 +224,7 @@ const DebateInputs = ({ debate, id }) => {
     console.log(argumentsArr, lastArgument);
 
     if (
+      argumentsArr.length === 2 * data.getDebate.numOfRounds ||
       currentUserRole === "spectator" ||
       lastArgument.user?._id === userId ||
       (currentUserRole === "opponent" && argumentsArr.length === 0)

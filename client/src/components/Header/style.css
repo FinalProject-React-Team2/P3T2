@@ -54,3 +54,7 @@ header h1 a {
     object-fit: contain;
     margin-right: 10px;
 }
+
+.nav>li>a:focus, .nav>li>a:hover{
+    background-color: transparent;
+}

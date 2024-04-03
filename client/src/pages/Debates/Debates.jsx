@@ -42,7 +42,7 @@ const Debates = () => {
   }
 
   const listStyle = {
-    listStyleType: "none",
+    // listStyleType: "none",
   };
 
   const gridStyle = {
@@ -75,18 +75,19 @@ const Debates = () => {
         <Grid item className="grid-item" key={1} xs={6} sm={6} md={5} lg={5} xl={5} style={gridItemStyle}>
           <div className="container" style={{height: '80vh'}}>
             <h2>Spectate An Active Debate:</h2>
-            <ul style={listStyle}>
+            <ol style={listStyle}>
               {activeDebates.map(({ createdBy, opponent, _id, title, status }) => (
                 <li key={_id}>
                   {/* Replace '/debate-room/' with your actual route */}
                   <Link to={`/debate/${_id}`}>
                     <h3>
-                      {createdBy.firstName} vs. {opponent.firstName} &quot;{title}&quot; is {status.toUpperCase()}
+                      {`👥
+                      ${createdBy.firstName} vs. ${opponent.firstName} "${title}" is (${status.toUpperCase()})`}
                     </h3>
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </Grid>
         <Grid item className="grid-item" key={2} xs={6} sm={6} md={5} lg={5} xl={5} style={gridItemStyle}>

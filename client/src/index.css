@@ -18,11 +18,12 @@ main {
   
 }
 
-
-
+.nav>li>a:focus, .nav>li>a:hover{
+  background-color: none;
+}
 
 .grid-item {
-  min-height: 40vh;
+  min-height: 45vh;
   width: 200px;
   border: solid 1px #89CFF0;
   box-shadow: 5px 5px 5px #89CFF0;

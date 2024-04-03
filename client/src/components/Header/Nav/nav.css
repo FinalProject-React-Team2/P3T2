@@ -1,4 +1,7 @@
 /* Nav.css */
+.nav>li>a:focus, .nav>li>a:hover{
+    background-color: none;
+}
 
 .flex-row {
     display: flex;
