@@ -175,7 +175,7 @@ const resolvers = {
         };
         const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
-          { $push: { arguments: newArgument, updatedAt: new Date() } },
+          { $push: { arguments: newArgument,  }, updatedAt: new Date() },
           { new: true }
         ).populate("createdBy opponent winner");
 
