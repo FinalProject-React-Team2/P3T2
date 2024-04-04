@@ -4,12 +4,14 @@ import { useParams, useLocation } from "react-router-dom";
 import { ADD_ARGUMENT } from "../../utils/mutations";
 import { ADD_COMMENT } from "../../utils/mutations";
 import { ADD_VOTE } from "../../utils/mutations";
+
 import { GET_DEBATE } from "../../utils/queries";
 import AuthService from "../../utils/auth";
 import Grid from "@mui/material/Unstable_Grid2";
 import "./DebateInputs.css";
 
-const DebateInputs = ({ debate, id }) => {
+
+const DebateInputs = ({ debate, id, handleEndDebate }) => {
   const userId = AuthService.getProfile().data._id;
   console.log(AuthService.getProfile().data.firstName);
 
@@ -47,6 +49,7 @@ const DebateInputs = ({ debate, id }) => {
   const [addArgument] = useMutation(ADD_ARGUMENT);
   const [addComment] = useMutation(ADD_COMMENT);
   const [addVote] = useMutation(ADD_VOTE);
+ 
 
  
   const handleAddArgument = async () => {
@@ -221,10 +224,30 @@ const DebateInputs = ({ debate, id }) => {
     const argumentsArr = data.getDebate.arguments;
     const lastArgument = argumentsArr[argumentsArr.length - 1] || {};
     console.log(argumentsArr, lastArgument);
+
+    function once(fn) {
+      let called = false; // Closure variable to track call status
+      return function(...args) {
+        if (!called) {
+          called = true; // Update the call status
+          fn.apply(this, args); // Call the original function with correct context and arguments
+        }
+      };
+    }
+
+    const handleEndDebateOnce = once(handleEndDebate);
+
+
     if (argumentsArr.length === 2 * data.getDebate.numOfRounds){
+      
+        // handleEndDebateOnce();
+        
+        
+   
+
       return (
         <div style={{ textAlign: "center" }}>
-          <h3>Arguments are in and votes will be tallied within 24hrs!</h3>
+          <h3>Closing arguments are in, and this debate is now closed!</h3>
         </div>
       );
     } else if (
@@ -272,6 +295,8 @@ const DebateInputs = ({ debate, id }) => {
       </>
     );
   };
+
+
 
   const renderComments = () => {
     // Assuming 'comments' is part of the data returned from the GET_DEBATE query and structured appropriately
@@ -341,7 +366,7 @@ const DebateInputs = ({ debate, id }) => {
             <h3>Debate Arguments:</h3>
             {renderArguments()}
           </div>
-          <div className="form-floating input-group mb-3" style={{display: 'flex', justifyContent: 'center', marginTop: '2rem'}}>
+          <div className="form-floating input-group mb-3" style={{display: 'flex', justifyContent: 'center', margin: '4rem'}}>
             {renderInputForm()}
           </div>
         </Grid>
