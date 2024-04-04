@@ -22,7 +22,7 @@ export default function ScoreBoard({ debate, challengerVotes, opponentVotes }) {
          {debate.status === "closed" && challengerVotes > opponentVotes ? <h2>🏆</h2> : ""}
         </div>
         <div className="col">
-  
+        
         </div>
         <div className="col">
         {debate.status === "closed" && challengerVotes < opponentVotes ? <h2>🏆</h2> : ""}
@@ -37,28 +37,28 @@ export default function ScoreBoard({ debate, challengerVotes, opponentVotes }) {
       </div>
       <div className="row">
         <div className="col">
-          <p style={{ color: "orange" }}>
+          <h2 style={{ color: "orange" }}>
             {debate?.createdBy?.firstName || "error"}
-          </p>
+          </h2>
         </div>
         <div className="col"></div>
         <div className="col">
-          <p style={{ color: "blue" }}>
+          <h2 style={{ color: "blue" }}>
             {debate?.opponent?.firstName || "waiting for opponent..."}
-          </p>
+          </h2>
         </div>
       </div>
       <div className="row">
         <div className="col">
-          <p style={{ color: "orange" }}>
+          <h2 style={{ color: "orange" }}>
             {challengerVotes|| "0"}
-          </p>
+          </h2>
         </div>
         <div className="col"><h3>👍</h3></div>
         <div className="col">
-          <p style={{ color: "blue" }}>
+          <h2 style={{ color: "blue" }}>
             {opponentVotes || "0"}
-          </p>
+          </h2>
         </div>
       </div>
     </div>

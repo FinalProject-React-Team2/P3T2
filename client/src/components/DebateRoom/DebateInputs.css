@@ -13,10 +13,9 @@ div.arguments > div:nth-child(odd) p {
   border-radius: 10px;
   padding: 10px;
   max-width: 80%;
-  box-shadow: 3px 3px 3px 3px #888888;
+  box-shadow: 5px 5px 5px 5px #888888;
   text-align: left;
   position: relative;
-  margin-bottom: .5em;
 }
 
 div.arguments > div:nth-child(odd) div.d-flex {
@@ -30,11 +29,10 @@ div.arguments > div:nth-child(even) p {
   border-radius: 10px;
   padding: 10px;
   max-width: 80%;
-  box-shadow: 3px 3px 3px 3px #888888;
+  box-shadow: 5px 5px 5px 5px #888888;
   text-align: right;
   position: relative;
   margin-right: .5em;
-  margin-bottom: .5em;
 }
 
 div.arguments > div:nth-child(even) div.d-flex {
@@ -48,10 +46,9 @@ div.arguments span {
   position: absolute;
   width: 6em;
   background-color: white;
-  border: 1px solid gray;
+  border: 1px solid black;
   border-radius: 0.8em;
   padding: 2px 4px;
-  box-shadow: #888888 1px 1px 1px 1px;
 }
 
 div.arguments > div:nth-child(odd) span {
@@ -69,3 +66,11 @@ div.arguments button {
   font-size: 2em;
 }
 
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;  
+  align-items: center;
+  flex-grow: 1;
+}
