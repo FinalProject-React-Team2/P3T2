@@ -1,9 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { END_DEBATE } from "../../utils/mutations";
 import { GET_DEBATE } from "../../utils/queries";
-import Grid from "@mui/material/Unstable_Grid2";
 import DebateInputs from "../../components/DebateRoom/DebateInputs";
 import ScoreBoard from "../../components/DebateRoom/ScoreBoard";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,10 +10,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function DebateRoom() {
   const { id } = useParams();
   // const [debate, setDebate] = useState({});
-  const { loading, data } = useQuery(GET_DEBATE, {
+  const data = useQuery(GET_DEBATE, {
     variables: { id },
-    pollInterval: 5000,
-  });
+    pollInterval: 1000,
+  }).data;
   const debate = data?.getDebate || {};
 
   const [endDebate] = useMutation(END_DEBATE);
@@ -80,24 +79,6 @@ function DebateRoom() {
 
   return (
     <>
-      {/* <Grid
-        container
-        className="grid-container"
-        style={{ margin: "50px", padding: "1rem" }}
-        spacing={1}
-      >
-        <Grid
-          item
-          style={{ height: "150px" }}
-          xs={12}
-          sm={12}
-          md={12}
-          lg={12}
-          xl={12}
-          key={100}
-        > */}
-      {/* </Grid>
-      </Grid> */}
       {debate && debate._id ? (
         <>
           <div className="debateHeader">

@@ -9,7 +9,7 @@ import AuthService from "../../utils/auth";
 import OpenDebates from "../../components/Dashboard/OpenDebates";
 import Grid from "@mui/material/Unstable_Grid2";
 
-const Debates = () => {
+const DebatesLists = () => {
   const { loading, error, data } = useQuery(GET_DEBATES);
   const activeDebates = data?.getDebates.filter(
     (debate) => debate.status === "active"
@@ -124,4 +124,4 @@ const Debates = () => {
   );
 };
 
-export default Debates;
+export default DebatesLists;
