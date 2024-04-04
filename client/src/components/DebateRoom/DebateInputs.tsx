@@ -159,7 +159,7 @@ const DebateInputs = ({ debate, id, handleEndDebate }) => {
               <p>
                 {" "}
                 {argument?.body}
-                <span>{argument.votes.length} votes</span>
+                <span className="voteCountBubble">{argument.votes.length} votes</span>
               </p>
               {currentUserRole === "spectator" && (
                 <button
