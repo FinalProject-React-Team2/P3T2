@@ -46,52 +46,75 @@ const Debates = () => {
   };
 
   const gridStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'baseline',
-    
-    position: 'absolute',
-    top: "20vh", 
-    left: 0,
-    right: 0,
- 
-  }
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "baseline",
+
+    // position: 'absolute',
+    // top: "20vh",
+    // left: 0,
+    // right: 0,
+  };
 
   const gridItemStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    maxHeight: '70vh', 
-    overFlowY: 'auto',
-  }
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    maxHeight: "70vh",
+    overFlowY: "auto",
+  };
 
   return (
     <div>
-      <h1 style={{margin: 0}}>
-        Welcome {userName}!
-      </h1>
-    <Grid container style={gridStyle} spacing={2}>
-        <Grid item className="grid-item" key={1} xs={6} sm={6} md={5} lg={5} xl={5} style={gridItemStyle}>
-          <div className="container" style={{height: '80vh'}}>
+      <div>
+        <h1>Welcome {userName}!</h1>
+      </div>
+      <Grid container style={gridStyle} spacing={2}>
+        <Grid
+          item
+          className="grid-item"
+          key={1}
+          xs={12}
+          sm={12}
+          md={5}
+          lg={5}
+          xl={5}
+          style={gridItemStyle}
+        >
+          <div className="container" style={{ height: "80vh" }}>
             <h2>Spectate An Active Debate:</h2>
             <ol style={listStyle}>
-              {activeDebates.map(({ createdBy, opponent, _id, title, status }) => (
-                <li key={_id}>
-                  {/* Replace '/debate-room/' with your actual route */}
-                  <Link to={`/debate/${_id}`}>
-                    <h3>
-                      {`👥
-                      ${createdBy.firstName} vs. ${opponent.firstName} "${title}" is (${status.toUpperCase()})`}
-                    </h3>
-                  </Link>
-                </li>
-              ))}
+              {activeDebates.map(
+                ({ createdBy, opponent, _id, title, status }) => (
+                  <li key={_id}>
+                    {/* Replace '/debate-room/' with your actual route */}
+                    <Link to={`/debate/${_id}`}>
+                      <h3>
+                        {`👥
+                      ${createdBy.firstName} vs. ${
+                          opponent.firstName
+                        } "${title}" is (${status.toUpperCase()})`}
+                      </h3>
+                    </Link>
+                  </li>
+                )
+              )}
             </ol>
           </div>
         </Grid>
-        <Grid item className="grid-item" key={2} xs={6} sm={6} md={5} lg={5} xl={5} style={gridItemStyle}>
-          <div className="container" style={{height: '80vh'}}>
+        <Grid
+          item
+          className="grid-item"
+          key={2}
+          xs={12}
+          sm={12}
+          md={5}
+          lg={5}
+          xl={5}
+          style={gridItemStyle}
+        >
+          <div className="container" style={{ height: "80vh" }}>
             <h2>Or Join as an Opponent</h2>
             <OpenDebates addOpponentHandler={addOpponentHandler} />
           </div>
