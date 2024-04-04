@@ -11,7 +11,6 @@ export const LOGIN = gql`
   }
 `;
 
-
 export const ADD_USER = gql`
   mutation AddUser(
     $firstName: String!
@@ -54,7 +53,7 @@ export const ADD_OPPONENT = gql`
       numOfRounds
       arguments {
         _id
-        user{
+        user {
           _id
           firstName
           lastName
@@ -65,7 +64,7 @@ export const ADD_OPPONENT = gql`
       }
       comments {
         _id
-        user{
+        user {
           _id
           firstName
           lastName
@@ -79,6 +78,8 @@ export const ADD_OPPONENT = gql`
         lastName
         email
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -97,6 +98,8 @@ export const CREATE_DEBATE = gql`
       }
       status
       title
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -107,13 +110,13 @@ export const ADD_ARGUMENT = gql`
       arguments {
         _id
         body
-        user{
+        user {
           _id
           firstName
           lastName
           email
         }
-        votes 
+        votes
       }
       _id
       status
@@ -131,7 +134,7 @@ export const ADD_ARGUMENT = gql`
         email
       }
       comments {
-        user{
+        user {
           _id
           firstName
           lastName
@@ -146,108 +149,113 @@ export const ADD_ARGUMENT = gql`
         email
       }
       title
+      createdAt
+      updatedAt
     }
   }
 `;
 
 export const ADD_COMMENT = gql`
- mutation addComment($id: ID!, $comment: String!) {
-  addComment(_id: $id, comment: $comment) {
-    _id
-    title
-    status
-    createdBy {
+  mutation addComment($id: ID!, $comment: String!) {
+    addComment(_id: $id, comment: $comment) {
       _id
-      firstName
-      lastName
-      email
-   
-    }
-    opponent {
-      _id
-      firstName
-      lastName
-      email
-    }
-    numOfRounds
-    arguments {
-      _id
-      user{
+      title
+      status
+      createdBy {
         _id
         firstName
         lastName
         email
       }
-      body
-      votes
-    }
-    comments {
-      _id
-      user{
+      opponent {
         _id
         firstName
         lastName
         email
       }
-      comment
-    }
-    winner {
-      _id
-      firstName
-      lastName
-      email
+      numOfRounds
+      arguments {
+        _id
+        user {
+          _id
+          firstName
+          lastName
+          email
+        }
+        body
+        votes
+      }
+      comments {
+        _id
+        user {
+          _id
+          firstName
+          lastName
+          email
+        }
+        comment
+      }
+      winner {
+        _id
+        firstName
+        lastName
+        email
+      }
+      createdAt
+      updatedAt
     }
   }
-}
 `;
 
 export const ADD_VOTE = gql`
-mutation addVote($id: ID!, $argumentId: ID!) {
-  addVote(_id: $id, argumentId: $argumentId) {
-    _id
-    title
-    status
-    createdBy {
+  mutation addVote($id: ID!, $argumentId: ID!) {
+    addVote(_id: $id, argumentId: $argumentId) {
       _id
-      firstName
-      lastName
-      email
-    }
-    opponent {
-      _id
-      firstName
-      lastName
-      email
-    }
-    numOfRounds
-    arguments {
-      _id
-      user{
-        _id
-        firstName
-        lastName
-        email
-      } 
-      body
-      votes
-    }
-    comments {
-      user{
+      title
+      status
+      createdBy {
         _id
         firstName
         lastName
         email
       }
-      comment
-    }
-    winner {
-      _id
-      firstName
-      lastName
-      email
+      opponent {
+        _id
+        firstName
+        lastName
+        email
+      }
+      numOfRounds
+      arguments {
+        _id
+        user {
+          _id
+          firstName
+          lastName
+          email
+        }
+        body
+        votes
+      }
+      comments {
+        user {
+          _id
+          firstName
+          lastName
+          email
+        }
+        comment
+      }
+      winner {
+        _id
+        firstName
+        lastName
+        email
+      }
+      createdAt
+      updatedAt
     }
   }
-}
 `;
 
 export const UPDATE_USER = gql`
@@ -265,6 +273,52 @@ export const UPDATE_USER = gql`
       firstName
       lastName
       email
+    }
+  }
+`;
+
+export const END_DEBATE = gql`
+  mutation endDebate($id: ID!, $winner: ID!) {
+    endDebate(_id: $id, winner: $winner) {
+      _id
+      title
+      status
+      createdBy {
+        _id
+        firstName
+        lastName
+        email
+      }
+      opponent {
+        _id
+        firstName
+        lastName
+        email
+      }
+      numOfRounds
+      arguments {
+        _id
+        user {
+          _id
+          firstName
+          lastName
+          email
+        }
+        body
+        votes
+      }
+      comments {
+        _id
+        comment
+      }
+      winner {
+        _id
+        firstName
+        lastName
+        email
+      }
+      createdAt
+      updatedAt
     }
   }
 `;

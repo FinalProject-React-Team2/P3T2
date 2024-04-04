@@ -65,6 +65,7 @@ const typeDefs = `
     addArgument(_id: ID!, argument: String!): Debate
     addComment(_id: ID!, comment: String!): Debate
     addVote(_id: ID!, argumentId: ID!): Debate
+    endDebate(_id: ID!, winner: ID!): Debate
   }
 `;
 

@@ -58,6 +58,7 @@ const resolvers = {
     },
 
     getDebate: async (parent, args, context) => {
+      console.log("GETTING DEBATE", args._id); // Logging a message to the console
       if (!context.user) {
         throw new AuthenticationError();
       } // Throwing an AuthenticationError if user is not authenticated
@@ -131,7 +132,7 @@ const resolvers = {
           status: "open",
           winner: null,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         }); // Creating a new debate
         console.log("DEBATE CREATED", debateInit); // Logging the debate to the console
         //  title: args.title, createdBy: context.user._id }, { new: true}); // Creating a new debate
@@ -151,7 +152,11 @@ const resolvers = {
       if (context.user) {
         const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
-          { opponent: context.user._id, status: "active", updatedAt: new Date()},
+          {
+            opponent: context.user._id,
+            status: "active",
+            updatedAt: new Date(),
+          },
           { new: true }
         ).populate("createdBy opponent winner");
 
@@ -175,7 +180,7 @@ const resolvers = {
         };
         const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
-          { $push: { arguments: newArgument,  }, updatedAt: new Date() },
+          { $push: { arguments: newArgument }, updatedAt: new Date() },
           { new: true }
         ).populate("createdBy opponent winner");
 
@@ -187,7 +192,15 @@ const resolvers = {
       if (context.user) {
         const updatedDebate = await Debate.findByIdAndUpdate(
           _id,
-          { $push: { comments: { user: context.user._id, comment, updatedAt: new Date() } } },
+          {
+            $push: {
+              comments: {
+                user: context.user._id,
+                comment,
+                updatedAt: new Date(),
+              },
+            },
+          },
           { new: true }
         )
           .populate("createdBy opponent winner")
@@ -201,7 +214,6 @@ const resolvers = {
     addVote: async (parent, { _id, argumentId }, context) => {
       if (context.user) {
         const debate = await Debate.findById(_id);
-        
 
         console.log("DEBATE", debate);
         // find the argument by its ID
@@ -224,6 +236,22 @@ const resolvers = {
         //   .populate({ path: "comments", populate: "user" });
 
         return debate;
+      }
+    },
+
+    endDebate: async (parent, { _id, winner }, context) => {
+      console.log("END DEBATE", _id, winner); // Logging a message to the console
+      try {
+        const updatedDebate = await Debate.findByIdAndUpdate(
+          _id,
+          { winner: winner, status: "closed" },
+          { new: true } //
+        ).populate("winner");
+
+        return updatedDebate;
+      } catch (error) {
+        console.error(error);
+        throw new Error("Failed to end debate");
       }
     },
   },

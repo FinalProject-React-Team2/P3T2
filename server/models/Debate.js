@@ -85,6 +85,7 @@ const debateSchema = new Schema(
     winner: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      default: null,
     },
     // Reference to the user who won the debate
   },
