@@ -8,8 +8,8 @@ export default function UserMenu() {
   if (loggedIn) {
     return (
      
-        <li className="mx-3 nav-item menu">
-          <Link className="nav-link" to="/Dashboard">Dashboard</Link>
+        <li className="mx-3 nav-item menu" key={4}>
+          <Link className="nav-link dashboard" to="/Dashboard">Dashboard</Link>
         </li>
       
     );
