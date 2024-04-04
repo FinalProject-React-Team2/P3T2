@@ -123,8 +123,8 @@ p {
   line-height: 1.5;
 }
 
-@media (max-width: 970px) {
-  /* header {
+/* @media (max-width: 970px) {
+  header {
     min-height: 100%;
   }
 
@@ -153,7 +153,7 @@ p {
     max-width: 80%;
     font-size: 18px;
   }
-} */
+}  */
 
   /* .section-heading {
   margin-top: 0;
@@ -296,10 +296,10 @@ p {
 .navbar-default .nav > li.active > a:focus:hover {
   background-color: transparent;
 } */
-}
-/* 
-@media (max-width: 767px) {
-  .navbar-default {
+
+
+/* @media (max-width: 767px) { */
+  /* .navbar-default {
     border-color: rgba(255, 255, 255, 0.3);
     background-color: transparent;
   }
@@ -349,7 +349,7 @@ p {
   .navbar-default.affix .nav > li > a:focus:hover {
     color: yellowgreen;
   }
-} */
+}
 
 .btn-default {
   border-color: #fff;
@@ -494,7 +494,7 @@ img::-moz-selection {
 
 .bg-primary {
   background-color: yellowgreen;
-}
+} */
 
 /* -------------------------------------------------- */
 
@@ -502,7 +502,7 @@ img::-moz-selection {
 
 /* ---------- LOGIN */
 
-.hero {
+/* .hero {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -551,4 +551,4 @@ a:focus {
 p {
   font-size: 16px;
   line-height: 1.5;
-}
+} */

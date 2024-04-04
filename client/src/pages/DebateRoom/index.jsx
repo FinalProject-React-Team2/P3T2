@@ -12,7 +12,7 @@ function DebateRoom() {
   // const [debate, setDebate] = useState({});
   const data = useQuery(GET_DEBATE, {
     variables: { id },
-    pollInterval: 1000,
+    pollInterval: 2500,
   }).data;
   const debate = data?.getDebate || {};
 
