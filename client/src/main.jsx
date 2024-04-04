@@ -6,13 +6,11 @@ import App from "./App.jsx";
 import Error from "./pages/404";
 import Home from "./pages/Home";
 import About from "./pages/About/Aboutus.jsx";
-import CreateDebate from "./components/Dashboard/CreateDebate.jsx";
-// import Donations from "./pages/Donations.jsx";
 import Notfound from "./pages/404";
 import Signup from "./pages/Signup/Signup.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Dashboard from "./pages/Dashboard";
-import Debates from "./pages/Debates/Debates.jsx";
+import Debates from "./pages/DebatesLists/DebatesLists.jsx";
 import DebateRoom from "./pages/DebateRoom/index.jsx";
 // Import bootstrap css
 import "bootstrap/dist/css/bootstrap.min.css";
