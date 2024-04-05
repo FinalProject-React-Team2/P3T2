@@ -6,7 +6,7 @@ function About() {
       <div className="mission">
         <h2>Our Mission</h2>
         <p>
-          At DebateCloud, we believe in the power of debate to inspire change,
+          At debateCloud, we believe in the power of debate to inspire change,
           foster understanding, and build communities. Our mission is to provide
           a user-friendly, accessible platform where anyone, anywhere, can
           participate in meaningful debates on a wide range of topics. The
