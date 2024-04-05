@@ -80,7 +80,7 @@ main {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-image: url(https://www.vectorstock.com/royalty-free-vector/political-debate-and-educational-lecture-in-park-vector-27927233);
+  /* background-image: url(https://www.vectorstock.com/royalty-free-vector/political-debate-and-educational-lecture-in-park-vector-27927233); */
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -502,14 +502,15 @@ img::-moz-selection {
 
 /* ---------- LOGIN */
 
-/* .hero {
+.hero {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-image: url(https://codetheweb.blog/assets/img/posts/full-image-hero/image.jpg);
+  /* background-image: url(https://codetheweb.blog/assets/img/posts/full-image-hero/image.jpg); */
+  background-image: url(./debateCloud.jpeg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -551,4 +552,4 @@ a:focus {
 p {
   font-size: 16px;
   line-height: 1.5;
-} */
+} 
