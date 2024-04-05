@@ -75,6 +75,7 @@ header h1 a {
     html, #root {
         background-image: linear-gradient(to right, orange 0% ,  #89CFF0 100% );
         
+        
     }
 
     .flex-row {
