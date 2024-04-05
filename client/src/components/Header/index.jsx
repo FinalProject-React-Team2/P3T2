@@ -9,7 +9,7 @@ export default function Header() {
           <span className="logo-container" role="img">
             <img className="logo" src="/debateLogo.png" alt="gavel-block & cloud" />
           </span>
-          DebateCloud
+          debateCloud
         </Link>
       </h1>
       <Nav />

@@ -5,7 +5,7 @@ function Home() {
     <div>
       <div className="header-content">
         <div className="header-content-inner">
-          <h1> Welcome to DebateCloud</h1>
+          <h1> Welcome to debateCloud</h1>
           <p>
             We are a community of individuals who love to debate. We provide a
             platform for users to engage in friendly debates on a variety of
