@@ -509,8 +509,8 @@ img::-moz-selection {
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* background-image: url(https://codetheweb.blog/assets/img/posts/full-image-hero/image.jpg); */
-  background-image: url(./debateCloud.jpeg);
+  background-image: url(https://codetheweb.blog/assets/img/posts/full-image-hero/image.jpg);
+  /* background-image: url(./debateCloud.jpeg); */
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
